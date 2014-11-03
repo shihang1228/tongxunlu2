@@ -28,4 +28,8 @@ public class ContactRepository {
             return null;
         }
     }
+    
+    public void save(Contact contact) {
+        entityManager.persist(contact);
+    }
 }
