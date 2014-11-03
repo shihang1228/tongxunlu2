@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("contact")
@@ -22,6 +23,12 @@ public class ContactController {
         
         model.addAttribute("contactList", contactService.list());
         return "contact/list";
+    }
+    
+    @RequestMapping(value = "show")
+    public String show(@RequestParam(value = "id", required = true) String id, Model model) {
+        model.addAttribute("id", id);
+        return "contact/show";
     }
      
     
