@@ -88,4 +88,11 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                .andExpect(model().attributeExists("id"))
                .andExpect(redirectedUrl("show?id=" + CONTACT_ID));
     }
+    
+    @Test
+    public void 当在update页面中点击delete时重定向到list页面() throws Exception{
+        mockMvc.perform(post("/contact/delete")
+                       .param("id", String.valueOf(CONTACT_ID)))
+               .andExpect(redirectedUrl("list"));
+    }
 }

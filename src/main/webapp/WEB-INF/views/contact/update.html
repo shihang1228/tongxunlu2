@@ -10,9 +10,9 @@
     </head>
     <body>
         <div class="container">
-            <h1 align="center">Update</h1>
-            <table border="1" align="center">
-                <form th:action="@{update}" method="POST">
+            <h1 align="center">Update</h1>            
+            <form th:action="@{update}" method="POST">
+                <table border="1" align="center">
                     <tr>
                         <td>Name:</td>
                         <td><input type="text" name="name" th:value="${contact.name}"/></td>
@@ -55,8 +55,18 @@
                             <input type="hidden" name="id" th:value="${contact.id}"/>
                             </td>
                     </tr>
-                </form>
-           </table>
+                </table>
+            </form>
+            <form th:action="@{delete}" method="POST">
+                <table align="center">
+                    <tr>
+                        <td align="center">
+                            <input type="submit" name="action" value="Delete" />
+                            <input type="hidden" name="id" th:value="${contact.id}"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
        </div>
     </body>
 </html>
