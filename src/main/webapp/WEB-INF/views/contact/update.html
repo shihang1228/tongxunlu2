@@ -2,54 +2,61 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Contact Update</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+        <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h1 align="center">Update</h1>
-        <table border="1" align="center">
-            <form th:action="@{update}" method="POST">
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" th:value="${contact.name}"/></td>
-                </tr>
-                <tr>
-                    <td>Mobile:</td>
-                    <td><input type="text" name="mobile" th:value="${contact.mobile}"/></td>
-                </tr>
-                <tr>
-                    <td>Vpmn:</td>
-                    <td><input type="text" name="vpmn" th:value="${contact.vpmn}"/></td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" name="email" th:value="${contact.email}"/></td>
-                </tr>
-                <tr>
-                    <td>HomeAddress:</td>
-                    <td><input type="text" name="homeAddress" th:value="${contact.homeAddress}"/></td>
-                </tr>
-                <tr>
-                    <td>OfficeAddress:</td>
-                    <td><input type="text" name="officeAddress" th:value="${contact.officeAddress}"/></td>
-                </tr>
-                <tr>
-                    <td>Job:</td>
-                    <td><input type="text" name="job" th:value="${contact.job}"/></td>
-                </tr>
-                <tr>
-                    <td>JobLevel:</td>
-                    <td><input type="text" name="jobLevel" th:value="${contact.jobLevel}"/></td>
-                </tr>
-                <tr>
-                    <td>Memo:</td>
-                    <td><input type="text" name="memo" th:value="${contact.memo}"/></td>
-                </tr>
-                <tr>
-                    <td align="center" colspan="2">
-                        <input type="submit" name="action" value="Update"/>
-                        <input type="hidden" name="id" th:value="${contact.id}"/>
-                        </td>
-                </tr>
-            </form>
-       </table>
+        <div class="container">
+            <h1 align="center">Update</h1>
+            <table border="1" align="center">
+                <form th:action="@{update}" method="POST">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" th:value="${contact.name}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile:</td>
+                        <td><input type="text" name="mobile" th:value="${contact.mobile}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Vpmn:</td>
+                        <td><input type="text" name="vpmn" th:value="${contact.vpmn}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input type="text" name="email" th:value="${contact.email}"/></td>
+                    </tr>
+                    <tr>
+                        <td>HomeAddress:</td>
+                        <td><input type="text" name="homeAddress" th:value="${contact.homeAddress}"/></td>
+                    </tr>
+                    <tr>
+                        <td>OfficeAddress:</td>
+                        <td><input type="text" name="officeAddress" th:value="${contact.officeAddress}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Job:</td>
+                        <td><input type="text" name="job" th:value="${contact.job}"/></td>
+                    </tr>
+                    <tr>
+                        <td>JobLevel:</td>
+                        <td><input type="text" name="jobLevel" th:value="${contact.jobLevel}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Memo:</td>
+                        <td><input type="text" name="memo" th:value="${contact.memo}"/></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <input type="submit" name="action" value="Update"/>
+                            <input type="hidden" name="id" th:value="${contact.id}"/>
+                            </td>
+                    </tr>
+                </form>
+           </table>
+       </div>
     </body>
 </html>
