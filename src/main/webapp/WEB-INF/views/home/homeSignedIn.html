@@ -16,6 +16,7 @@
         <!-- /* The message code is returned from the @Controller */ -->
         <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
     </th:block>
+    <h1 align="center"><a th:href="@{contact/list}" th:text="ContactList"></a></h1>
     <p>
         Welcome to the Spring MVC Quickstart application!
     </p>
