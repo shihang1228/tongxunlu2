@@ -46,4 +46,10 @@ public class ContactServiceTest {
         contactService.save(contact);
         verify(contactRepository).save(any(Contact.class));
     }
+    
+    @Test
+    public void 在ContactService中的update方法中调用ContactRepository中的update方法() {
+        contactService.update(contact);
+        verify(contactRepository).update(any(Contact.class));
+    }
 }
