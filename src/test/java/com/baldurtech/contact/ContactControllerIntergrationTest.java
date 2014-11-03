@@ -62,4 +62,11 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("jobLevel", String.valueOf(contact.getJobLevel())))
                .andExpect(redirectedUrl("list"));
     }
+    
+    @Test
+    public void 当URL为contact_update时应该访问update页面() throws Exception {
+        mockMvc.perform(get("/contact/update")
+                       .param("id", String.valueOf(CONTACT_ID)))
+               .andExpect(view().name("contact/update"));
+    }
 }

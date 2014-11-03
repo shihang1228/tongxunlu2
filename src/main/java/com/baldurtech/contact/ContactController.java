@@ -43,7 +43,11 @@ public class ContactController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(@ModelAttribute("contact") Contact contact) {
         contactService.save(contact);
-        return "redirect:list";
-        
-    }    
+        return "redirect:list";       
+    } 
+    
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public String update(@RequestParam("id") Long id) {
+        return "contact/update";
+    }
 }
