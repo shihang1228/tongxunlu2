@@ -63,4 +63,10 @@ public class ContactControllerUnitTest {
         contactController.update(contact, model);
         verify(contactService).update(any(Contact.class));
     }
+    
+    @Test
+    public void 在contactController中的delete方法中将会调用ContactService中的delete方法() {
+        contactController.delete(String.valueOf(CONTACT_ID));
+        verify(contactService).delete(CONTACT_ID);
+    }
 }
