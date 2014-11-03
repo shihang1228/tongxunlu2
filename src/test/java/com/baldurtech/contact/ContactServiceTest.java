@@ -52,4 +52,10 @@ public class ContactServiceTest {
         contactService.update(contact);
         verify(contactRepository).update(any(Contact.class));
     }
+    
+    @Test
+    public void 在ContactService中的delete方法中调用ContactRepository中的delete方法() {
+        contactService.delete(CONTACT_ID);
+        verify(contactRepository).delete(CONTACT_ID);
+    }
 }
