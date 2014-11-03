@@ -31,4 +31,11 @@ public class ContactController {
         model.addAttribute("contact", contactService.show(Long.valueOf(id)));
         return "contact/show";
     }
+    
+    @RequestMapping(value = "create")
+    public String create(Model model) {
+        model.addAttribute("contact", new Contact());
+        return "contact/create";
+    }
+    
 }
