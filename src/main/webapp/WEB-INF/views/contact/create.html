@@ -2,52 +2,58 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Contact Create</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+        <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h1 align="center">Create</h1>
-        <table align="center">
-            <form action="#" th:action="@{save}" method="POST">
-                <tr>
-                    <td>Name</td>
-                    <td><input type="text" name="name" th:value="ShiHang"/></td>
-                </tr>
-                <tr>
-                    <td>Mobile</td>
-                    <td><input type="text" name="mobile" th:value="15235432994"/></td>
-                </tr>
-                <tr>
-                    <td>Vpmn</td>
-                    <td><input type="text" name="vpmn" th:value="652994"/></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><input type="email" name="email" th:value="abc"/></td>
-                </tr>
-                <tr>
-                    <td>HomeAddress</td>
-                    <td><input type="text" name="homeAddress" th:value="TaiYuan"/></td>
-                </tr>
-                <tr>
-                    <td>OfficeAddress</td>
-                    <td><input type="text" name="officeAddress" th:value="BeiZhang"/></td>
-                </tr>
-                <tr>
-                    <td>Memo</td>
-                    <td><input type="text" name="memo" th:value="memo"/></td>
-                </tr>
-                <tr>
-                    <td>Job</td>
-                    <td><input type="text" name="job" th:value="HR"/></td>
-                </tr>
-                <tr>
-                    <td>JobLevel</td>
-                    <td><input type="number" name="jobLevel" th:value="4"/></td>
-                </tr>
-                <tr align="center">
-                    <td colspan="2"><input type="submit" name="aciton"/></td>
-                </tr>
-            </form>
-        </table>
-        
+        <div class="container">
+            <h1 align="center">Create</h1>
+            <table align="center">
+                <form action="#" th:action="@{save}" method="POST">
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" name="name" th:value="ShiHang"/></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td><input type="text" name="mobile" th:value="15235432994"/></td>
+                    </tr>
+                    <tr>
+                        <td>Vpmn</td>
+                        <td><input type="text" name="vpmn" th:value="652994"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" th:value="abc"/></td>
+                    </tr>
+                    <tr>
+                        <td>HomeAddress</td>
+                        <td><input type="text" name="homeAddress" th:value="TaiYuan"/></td>
+                    </tr>
+                    <tr>
+                        <td>OfficeAddress</td>
+                        <td><input type="text" name="officeAddress" th:value="BeiZhang"/></td>
+                    </tr>
+                    <tr>
+                        <td>Memo</td>
+                        <td><input type="text" name="memo" th:value="memo"/></td>
+                    </tr>
+                    <tr>
+                        <td>Job</td>
+                        <td><input type="text" name="job" th:value="HR"/></td>
+                    </tr>
+                    <tr>
+                        <td>JobLevel</td>
+                        <td><input type="number" name="jobLevel" th:value="4"/></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2"><input type="submit" name="aciton"/></td>
+                    </tr>
+                </form>
+            </table>
+       </div> 
     </body>
 </html>
