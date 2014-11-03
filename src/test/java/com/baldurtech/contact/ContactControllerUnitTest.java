@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 1L;
-    private Contact contact;
+    private Contact contact = new Contact();
     
     @Mock
     ContactService contactService;
@@ -50,5 +50,11 @@ public class ContactControllerUnitTest {
     public void 在contactController中的save方法中将会调用ContactService中的save方法() {
         contactController.save(contact);
         verify(contactService).save(any(Contact.class));
+    }
+    
+    @Test
+    public void 在contactController中的update方法中将会调用ContactService中的update方法() {
+        contactController.update(contact, model);
+        verify(contactService).update(any(Contact.class));
     }
 }
