@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ContactController {
     @RequestMapping(value = "list")
     public String list(Model model) {
+        
+        model.addAttribute("contactList", findAll());
+        return "contact/list";
+    }
+     
+    public List<Contact> findAll() {
         List<Contact> contactList = new ArrayList<Contact>();
         Contact contact = new Contact();
         contact.setName("ShiHang");
@@ -19,7 +25,6 @@ public class ContactController {
         contact.setHomeAddress("TaiYuan");
         
         contactList.add(contact);
-        model.addAttribute("contactList", contactList);
-        return "contact/list";
+        return contactList;
     }
 }
