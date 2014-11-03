@@ -44,7 +44,10 @@
                     <td><input type="text" name="memo" th:value="${contact.memo}"/></td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2"><input type="submit" name="action" value="Update"/></td>
+                    <td align="center" colspan="2">
+                        <input type="submit" name="action" value="Update"/>
+                        <input type="hidden" name="id" th:value="${contact.id}"/>
+                        </td>
                 </tr>
             </form>
        </table>

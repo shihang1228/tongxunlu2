@@ -70,4 +70,21 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/update"));
     }
+    
+    @Test
+    public void 当点击update页面中的update按钮时应该重定向到show页面() throws Exception{
+        mockMvc.perform(post("/contact/update")
+                       .param("id", String.valueOf(CONTACT_ID))
+                       .param("name", String.valueOf(contact.getName()))
+                       .param("mobile", String.valueOf(contact.getMobile()))
+                       .param("vpmn", String.valueOf(contact.getVpmn()))
+                       .param("email", String.valueOf(contact.getEmail()))
+                       .param("homeAddress", String.valueOf(contact.getHomeAddress()))
+                       .param("officeAddress", String.valueOf(contact.getOfficeAddress()))
+                       .param("job", String.valueOf(contact.getJob()))
+                       .param("jobLevel", String.valueOf(contact.getJobLevel()))
+                       .param("memo", String.valueOf(contact.getMemo())))
+               .andExpect(model().attributeExists("id"))
+               .andExpect(redirectedUrl("show?id=" + CONTACT_ID));
+    }
 }
