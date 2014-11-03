@@ -18,7 +18,7 @@ public class ContactService {
     }
      
     public Contact show(Long id) {
-        return getById(id);
+        return contactRepository.getById(id);
     }
     
     public Contact getById(Long id) {
