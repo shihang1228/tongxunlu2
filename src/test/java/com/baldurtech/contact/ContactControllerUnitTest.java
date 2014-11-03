@@ -4,6 +4,7 @@ import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.any;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 1L;
+    private Contact contact;
+    
     @Mock
     ContactService contactService;
     
@@ -41,5 +44,11 @@ public class ContactControllerUnitTest {
     public void 在contactController中的show方法中将会调用ContactService中的show方法() {
         contactController.show(String.valueOf(CONTACT_ID), model);
         verify(contactService).show(CONTACT_ID);
+    }
+    
+    @Test
+    public void 在contactController中的save方法中将会调用ContactService中的save方法() {
+        contactController.save(contact);
+        verify(contactService).save(any(Contact.class));
     }
 }

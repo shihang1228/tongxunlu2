@@ -30,4 +30,8 @@ public class ContactService {
         
         return contact;
     }
+    
+    public void save(Contact contact) {
+        System.out.println(contact.getName());
+    }
 }
