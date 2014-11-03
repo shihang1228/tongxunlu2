@@ -48,7 +48,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在contactController中的save方法中将会调用ContactService中的save方法() {
-        contactController.save(contact);
+        contactController.save(contact, model);
         verify(contactService).save(any(Contact.class));
     }
     

@@ -60,7 +60,8 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("memo", contact.getMemo())
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel())))
-               .andExpect(redirectedUrl("list"));
+              .andExpect(model().attributeExists("id"))
+              .andExpect(redirectedUrl("show?id=8"));
     }
     
     @Test
