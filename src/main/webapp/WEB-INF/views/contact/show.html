@@ -5,6 +5,19 @@
     </head>
     <body>
         <h1 align="center">Show</h1>
-        <h1 th:text="${id}" align="center"></h1>
+        <table align="center" border="1">
+            <tr>
+                <td>Name</td>
+                <td>Mobile</td>
+                <td>Vpmn</td>
+                <td>Address</td>
+            </tr>
+            <tr>
+                <td th:text="${contact.name}"></td>
+                <td th:text="${contact.mobile}"></td>
+                <td th:text="${contact.vpmn}"></td>
+                <td th:text="${contact.homeAddress}"></td>
+            </tr>
+        </table>
     </body>
 </html>

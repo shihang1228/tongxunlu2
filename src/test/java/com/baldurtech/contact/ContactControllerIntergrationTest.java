@@ -19,7 +19,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     public void 当URL为contact_show时应该访问show页面() throws Exception {
         mockMvc.perform(get("/contact/show")
                         .param("id", String.valueOf(CONTACT_ID)))
-               .andExpect(model().attributeExists("id"))
+               .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/show"));
     }
 }

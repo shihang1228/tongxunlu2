@@ -27,7 +27,13 @@ public class ContactController {
     
     @RequestMapping(value = "show")
     public String show(@RequestParam(value = "id", required = true) String id, Model model) {
-        model.addAttribute("id", id);
+        Contact contact = new Contact();
+        contact.setName("ShiHang");
+        contact.setMobile("15235432994");
+        contact.setVpmn("652994");
+        contact.setHomeAddress("TaiYuan");
+        
+        model.addAttribute("contact", contact);
         return "contact/show";
     }
      
