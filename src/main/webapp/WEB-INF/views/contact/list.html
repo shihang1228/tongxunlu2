@@ -11,25 +11,18 @@
     <body>
         <div class="container">
             <h1 align="center">Contact List</h1>
-            <h1 th:text="${contactList}"></h1>
             <table align="center" border="1">
                 <tr>
-                    <td th:text="Name"></td>
+                    <td th:text="name"></td>
                     <td th:text="Mobile"></td>
                     <td th:text="Vpmn"></td>
                     <td th:text="Address"></td>
                 </tr>
-                <tr>
-                    <td th:text="ShiHang"></td>
-                    <td th:text="15235432994"></td>
-                    <td th:text="652994"></td>
-                    <td th:text="ShanXi"></td>
-                </tr>
-                <tr>
-                    <td th:text="ShiHang"></td>
-                    <td th:text="15235432994"></td>
-                    <td th:text="652994"></td>
-                    <td th:text="ShanXi"></td>
+                <tr th:each="contact : ${contactList}">
+                    <td th:text="${contact.name}"></td>
+                    <td th:text="${contact.mobile}"></td>
+                    <td th:text="${contact.Vpmn}"></td>
+                    <td th:text="${contact.HomeAddress}"></td>
                 </tr>
             </table>
         </div>
