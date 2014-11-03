@@ -27,7 +27,7 @@
                     <td th:text="${contact.mobile}"></td>
                     <td th:text="${contact.Vpmn}"></td>
                     <td th:text="${contact.HomeAddress}"></td>
-                    <td th:text="update"></td>
+                    <td><a th:href="@{'update?id=' + ${contact.id}}" th:text="update"></a></td>
                     <td th:text="delete"></td>
                 </tr>
             </table>
