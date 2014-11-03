@@ -1,9 +1,52 @@
 <html>
-<head>
-	<meta charset="UTF-8"/>
-	<title>Contact Update</title>
-</head>
-<body>
-	<h1 align="center">Update</h1>
-</body>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Contact Update</title>
+    </head>
+    <body>
+        <h1 align="center">Update</h1>
+        <table border="1" align="center">
+            <form th:action="@{update}" method="POST">
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" th:value="${contact.name}"/></td>
+                </tr>
+                <tr>
+                    <td>Mobile:</td>
+                    <td><input type="text" name="mobile" th:value="${contact.mobile}"/></td>
+                </tr>
+                <tr>
+                    <td>Vpmn:</td>
+                    <td><input type="text" name="vpmn" th:value="${contact.vpmn}"/></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" th:value="${contact.email}"/></td>
+                </tr>
+                <tr>
+                    <td>HomeAddress:</td>
+                    <td><input type="text" name="homeAddress" th:value="${contact.homeAddress}"/></td>
+                </tr>
+                <tr>
+                    <td>OfficeAddress:</td>
+                    <td><input type="text" name="officeAddress" th:value="${contact.officeAddress}"/></td>
+                </tr>
+                <tr>
+                    <td>Job:</td>
+                    <td><input type="text" name="job" th:value="${contact.job}"/></td>
+                </tr>
+                <tr>
+                    <td>JobLevel:</td>
+                    <td><input type="text" name="jobLevel" th:value="${contact.jobLevel}"/></td>
+                </tr>
+                <tr>
+                    <td>Memo:</td>
+                    <td><input type="text" name="memo" th:value="${contact.memo}"/></td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2"><input type="submit" name="action" value="Update"/></td>
+                </tr>
+            </form>
+       </table>
+    </body>
 </html>
