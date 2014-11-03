@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 
 public class ContactControllerUnitTest {
+    private Long CONTACT_ID = 1L;
     @Mock
     ContactService contactService;
     
@@ -34,5 +35,11 @@ public class ContactControllerUnitTest {
     public void 在contactController中的list方法中将会调用ContactService中的list方法() {
         contactController.list(model);
         verify(contactService).list();
+    }
+    
+    @Test
+    public void 在contactController中的show方法中将会调用ContactService中的show方法() {
+        contactController.show(String.valueOf(CONTACT_ID), model);
+        verify(contactService).show(CONTACT_ID);
     }
 }

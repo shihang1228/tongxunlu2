@@ -16,4 +16,18 @@ public class ContactService {
     public List<Contact> list() {
         return contactRepository.findAll();
     }
+     
+    public Contact show(Long id) {
+        return getById(id);
+    }
+    
+    public Contact getById(Long id) {
+        Contact contact = new Contact();
+        contact.setName("ShiHang");
+        contact.setMobile("15235432994");
+        contact.setVpmn("652994");
+        contact.setHomeAddress("TaiYuan");
+        
+        return contact;
+    }
 }
