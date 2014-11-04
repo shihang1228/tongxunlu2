@@ -71,11 +71,11 @@ public class ContactController {
     } 
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
-    public String edit(@RequestParam("id") Long id, Model model) {
-        if(id == null) {
+    public String edit(@RequestParam("id") String id, Model model) {
+        if(id == null || id.trim().length() == 0) {
             return "redirect:list";
         } else {
-            model.addAttribute("contact", contactService.show(id));
+            model.addAttribute("contact", contactService.show(Long.valueOf(id)));
             return "contact/update";
         }
     }

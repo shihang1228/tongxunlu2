@@ -17,7 +17,7 @@ import org.springframework.validation.BindingResult;
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 1L;
-    private String id = "    ";
+    private String BLANK_ID = "    ";
     private Contact contact = new Contact();
     
     @Mock
@@ -76,6 +76,11 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在edit方法中当id为空白时应该重定向到list页面() {
+        assertEquals("redirect:list", contactController.edit(BLANK_ID, model));
+    }
+    
+    @Test
     public void 在update方法中当contact为空时重定向到list页面() {
         assertEquals("redirect:list", contactController.update(null, model));
     }
@@ -93,7 +98,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在delete方法中当id为空白时重定向到list页面() {
-        assertEquals("null", contactController.delete(id));
+        assertEquals("null", contactController.delete(BLANK_ID));
     }
     
     @Test
