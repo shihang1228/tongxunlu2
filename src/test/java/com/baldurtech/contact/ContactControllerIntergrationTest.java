@@ -7,10 +7,13 @@ import org.junit.Ignore;
 import static org.mockito.Mockito.when;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.ResultActions;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import com.baldurtech.config.WebSecurityConfigurationAware;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 public class ContactControllerIntergrationTest extends WebSecurityConfigurationAware {
     private Long CONTACT_ID = 1L;
@@ -34,6 +37,20 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         contact.setJobLevel(3L);
         
         contactService.save(contact);
+    }
+    
+    protected ResultActions userPostPerform(MockHttpServletRequestBuilder request)
+        throws Exception {
+        return mockMvc.perform(request.session(userSession())    
+                       .param("name", contact.getName())
+                       .param("mobile", contact.getMobile())
+                       .param("vpmn", contact.getVpmn())
+                       .param("email", contact.getEmail())
+                       .param("homeAddress", contact.getHomeAddress())
+                       .param("officeAddress", contact.getOfficeAddress())
+                       .param("memo", contact.getMemo())
+                       .param("job", contact.getJob())
+                       .param("jobLevel", String.valueOf(contact.getJobLevel())));
     }
     
     @After
@@ -64,16 +81,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test  
     public void 当URL为contact_save时应该重定向到list页面() throws Exception {
-        userPerform(post("/contact/save")
-                       .param("name", contact.getName())
-                       .param("mobile", contact.getMobile())
-                       .param("vpmn", contact.getVpmn())
-                       .param("email", contact.getEmail())
-                       .param("homeAddress", contact.getHomeAddress())
-                       .param("officeAddress", contact.getOfficeAddress())
-                       .param("memo", contact.getMemo())
-                       .param("job", contact.getJob())
-                       .param("jobLevel", String.valueOf(contact.getJobLevel())))
+        userPostPerform(post("/contact/save"))
               .andExpect(model().attributeExists("id"))
               .andExpect(redirectedUrl("show?id=" + (contact.getId()+1)));
     }
