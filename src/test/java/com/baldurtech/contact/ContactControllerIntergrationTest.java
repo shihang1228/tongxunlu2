@@ -26,6 +26,9 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     @Before
     public void setup() {
         contact = new Contact();
+        contactService.save(createContact(contact));
+    }
+    private Contact createContact(Contact contact){
         contact.setName("ShiHang");
         contact.setMobile("15235432994");
         contact.setEmail("shihang@qq.com");
@@ -36,7 +39,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         contact.setJob("HR");
         contact.setJobLevel(3L);
         
-        contactService.save(contact);
+        return contact;
     }
     
     protected ResultActions userPostPerform(MockHttpServletRequestBuilder request)
