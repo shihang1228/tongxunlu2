@@ -3,6 +3,7 @@ package com.baldurtech.contact;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "contact")
@@ -21,6 +22,8 @@ public class Contact
     
     @NotBlank
     private String name;
+    
+    @NotNull
     private String mobile;
     private String vpmn;
     private String email;
