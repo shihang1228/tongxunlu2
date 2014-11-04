@@ -108,18 +108,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     @Test 
     public void 当在update页面中点击delete时重定向到list页面() throws Exception{
         Contact contact = new Contact();
-        contact = new Contact();
-        contact.setName("ShiHang");
-        contact.setMobile("15235432994");
-        contact.setEmail("shihang@qq.com");
-        contact.setHomeAddress("TaiYuan");
-        contact.setVpmn("652994");
-        contact.setOfficeAddress("BeiZhang");
-        contact.setMemo("Memo");
-        contact.setJob("HR");
-        contact.setJobLevel(3L);
-        
-        contactService.save(contact);
+        contactService.save(createContact(contact));
         
         userPerform(post("/contact/delete")
                        .param("id", String.valueOf(contact.getId())))
