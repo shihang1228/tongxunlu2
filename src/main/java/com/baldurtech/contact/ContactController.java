@@ -82,9 +82,13 @@ public class ContactController {
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public String update(@ModelAttribute("contact") Contact contact, Model model) { 
-        contactService.update(contact);
-        model.addAttribute("id", contact.getId());
-        return "redirect:show";
+        if(contact == null) {
+            return "redirect:list";
+        } else {
+            contactService.update(contact);
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";
+        }
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)

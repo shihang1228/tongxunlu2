@@ -75,11 +75,10 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在contactController中的edit方法中当id不为空时将会调用ContactService中的show方法() {
-        contactController.edit(CONTACT_ID, model);
-        verify(contactService).show(CONTACT_ID);
+    public void 在update方法中当contact为空时重定向到list页面() {
+        assertEquals("redirect:list", contactController.update(null, model));
     }
-    
+
     @Test
     public void 在contactController中的update方法中将会调用ContactService中的update方法() {
         contactController.update(contact, model);
