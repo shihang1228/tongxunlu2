@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,21 +41,21 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在contactController中的list方法中将会调用ContactService中的list方法() {
+    public void 在contactController中的list方法中将会调用ContactService中的list方法并验证返回值() {
         assertEquals("contact/list", contactController.list(model));
         verify(contactService).list();
     }
     
     @Test
-    public void 在contactController中的show方法中将会调用ContactService中的show方法() {
+    public void 在contactController中的show方法中将会调用ContactService中的show方法并验证返回值() {
         assertEquals("contact/show", contactController.show(String.valueOf(CONTACT_ID), model));
         verify(contactService).show(CONTACT_ID);
     }
     
     @Test
-    public void 在contactController中的save方法中将会调用ContactService中的save方法() {
-        contactController.save(contact, result, model);
-        verify(contactService).save(any(Contact.class));
+    public void 在save方法中如果页面验证有错则返回create页面() {
+        when(result.hasErrors()).thenReturn(true);
+        assertEquals("contact/create", contactController.save(contact, result, model));
     }
     
     @Test
