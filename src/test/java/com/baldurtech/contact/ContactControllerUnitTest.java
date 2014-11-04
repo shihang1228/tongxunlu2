@@ -11,14 +11,27 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+import java.security.Principal;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import com.baldurtech.account.*;
 
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 1L;
     private String BLANK_ID = "    ";
     private Contact contact = new Contact();
+    
+    @Mock
+    Principal principal;
+    
+    @Mock
+    Account account;
+    
+    @Mock
+    AccountRepository accountRepository;
     
     @Mock
     ContactService contactService;
@@ -115,5 +128,12 @@ public class ContactControllerUnitTest {
     public void 在contactController中的delete方法中当id不为空时将会调用ContactService中的delete方法() {
         contactController.delete(String.valueOf(CONTACT_ID));
         verify(contactService).delete(CONTACT_ID);
+    }
+    
+    @Test
+    public void 当用户是ROLE_USER时创建联系人时会重定向到forbidden页面() {
+        when(account.getRole()).thenReturn("ROLE_USER");
+        when(accountRepository.findByEmail(any(String.class))).thenReturn(account);
+        assertEquals("contact/forbidden", contactController.create(model, principal));
     }
 }
