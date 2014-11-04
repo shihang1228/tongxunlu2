@@ -122,4 +122,10 @@ public class ContactValidationTest {
         contact.setVpmn("abcd");
         assertConstraintViolation("not a valid vpmn format!");      
     }
+   
+    @Test 
+    public void email_cannot_be_null() {
+        contact.setEmail(null);
+        assertConstraintViolation("not a valid email format!");      
+    }
 }

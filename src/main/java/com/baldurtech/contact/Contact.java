@@ -1,6 +1,7 @@
 package com.baldurtech.contact;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -31,6 +32,9 @@ public class Contact
     @NotNull(message = "not a valid vpmn format!")
     @Pattern(regexp = "\\d{4,6}", message = "not a valid vpmn format!")
     private String vpmn;
+    
+    @NotBlank(message = "not a valid email format!")
+    @Email(message = "not a valid email format!")
     private String email;
     private String homeAddress;
     private String officeAddress;
