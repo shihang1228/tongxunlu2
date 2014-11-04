@@ -2,6 +2,7 @@ package com.baldurtech.contact;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Ignore;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
         contactService.save(contact);
     }
     
+    @After
+    public void teardown() {
+        contactService.delete(contact.getId());
+    }
+    
     @Test
     public void 当URL为contact_list时应该访问list页面() throws Exception{
         mockMvc.perform(get("/contact/list"))
@@ -44,7 +50,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     @Test
     public void 当URL为contact_show时应该访问show页面() throws Exception {
         mockMvc.perform(get("/contact/show")
-                        .param("id", String.valueOf(CONTACT_ID)))
+                        .param("id", String.valueOf(contact.getId())))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/show"));
     }
@@ -72,10 +78,10 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
               .andExpect(redirectedUrl("show?id=" + (contact.getId()+1)));
     }
     
-    @Test @Ignore
+    @Test
     public void 当URL为contact_update时应该访问update页面() throws Exception {
         mockMvc.perform(get("/contact/update")
-                       .param("id", String.valueOf(CONTACT_ID)))
+                       .param("id", String.valueOf(contact.getId())))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/update"));
     }
@@ -83,7 +89,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     @Test
     public void 当点击update页面中的update按钮时应该重定向到show页面() throws Exception{
         mockMvc.perform(post("/contact/update")
-                       .param("id", String.valueOf(CONTACT_ID))
+                       .param("id", String.valueOf(contact.getId()))
                        .param("name", String.valueOf(contact.getName()))
                        .param("mobile", String.valueOf(contact.getMobile()))
                        .param("vpmn", String.valueOf(contact.getVpmn()))
@@ -94,13 +100,27 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("jobLevel", String.valueOf(contact.getJobLevel()))
                        .param("memo", String.valueOf(contact.getMemo())))
                .andExpect(model().attributeExists("id"))
-               .andExpect(redirectedUrl("show?id=" + CONTACT_ID));
+               .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
     
     @Test
     public void 当在update页面中点击delete时重定向到list页面() throws Exception{
+        Contact contact = new Contact();
+        contact = new Contact();
+        contact.setName("ShiHang");
+        contact.setMobile("15235432994");
+        contact.setEmail("shihang@qq.com");
+        contact.setHomeAddress("TaiYuan");
+        contact.setVpmn("652994");
+        contact.setOfficeAddress("BeiZhang");
+        contact.setMemo("Memo");
+        contact.setJob("HR");
+        contact.setJobLevel(3L);
+        
+        contactService.save(contact);
+        
         mockMvc.perform(post("/contact/delete")
-                       .param("id", String.valueOf(CONTACT_ID)))
+                       .param("id", String.valueOf(contact.getId())))
                .andExpect(redirectedUrl("list"));
     }
 }
