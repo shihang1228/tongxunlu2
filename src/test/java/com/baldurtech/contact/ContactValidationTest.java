@@ -140,4 +140,10 @@ public class ContactValidationTest {
         contact.setEmail("asdfasdfasd");
         assertConstraintViolation("not a valid email format!");      
     }
+   
+    @Test 
+    public void homeAddress_cannot_be_null() {
+        contact.setHomeAddress(null);
+        assertConstraintViolation("不能为空");      
+    }
 }
