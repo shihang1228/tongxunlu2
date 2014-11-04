@@ -70,8 +70,13 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在edit方法中当id为null时应该重定向到list页面() {
+        assertEquals("redirect:list", contactController.edit(null, model));
+    }
+    
+    @Test
     public void 在contactController中的update方法中将会调用ContactService中的show方法() {
-        contactController.update(CONTACT_ID, model);
+        contactController.edit(CONTACT_ID, model);
         verify(contactService).show(CONTACT_ID);
     }
     

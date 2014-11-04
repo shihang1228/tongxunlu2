@@ -71,7 +71,7 @@ public class ContactController {
     } 
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
-    public String update(@RequestParam("id") Long id, Model model) {
+    public String edit(@RequestParam("id") Long id, Model model) {
         if(id == null) {
             return "redirect:list";
         } else {
