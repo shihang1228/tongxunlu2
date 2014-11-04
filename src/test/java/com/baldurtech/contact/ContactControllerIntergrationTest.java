@@ -1,8 +1,5 @@
 package com.baldurtech.contact;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -14,14 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import com.baldurtech.config.WebSecurityConfigurationAware;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.mock.web.MockHttpSession;
 
 public class ContactControllerIntergrationTest extends WebSecurityConfigurationAware {
     private Long CONTACT_ID = 1L;
@@ -45,27 +34,6 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         contact.setJobLevel(3L);
         
         contactService.save(contact);
-    }
-
-    protected MockHttpSession userSession() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-        Authentication userAuthentication = 
-            new UsernamePasswordAuthenticationToken("user","demo", authorities);
-            
-        SecurityContext securityContext = org.mockito.Mockito.mock(SecurityContext.class);
-        when(securityContext.getAuthentication()).thenReturn(userAuthentication);
-        
-        MockHttpSession userSession = new MockHttpSession();
-        userSession.setAttribute(
-                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, 
-                securityContext);
-                
-        return userSession;
-    }
-    
-    protected org.springframework.test.web.servlet.ResultActions userPerform(org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder request)
-        throws Exception {
-        return mockMvc.perform(request.session(userSession()));
     }
     
     @After
