@@ -86,6 +86,11 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在delete方法中当id为空时重定向到list页面() {
+        assertEquals("redirect:list", contactController.delete(null));
+    }
+    
+    @Test
     public void 在contactController中的delete方法中将会调用ContactService中的delete方法() {
         contactController.delete(String.valueOf(CONTACT_ID));
         verify(contactService).delete(CONTACT_ID);
