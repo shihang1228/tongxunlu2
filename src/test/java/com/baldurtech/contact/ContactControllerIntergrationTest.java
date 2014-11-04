@@ -96,17 +96,8 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test 
     public void 当点击update页面中的update按钮时应该重定向到show页面() throws Exception{
-        userPerform(post("/contact/update")
-                       .param("id", String.valueOf(contact.getId()))
-                       .param("name", String.valueOf(contact.getName()))
-                       .param("mobile", String.valueOf(contact.getMobile()))
-                       .param("vpmn", String.valueOf(contact.getVpmn()))
-                       .param("email", String.valueOf(contact.getEmail()))
-                       .param("homeAddress", String.valueOf(contact.getHomeAddress()))
-                       .param("officeAddress", String.valueOf(contact.getOfficeAddress()))
-                       .param("job", String.valueOf(contact.getJob()))
-                       .param("jobLevel", String.valueOf(contact.getJobLevel()))
-                       .param("memo", String.valueOf(contact.getMemo())))
+        userPostPerform(post("/contact/update")
+                       .param("id", String.valueOf(contact.getId())))
                .andExpect(model().attributeExists("id"))
                .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
