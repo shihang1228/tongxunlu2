@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.Ignore;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,6 +13,10 @@ import com.baldurtech.config.WebAppConfigurationAware;
 public class ContactControllerIntergrationTest extends WebAppConfigurationAware {
     private Long CONTACT_ID = 1L;
     private Contact contact;
+    private ContactRepository contactRepository;
+    
+    @Autowired
+    ContactService contactService = new ContactService(contactRepository);
     
     @Before
     public void setup() {
@@ -26,7 +31,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
         contact.setJob("HR");
         contact.setJobLevel(3L);
         
-        
+        contactService.save(contact);
     }
     
     @Test
@@ -64,7 +69,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel())))
               .andExpect(model().attributeExists("id"))
-              .andExpect(redirectedUrl("show?id=8"));
+              .andExpect(redirectedUrl("show?id=" + (contact.getId()+1)));
     }
     
     @Test @Ignore
