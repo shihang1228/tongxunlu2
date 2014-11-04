@@ -21,16 +21,6 @@ public class ContactService {
         return contactRepository.getById(id);
     }
     
-    public Contact getById(Long id) {
-        Contact contact = new Contact();
-        contact.setName("ShiHang");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setHomeAddress("TaiYuan");
-        
-        return contact;
-    }
-    
     public void save(Contact contact) {
         contactRepository.save(contact);
     }
