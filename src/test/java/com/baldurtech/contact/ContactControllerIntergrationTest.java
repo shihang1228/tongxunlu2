@@ -86,7 +86,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     public void 当URL为contact_save时应该重定向到list页面() throws Exception {
         userPostPerform(post("/contact/save"))
               .andExpect(model().attributeExists("id"))
-              .andExpect(redirectedUrl("show?id=" + (contact.getId()+1)));
+              .andExpect(redirectedUrl("show?id=" + (contactService.list().get(contactService.list().size() - 1)).getId()));
     }
     
     @Test  
