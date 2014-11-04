@@ -59,6 +59,12 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在save方法中当contact不为空时将会调用contactService中的save方法并验证返回值() {
+        assertEquals("redirect:show", contactController.save(contact, result, model));
+        verify(contactService).save(contact);
+    }
+    
+    @Test
     public void 在contactController中的update方法中将会调用ContactService中的show方法() {
         contactController.update(CONTACT_ID, model);
         verify(contactService).show(CONTACT_ID);
