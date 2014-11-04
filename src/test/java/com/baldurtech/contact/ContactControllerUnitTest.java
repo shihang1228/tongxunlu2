@@ -8,6 +8,7 @@ import static org.mockito.Mockito.any;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,13 +41,13 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在contactController中的list方法中将会调用ContactService中的list方法() {
-        contactController.list(model);
+        assertEquals("contact/list", contactController.list(model));
         verify(contactService).list();
     }
     
     @Test
     public void 在contactController中的show方法中将会调用ContactService中的show方法() {
-        contactController.show(String.valueOf(CONTACT_ID), model);
+        assertEquals("contact/show", contactController.show(String.valueOf(CONTACT_ID), model));
         verify(contactService).show(CONTACT_ID);
     }
     
