@@ -136,4 +136,11 @@ public class ContactControllerUnitTest {
         when(accountRepository.findByEmail(any(String.class))).thenReturn(account);
         assertEquals("contact/forbidden", contactController.create(model, principal));
     }
+    
+    @Test
+    public void 当用户是ROLE_ADMIN时创建联系人时会重定向到create页面() {
+        when(account.getRole()).thenReturn("ROLE_ADMIN");
+        when(accountRepository.findByEmail(any(String.class))).thenReturn(account);
+        assertEquals("contact/create", contactController.create(model, principal));
+    }
 }
