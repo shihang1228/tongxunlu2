@@ -20,11 +20,12 @@ import com.baldurtech.account.*;
 @RequestMapping("contact")
 public class ContactController {
     ContactService contactService;
-    AccountRepository accountRepository = new AccountRepository();
+    AccountRepository accountRepository;
     
     @Autowired
-    public ContactController(ContactService contactService) {
+    public ContactController(ContactService contactService, AccountRepository accountRepository) {
         this.contactService = contactService;
+        this.accountRepository = accountRepository;
     }
 
     @RequestMapping(value = "list")
