@@ -47,6 +47,8 @@ public class Contact
     
     @NotBlank
     private String job;
+    
+    @NotNull
     private Long jobLevel;
 
     public void setId(Long id)
