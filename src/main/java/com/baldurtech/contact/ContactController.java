@@ -93,8 +93,8 @@ public class ContactController {
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String delete(@RequestParam("id") String id) {
-        if(id == null) {
-            return "redirect:list";
+        if(id == null || id.trim().length() == 0) {
+            return "null";
         } else {
             contactService.delete(Long.valueOf(id));
             return "redirect:list";

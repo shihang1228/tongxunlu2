@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 1L;
+    private String id = "    ";
     private Contact contact = new Contact();
     
     @Mock
@@ -87,7 +88,12 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在delete方法中当id为空时重定向到list页面() {
-        assertEquals("redirect:list", contactController.delete(null));
+        assertEquals("null", contactController.delete(null));
+    }
+    
+    @Test
+    public void 在delete方法中当id为空白时重定向到list页面() {
+        assertEquals("null", contactController.delete(id));
     }
     
     @Test
