@@ -42,7 +42,7 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact, Model model, BindingResult result) {
+    public String save(@ModelAttribute("contact") Contact contact, BindingResult result, Model model) {
         if(result.hasErrors()) {
             return "contact/create";
         }
