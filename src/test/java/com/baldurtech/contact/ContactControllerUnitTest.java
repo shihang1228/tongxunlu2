@@ -80,7 +80,7 @@ public class ContactControllerUnitTest {
     }
 
     @Test
-    public void 在contactController中的update方法中将会调用ContactService中的update方法() {
+    public void 在contactController中的update方法中contact不为空时将会调用ContactService中的update方法() {
         contactController.update(contact, model);
         verify(contactService).update(any(Contact.class));
     }
