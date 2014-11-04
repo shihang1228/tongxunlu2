@@ -53,6 +53,11 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在show方法中当id为空白时应该重定向到list页面() {
+        assertEquals("redirect:list", contactController.show(BLANK_ID, model));
+    }
+    
+    @Test
     public void 在contactController中的show方法中当id合法时将会调用ContactService中的show方法并验证返回值() {
         assertEquals("contact/show", contactController.show(String.valueOf(CONTACT_ID), model));
         verify(contactService).show(CONTACT_ID);
