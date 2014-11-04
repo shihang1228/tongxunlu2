@@ -11,7 +11,7 @@ import org.springframework.security.web.FilterChainProxy;
 import javax.inject.Inject;
 
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.Authentication;
@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 public abstract class WebSecurityConfigurationAware extends WebAppConfigurationAware {
 
@@ -47,7 +48,7 @@ public abstract class WebSecurityConfigurationAware extends WebAppConfigurationA
         return userSession;
     }
     
-    protected org.springframework.test.web.servlet.ResultActions userPerform(org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder request)
+    protected ResultActions userPerform(MockHttpServletRequestBuilder request)
         throws Exception {
         return mockMvc.perform(request.session(userSession()));
     }
