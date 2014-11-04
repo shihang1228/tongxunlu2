@@ -12,10 +12,11 @@
         <div class="container">
             <h1 align="center">Create</h1>
             <table align="center">
-                <form action="#" th:action="@{save}" method="POST">
+                <form action="#" th:action="@{save}" th:object="${contact}" method="POST">
                     <tr>
                         <td>Name</td>
-                        <td><input type="text" name="name" th:value="ShiHang"/></td>
+                        <td><input type="text" th:field="*{name}"/></td>
+                        <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
                     </tr>
                     <tr>
                         <td>Mobile</td>

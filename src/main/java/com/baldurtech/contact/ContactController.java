@@ -2,6 +2,8 @@ package com.baldurtech.contact;
 
 import java.util.List;
 import java.util.ArrayList;
+import javax.validation.Valid;
+
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact, BindingResult result, Model model) {
+    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) {
         if(result.hasErrors()) {
             return "contact/create";
         }
