@@ -91,7 +91,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在contactController中的delete方法中将会调用ContactService中的delete方法() {
+    public void 在contactController中的delete方法中当id不为空时将会调用ContactService中的delete方法() {
         contactController.delete(String.valueOf(CONTACT_ID));
         verify(contactService).delete(CONTACT_ID);
     }
