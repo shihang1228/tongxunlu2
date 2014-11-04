@@ -42,7 +42,10 @@ public class Contact
     
     @NotBlank
     private String officeAddress;
+    
     private String memo;
+    
+    @NotBlank
     private String job;
     private Long jobLevel;
 
