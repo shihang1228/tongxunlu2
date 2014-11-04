@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 
 public class ContactControllerUnitTest {
@@ -21,6 +22,9 @@ public class ContactControllerUnitTest {
     
     @Mock
     Model model;
+    
+    @Mock
+    BindingResult result;
     
     @InjectMocks
     ContactController contactController;
@@ -48,7 +52,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在contactController中的save方法中将会调用ContactService中的save方法() {
-        contactController.save(contact, model);
+        contactController.save(contact, model, result);
         verify(contactService).save(any(Contact.class));
     }
     

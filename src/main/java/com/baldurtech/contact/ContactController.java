@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping("contact")
@@ -41,8 +42,13 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact, Model model) {
-        contactService.save(contact);
+    public String save(@ModelAttribute("contact") Contact contact, Model model, BindingResult result) {
+        if(result.hasErrors()) {
+            return "contact/create";
+        }
+        if(contact != null) {
+            contactService.save(contact);
+        }
         model.addAttribute("id", contact.getId());
         return "redirect:show";       
     } 
