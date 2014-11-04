@@ -1,6 +1,7 @@
 package com.baldurtech.contact;
 
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.assertEquals;
@@ -59,6 +60,12 @@ public class ContactValidationTest {
     @Test
     public void mobile_cannot_be_null() {
         contact.setMobile(null);
-        assertConstraintViolation("不能为null");      
+        assertConstraintViolation("not a valid mobile format!");      
+    }
+   
+    @Test @Ignore
+    public void mobile_cannot_be_blank() {
+        contact.setMobile("        ");
+        assertConstraintViolation("not a valid mobile format!");      
     }
 }
