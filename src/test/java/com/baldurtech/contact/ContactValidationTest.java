@@ -1,6 +1,7 @@
 package com.baldurtech.contact;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.assertEquals;
 
@@ -12,6 +13,8 @@ import javax.validation.ValidatorFactory;
 
 
 public class ContactValidationTest {
+    private Contact contact;
+    private Set<ConstraintViolation<Contact>> constraintViolations;
     private static Validator validator;
     
     @BeforeClass
@@ -20,10 +23,10 @@ public class ContactValidationTest {
         validator = factory.getValidator();
     }
     
-    @Test
-    public void name_cannot_be_null() {
-        Contact contact = new Contact();
-        contact.setName(null);
+    @Before
+    public void createValidContact() {
+        contact = new Contact();
+        contact.setName("Xiao Bai");
         contact.setMobile("15235432994");
         contact.setEmail("123@qq.com");
         contact.setVpmn("652994");
@@ -32,6 +35,24 @@ public class ContactValidationTest {
         contact.setMemo("memo");
         contact.setJob("HR");
         contact.setJobLevel(1L);
+    }
+    
+    public void assertConstraintViolation(String errorMessage) {
+        constraintViolations = validator.validate(contact);
+        
+        assertEquals(1, constraintViolations.size());
+        assertEquals(errorMessage, constraintViolations.iterator().next().getMessage());        
+    }
+    
+    @Test
+    public void name_cannot_be_null() {
+        contact.setName(null);
+        assertConstraintViolation("不能为空"); 
+    }
+   
+    @Test
+    public void name_cannot_be_blank() {
+        contact.setName("         ");
         
         Set<ConstraintViolation<Contact>> constraintViolations = validator.validate(contact);
         
