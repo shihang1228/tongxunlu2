@@ -62,9 +62,12 @@ public class ContactController {
         }
         if(contact != null) {
             contactService.save(contact);
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";          
+        }else {
+            return "contact/create";
         }
-        model.addAttribute("id", contact.getId());
-        return "redirect:show";       
+              
     } 
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
