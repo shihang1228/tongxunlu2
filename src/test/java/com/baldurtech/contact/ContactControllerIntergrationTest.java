@@ -88,11 +88,10 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
                .andExpect(view().name("contact/show"));
     }
     
-    @Test  @Ignore
-    public void 当URL为contact_create时应该访问create页面() throws Exception {
+    @Test
+    public void 当用户角色为ROLE_USER时应该访问forbidden页面() throws Exception {
         userPerform(get("/contact/create"))
-               .andExpect(model().attributeExists("contact"))
-               .andExpect(view().name("contact/create"));
+               .andExpect(view().name("contact/forbidden"));
     }
     
     @Test  
