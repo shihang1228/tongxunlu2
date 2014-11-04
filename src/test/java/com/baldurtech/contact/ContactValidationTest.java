@@ -104,4 +104,10 @@ public class ContactValidationTest {
         contact.setVpmn("     ");
         assertConstraintViolation("not a valid vpmn format!");      
     }
+   
+    @Test 
+    public void vpmn_cannot_be_too_long() {
+        contact.setVpmn("123");
+        assertConstraintViolation("not a valid vpmn format!");      
+    }
 }
