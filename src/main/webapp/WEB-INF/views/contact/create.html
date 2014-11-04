@@ -20,35 +20,43 @@
                     </tr>
                     <tr>
                         <td>Mobile</td>
-                        <td><input type="text" name="mobile" th:value="15235432994"/></td>
+                        <td><input type="text" th:field="*{mobile}"/></td>
+                        <td th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}">Name Error</td>
                     </tr>
                     <tr>
                         <td>Vpmn</td>
-                        <td><input type="text" name="vpmn" th:value="652994"/></td>
+                        <td><input type="text" th:field="*{vpmn}"/></td>
+                        <td th:if="${#fields.hasErrors('vpmn')}" th:errors="*{vpmn}">Name Error</td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="email" name="email" value="a@a.com"/></td>
+                        <td><input type="email" th:field="*{email}"/></td>
+                        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</td>
                     </tr>
                     <tr>
                         <td>HomeAddress</td>
-                        <td><input type="text" name="homeAddress" th:value="TaiYuan"/></td>
+                        <td><input type="text" th:field="*{homeAddress}"/></td>
+                        <td th:if="${#fields.hasErrors('homeAddress')}" th:errors="*{homeAddress}">Name Error</td>
                     </tr>
                     <tr>
                         <td>OfficeAddress</td>
-                        <td><input type="text" name="officeAddress" th:value="BeiZhang"/></td>
+                        <td><input type="text" th:field="*{officeAddress}"/></td>
+                        <td th:if="${#fields.hasErrors('officeAddress')}" th:errors="*{officeAddress}">Name Error</td>
                     </tr>
                     <tr>
                         <td>Memo</td>
-                        <td><input type="text" name="memo" th:value="memo"/></td>
+                        <td><input type="text" th:field="*{memo}"/></td>
+                        <td th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}">Name Error</td>
                     </tr>
                     <tr>
                         <td>Job</td>
-                        <td><input type="text" name="job" th:value="HR"/></td>
+                        <td><input type="text" th:field="*{job}"/></td>
+                        <td th:if="${#fields.hasErrors('job')}" th:errors="*{job}">Name Error</td>
                     </tr>
                     <tr>
                         <td>JobLevel</td>
-                        <td><input type="number" name="jobLevel" th:value="4"/></td>
+                        <td><input type="number" th:field="*{jobLevel}"/></td>
+                        <td th:if="${#fields.hasErrors('jobLevel')}" th:errors="*{jobLevel}">Name Error</td>
                     </tr>
                     <tr align="center">
                         <td colspan="2"><input type="submit" name="aciton"/></td>
