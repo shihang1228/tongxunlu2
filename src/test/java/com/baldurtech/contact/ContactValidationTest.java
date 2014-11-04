@@ -158,4 +158,10 @@ public class ContactValidationTest {
         contact.setOfficeAddress(null);
         assertConstraintViolation("不能为空");      
     }
+   
+    @Test 
+    public void officeAddress_cannot_be_blank() {
+        contact.setOfficeAddress("     ");
+        assertConstraintViolation("不能为空");      
+    }
 }
