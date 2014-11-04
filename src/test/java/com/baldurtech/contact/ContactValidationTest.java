@@ -116,4 +116,10 @@ public class ContactValidationTest {
         contact.setVpmn("123");
         assertConstraintViolation("not a valid vpmn format!");      
     }
+   
+    @Test 
+    public void vpmn_can_be_digits() {
+        contact.setVpmn("abcd");
+        assertConstraintViolation("not a valid vpmn format!");      
+    }
 }
