@@ -65,6 +65,11 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在save方法中当contact为空时将会返回到create页面() {
+        assertEquals("contact/create", contactController.save(null, result, model));
+    }
+    
+    @Test
     public void 在contactController中的update方法中将会调用ContactService中的show方法() {
         contactController.update(CONTACT_ID, model);
         verify(contactService).show(CONTACT_ID);
