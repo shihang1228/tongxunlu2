@@ -80,24 +80,24 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
                .andExpect(model().attributeExists("contactList"));
     }
     
-    @Test @Ignore
+    @Test 
     public void 当URL为contact_show时应该访问show页面() throws Exception {
-        mockMvc.perform(get("/contact/show")
+        userPerform(get("/contact/show")
                         .param("id", String.valueOf(contact.getId())))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/show"));
     }
     
-    @Test @Ignore
+    @Test  @Ignore
     public void 当URL为contact_create时应该访问create页面() throws Exception {
-        mockMvc.perform(get("/contact/create"))
+        userPerform(get("/contact/create"))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/create"));
     }
     
-    @Test @Ignore
+    @Test  
     public void 当URL为contact_save时应该重定向到list页面() throws Exception {
-        mockMvc.perform(post("/contact/save")
+        userPerform(post("/contact/save")
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
                        .param("vpmn", contact.getVpmn())
@@ -111,17 +111,17 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
               .andExpect(redirectedUrl("show?id=" + (contact.getId()+1)));
     }
     
-    @Test @Ignore
+    @Test  
     public void 当URL为contact_update时应该访问update页面() throws Exception {
-        mockMvc.perform(get("/contact/update")
+        userPerform(get("/contact/update")
                        .param("id", String.valueOf(contact.getId())))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/update"));
     }
     
-    @Test @Ignore
+    @Test 
     public void 当点击update页面中的update按钮时应该重定向到show页面() throws Exception{
-        mockMvc.perform(post("/contact/update")
+        userPerform(post("/contact/update")
                        .param("id", String.valueOf(contact.getId()))
                        .param("name", String.valueOf(contact.getName()))
                        .param("mobile", String.valueOf(contact.getMobile()))
@@ -136,7 +136,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
                .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
     
-    @Test @Ignore
+    @Test 
     public void 当在update页面中点击delete时重定向到list页面() throws Exception{
         Contact contact = new Contact();
         contact = new Contact();
@@ -152,7 +152,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         
         contactService.save(contact);
         
-        mockMvc.perform(post("/contact/delete")
+        userPerform(post("/contact/delete")
                        .param("id", String.valueOf(contact.getId())))
                .andExpect(redirectedUrl("list"));
     }
