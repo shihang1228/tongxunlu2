@@ -53,10 +53,6 @@ public class ContactValidationTest {
     @Test
     public void name_cannot_be_blank() {
         contact.setName("         ");
-        
-        Set<ConstraintViolation<Contact>> constraintViolations = validator.validate(contact);
-        
-        assertEquals(1, constraintViolations.size());
-        assertEquals("不能为空", constraintViolations.iterator().next().getMessage());        
+        assertConstraintViolation("不能为空");      
     }
 }
