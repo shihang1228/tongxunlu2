@@ -80,4 +80,10 @@ public class ContactValidationTest {
         contact.setMobile("1821234567");
         assertConstraintViolation("not a valid mobile format!");      
     }
+   
+    @Test 
+    public void mobile_can_be_digits() {
+        contact.setMobile("abcdefjhijk");
+        assertConstraintViolation("not a valid mobile format!");      
+    }
 }
