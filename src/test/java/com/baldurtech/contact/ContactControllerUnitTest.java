@@ -75,7 +75,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在contactController中的update方法中将会调用ContactService中的show方法() {
+    public void 在contactController中的edit方法中当id不为空时将会调用ContactService中的show方法() {
         contactController.edit(CONTACT_ID, model);
         verify(contactService).show(CONTACT_ID);
     }
