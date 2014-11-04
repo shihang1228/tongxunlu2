@@ -170,4 +170,10 @@ public class ContactValidationTest {
         contact.setJob(null);
         assertConstraintViolation("不能为空");      
     }
+   
+    @Test 
+    public void job_cannot_be_blank() {
+        contact.setJob("     ");
+        assertConstraintViolation("不能为空");      
+    }
 }
