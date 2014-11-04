@@ -3,6 +3,7 @@ package com.baldurtech.contact;
 import java.util.List;
 import java.util.ArrayList;
 import javax.validation.Valid;
+import java.security.Principal;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.validation.BindingResult;
 
+import com.baldurtech.account.*;
+
 @Controller
 @RequestMapping("contact")
 public class ContactController {
     ContactService contactService;
+    AccountRepository accountRepository = new AccountRepository();
     
     @Autowired
     public ContactController(ContactService contactService) {
@@ -38,9 +42,16 @@ public class ContactController {
     }
     
     @RequestMapping(value = "create")
-    public String create(Model model) {
-        model.addAttribute("contact", new Contact());
-        return "contact/create";
+    public String create(Model model, Principal principal) {
+        Account account = accountRepository.findByEmail(principal.getName());
+        if("ROLE_USER".equals(account.getRole())) {
+            return "contact/forbidden";
+        }else if("ROLE_ADMIN".equals(account.getRole())) {
+            model.addAttribute("contact", new Contact());
+            return "contact/create";
+        }else {
+            return "contact/forbidden";
+        }
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
