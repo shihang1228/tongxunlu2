@@ -98,4 +98,10 @@ public class ContactValidationTest {
         contact.setVpmn(null);
         assertConstraintViolation("not a valid vpmn format!");      
     }
+   
+    @Test 
+    public void vpmn_cannot_be_blank() {
+        contact.setVpmn("     ");
+        assertConstraintViolation("not a valid vpmn format!");      
+    }
 }
