@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
 
 import org.springframework.ui.Model;
 
@@ -48,17 +49,19 @@ public class ContactControllerUnitTest {
         return NON_CONTACT_EXISTS;
     }
     
+    @Test
     public void 验证contactController的list方法能否正确使用ContactService的list方法() {
         List<Contact> contactList = 当Contact存在时返回contactList();
         
         when(contactService.list()).thenReturn(contactList);
         assertEquals("contact/list", contactController.list(model));
-        verify(contactService, times(1)).list();
+        verify(contactService, times(2)).list();
     }
     
+    @Test
     public void 验证ContactService的list方法的返回值为null时contactController的list方法应该重定向到create页面() {
         when(contactService.list()).thenReturn(NON_CONTACT_EXISTS);
-        assertEquals("contact/list", contactController.list(model));
+        assertEquals("contact/create", contactController.list(model));
         verify(contactService, times(1)).list();
     }
 }

@@ -22,8 +22,8 @@ public class ContactController {
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
-        if(null != contactService.findAll()) {
-            model.addAttribute("contactList", contactService.findAll());
+        if(null != contactService.list()) {
+            model.addAttribute("contactList", contactService.list());
             return "contact/list";
         } else {
             return "contact/create";
