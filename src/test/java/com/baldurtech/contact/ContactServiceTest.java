@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.never;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -17,6 +16,8 @@ import org.junit.Test;
 import org.junit.Before;
 
 public class ContactServiceTest {
+    private static Contact NON_EXIST_CONTACT = null;
+    
     private Long CONTACT_ID = 3L;
     private Contact contact;
     
@@ -31,10 +32,6 @@ public class ContactServiceTest {
     
     @Before
     public void setup() {
-        initMocks();
-    }
-    
-    public void initMocks() {
         MockitoAnnotations.initMocks(this);
     }
     
@@ -44,28 +41,46 @@ public class ContactServiceTest {
         verify(contactRepository).findAll();
     }
     
+    private Contact 假如id对应的contact已经存在(Long id) {
+        Contact contact = new Contact();
+        contact.setId(id);
+        
+        when(contactRepository.getById(id)).thenReturn(contact);
+        
+        return contact;
+    }
+
+    private Contact 假如id对应的contact不存在(Long id) {
+        when(contactRepository.getById(id)).thenReturn(NON_EXIST_CONTACT);
+        return NON_EXIST_CONTACT;
+    }
+
     @Test
     public void 在ContactService中的show方法中调用ContactRepository中的getById方法() {
-        Contact contact = new Contact();
-        contact.setId(CONTACT_ID);
+        Long contactId = 100L;
         
-        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        Contact contact = 假如id对应的contact已经存在(contactId);
         
-        assertEquals(contact, contactService.show(CONTACT_ID));
-        verify(contactRepository, times(1)).getById(CONTACT_ID);
-        assertEquals(CONTACT_ID, contactRepository.getById(CONTACT_ID).getId());
+        assertEquals(contact, contactService.show(contactId));
+        verify(contactRepository,times(1)).getById(contactId);
     }
     
     @Test
     public void 如果id对应的contact不存在时就返回null() {
-        assertNull(contactService.show(-1L));
-        verify(contactRepository,never()).getById(-1L);
+        Long contactId = 8964L;
+        
+        假如id对应的contact不存在(contactId);
+    
+        assertNull(contactService.show(contactId));
+        verify(contactRepository, times(1)).getById(contactId);
     }
     
     @Test
     public void 在ContactService中的save方法中调用ContactRepository中的save方法() {
+        Contact contact = 假如id对应的contact已经存在(98374L);
+    
         contactService.save(contact);
-        verify(contactRepository).save(any(Contact.class));
+        verify(contactRepository).save(contact);
     }
     
     @Test

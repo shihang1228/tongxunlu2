@@ -18,12 +18,7 @@ public class ContactService {
     }
      
     public Contact show(Long id) {
-        if(id > 0) {
-            return contactRepository.getById(3L);
-        } else {
-            return null;
-        }
-        
+        return contactRepository.getById(id);
     }
     
     public void save(Contact contact) {
