@@ -15,6 +15,7 @@ import com.baldurtech.config.WebSecurityConfigurationAware;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+@Ignore
 public class ContactControllerIntergrationTest extends WebSecurityConfigurationAware {
     private Long CONTACT_ID = 1L;
     private Contact contact;

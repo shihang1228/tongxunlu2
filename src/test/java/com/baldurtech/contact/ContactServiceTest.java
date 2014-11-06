@@ -3,15 +3,21 @@ package com.baldurtech.contact;
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.never;
 
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.Before;
 
 public class ContactServiceTest {
-    private Long CONTACT_ID = 1L;
+    private Long CONTACT_ID = 3L;
     private Contact contact;
     
     @Mock
@@ -19,6 +25,9 @@ public class ContactServiceTest {
     
     @InjectMocks
     ContactService contactService;
+    
+    @InjectMocks
+    ContactController contactController;
     
     @Before
     public void setup() {
@@ -37,8 +46,20 @@ public class ContactServiceTest {
     
     @Test
     public void 在ContactService中的show方法中调用ContactRepository中的getById方法() {
-        contactService.show(CONTACT_ID);
-        verify(contactRepository).getById(CONTACT_ID);
+        Contact contact = new Contact();
+        contact.setId(CONTACT_ID);
+        
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        
+        assertEquals(contact, contactService.show(CONTACT_ID));
+        verify(contactRepository, times(1)).getById(CONTACT_ID);
+        assertEquals(CONTACT_ID, contactRepository.getById(CONTACT_ID).getId());
+    }
+    
+    @Test
+    public void 如果id对应的contact不存在时就返回null() {
+        assertNull(contactService.show(-1L));
+        verify(contactRepository,never()).getById(-1L);
     }
     
     @Test
