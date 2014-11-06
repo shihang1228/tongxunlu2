@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ContactServiceTest {
+    private final List<Contact> NON_CONTACT_EXISTS = null;
+    
     @Mock
     ContactRepository contactRepository;
     
@@ -40,6 +43,14 @@ public class ContactServiceTest {
         when(contactRepository.findAll()).thenReturn(contactList);
         
         assertEquals(contactList, contactService.list());
+        verify(contactRepository, times(1)).findAll();
+    }
+    
+    @Test
+    public void 验证contactRepository的返回值为null时返回null() {
+        when(contactRepository.findAll()).thenReturn(NON_CONTACT_EXISTS);
+        
+        assertNull(contactService.list());
         verify(contactRepository, times(1)).findAll();
     }
 }
