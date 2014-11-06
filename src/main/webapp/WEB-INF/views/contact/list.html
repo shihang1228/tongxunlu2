@@ -10,8 +10,7 @@
     </head>
     <body>
         <fieldset>
-            <legend align="center">Contact List</legend>
-            <h1 align="center" th:text="${contactList}"></h1>
+            <legend align="center">Contac List</legend>
             <table border="1" align="center">
                 <tr>
                     <td>Name</td>
@@ -19,17 +18,11 @@
                     <td>Vpmn</td>
                     <td>HomeAddress</td>
                 </tr>
-                <tr>
-                    <td>Xiao Bai</td>
-                    <td>18234105437</td>
-                    <td>62222</td>
-                    <td>TaiYuan</td>
-                </tr>
-                <tr>
-                    <td>Shi Hang</td>
-                    <td>18234105437</td>
-                    <td>62222</td>
-                    <td>TaiYuan</td>
+                <tr th:each="contact : ${contactList}">
+                    <td th:text="${contact.name}">Xiao Bai</td>
+                    <td th:text="${contact.mobile}">18234105437</td>
+                    <td th:text="${contact.vpmn}">62222</td>
+                    <td th:text="${contact.homeAddress}">TaiYuan</td>
                 </tr>
             </table>
         </fieldset>
