@@ -14,5 +14,5 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware {
         mockMvc.perform(get("/contact/list"))
             .andExpect(view().name("contact/list"))
             .andExpect(model().attributeExists("contactList"));
-    }
+    }    
 }
