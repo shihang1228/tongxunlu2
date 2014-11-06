@@ -14,6 +14,11 @@ import org.springframework.ui.Model;
 public class ContactController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
+        model.addAttribute("contactList", findAll());
+        return "contact/list";
+    }
+    
+    public List<Contact> findAll() {
         List<Contact> contactList = new ArrayList<Contact>();
         
         Contact contact1 = new Contact();
@@ -31,7 +36,6 @@ public class ContactController {
         contactList.add(contact1);
         contactList.add(contact2);
         
-        model.addAttribute("contactList", contactList);
-        return "contact/list";
+        return contactList;
     }
 }
