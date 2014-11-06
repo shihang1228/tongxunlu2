@@ -35,6 +35,8 @@ class JpaConfig implements TransactionManagementConfigurer {
     private String dialect;
     @Value("${hibernate.hbm2ddl.auto}")
     private String hbm2ddlAuto;
+    @Value("${hibernate.show_sql}")
+    private String showSql;
 
     @Bean
     public DataSource configureDataSource() {
@@ -56,6 +58,7 @@ class JpaConfig implements TransactionManagementConfigurer {
         Properties jpaProperties = new Properties();
         jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
         jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
+        jpaProperties.put(org.hibernate.cfg.Environment.SHOW_SQL, showSql);
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
         return entityManagerFactoryBean;
