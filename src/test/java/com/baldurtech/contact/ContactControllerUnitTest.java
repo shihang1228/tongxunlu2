@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
     private List<Contact> NON_CONTACT_EXISTS = null;
+    private Contact contact = new Contact();
     
     @Mock
     Model model;
@@ -32,35 +33,39 @@ public class ContactControllerUnitTest {
     @Before
     public void initMocks() {
         MockitoAnnotations.initMocks(this);
+        contact.setName("XiaoBai");
+        contact.setMobile("18234105437");
+        contact.setVpmn("62222");
+        contact.setEmail("a@a.com");
+        contact.setHomeAddress("ShanXi");
+        contact.setOfficeAddress("TaiYuan");
+        contact.setJob("HR");
+        contact.setJobLevel(1L);
+        contact.setMemo("memo");
     }
-    public List<Contact> 当Contact存在时返回contactList() {
+    public void 当Contact存在时返回contactList() {
         List<Contact> contactList = new ArrayList<Contact>();
-        Contact contact1 = new Contact();
-        contact1.setName("Xiao Bai");
-        Contact contact2 = new Contact();
-        contact2.setName("Shi Hang");
         
-        contactList.add(contact1);
-        contactList.add(contact2);
-        return contactList;
+        contactList.add(contact);
+        when(contactService.list()).thenReturn(contactList);
     }
     
-    public List<Contact> 当Contact不存在是返回null() {
-        return NON_CONTACT_EXISTS;
+    public void 当Contact不存在是返回null() {
+        when(contactService.list()).thenReturn(NON_CONTACT_EXISTS);
     }
     
     @Test
     public void 验证contactController的list方法能否正确使用ContactService的list方法() {
-        List<Contact> contactList = 当Contact存在时返回contactList();
+        当Contact存在时返回contactList();
         
-        when(contactService.list()).thenReturn(contactList);
         assertEquals("contact/list", contactController.list(model));
         verify(contactService, times(2)).list();
     }
     
     @Test
     public void 验证ContactService的list方法的返回值为null时contactController的list方法应该重定向到create页面() {
-        when(contactService.list()).thenReturn(NON_CONTACT_EXISTS);
+        当Contact不存在是返回null();
+        
         assertEquals("contact/create", contactController.list(model));
         verify(contactService, times(1)).list();
     }
