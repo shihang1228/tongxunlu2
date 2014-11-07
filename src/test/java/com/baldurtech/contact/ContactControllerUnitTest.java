@@ -94,4 +94,10 @@ public class ContactControllerUnitTest {
         assertEquals("redirect:list", contactController.show(null, model));
         verify(contactService, never()).show(any(Long.class));
     }
+    
+    @Test
+    public void 当id为blank时应该重定向到list页面() {
+        assertEquals("redirect:list", contactController.show("      ", model));
+        verify(contactService, never()).show(any(Long.class));
+    }
 }
