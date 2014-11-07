@@ -36,7 +36,7 @@ public class ContactController {
         if(null == id && id.trim().length() == 0) {
             return "redirect:list";
         }
-        
+
         if(null != contactService.show(Long.valueOf(id))) {
             model.addAttribute("contact", contactService.show(Long.valueOf(id)));
             return "contact/show";

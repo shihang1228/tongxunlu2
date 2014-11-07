@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
     private List<Contact> NON_CONTACT_EXISTS = null;
+    private Contact NON_CONTACT = null;
     private Contact contact = new Contact();
     private Long CONTACT_ID = 9L;
     
@@ -56,7 +57,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 验证contactController的list方法能否正确使用ContactService的list方法() {
+    public void 验证contactController的list方法应该正确使用ContactService的list方法() {
         当Contact存在时返回contactList();
         
         assertEquals("contact/list", contactController.list(model));
@@ -72,10 +73,18 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 验证contactController的show方法能否正确使用contactService的show方法() {
+    public void 验证contactController的show方法应该正确使用contactService的show方法() {
         when(contactService.show(CONTACT_ID)).thenReturn(contact);
         
         assertEquals("contact/show", contactController.show(String.valueOf(CONTACT_ID), model));
         verify(contactService, times(2)).show(CONTACT_ID);
+    }
+    
+    @Test
+    public void contactService的show方法的返回值为null时应该重定向到list页面() {
+        when(contactService.show(CONTACT_ID)).thenReturn(NON_CONTACT);
+        
+        assertEquals("redirect:list", contactController.show(String.valueOf(CONTACT_ID), model));
+        verify(contactService, times(1)).show(CONTACT_ID);
     }
 }
