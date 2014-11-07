@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNull;
 
 public class ContactServiceTest {
     private final List<Contact> NON_CONTACT_EXISTS = null;
+    private Contact contact = new Contact();
     
     @Mock
     ContactRepository contactRepository;
@@ -27,20 +28,32 @@ public class ContactServiceTest {
     @Before
     public void initMocks() {
         MockitoAnnotations.initMocks(this);
-    } 
+        contact.setName("XiaoBai");
+        contact.setMobile("18234105437");
+        contact.setVpmn("62222");
+        contact.setEmail("a@a.com");
+        contact.setHomeAddress("ShanXi");
+        contact.setOfficeAddress("TaiYuan");
+        contact.setJob("HR");
+        contact.setJobLevel(1L);
+        contact.setMemo("memo");
+    }
+    public List<Contact> 当Contact存在时返回contactList() {
+        List<Contact> contactList = new ArrayList<Contact>();
+        
+        contactList.add(contact);   
+        when(contactRepository.findAll()).thenReturn(contactList);
+        
+        return contactList;
+    }
+    
+    public void 当Contact不存在时返回null() {
+        when(contactRepository.findAll()).thenReturn(NON_CONTACT_EXISTS);
+    }
     
     @Test
     public void 验证ContactService可以正确的使用ContactRepository的findAll方法() {
-        List<Contact> contactList = new ArrayList<Contact>();
-        Contact contact1 = new Contact();
-        contact1.setName("Xiao Bai");
-        Contact contact2 = new Contact();
-        contact2.setName("Shi Hang");
-        
-        contactList.add(contact1);
-        contactList.add(contact2);
-        
-        when(contactRepository.findAll()).thenReturn(contactList);
+        List<Contact> contactList = 当Contact存在时返回contactList();
         
         assertEquals(contactList, contactService.list());
         verify(contactRepository, times(1)).findAll();
@@ -48,8 +61,8 @@ public class ContactServiceTest {
     
     @Test
     public void 验证contactRepository的返回值为null时返回null() {
-        when(contactRepository.findAll()).thenReturn(NON_CONTACT_EXISTS);
-        
+        当Contact不存在时返回null();
+    
         assertNull(contactService.list());
         verify(contactRepository, times(1)).findAll();
     }

@@ -50,7 +50,7 @@ public class ContactControllerUnitTest {
         when(contactService.list()).thenReturn(contactList);
     }
     
-    public void 当Contact不存在是返回null() {
+    public void 当Contact不存在时返回null() {
         when(contactService.list()).thenReturn(NON_CONTACT_EXISTS);
     }
     
@@ -64,7 +64,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 验证ContactService的list方法的返回值为null时contactController的list方法应该重定向到create页面() {
-        当Contact不存在是返回null();
+        当Contact不存在时返回null();
         
         assertEquals("contact/create", contactController.list(model));
         verify(contactService, times(1)).list();
