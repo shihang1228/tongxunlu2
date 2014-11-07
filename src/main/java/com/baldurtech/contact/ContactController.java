@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.ui.Model;
 
@@ -49,4 +50,11 @@ public class ContactController {
     public String create() {
         return "contact/create";
     }
+    
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("contact") Contact contact, Model model) {
+        model.addAttribute("contact", contact);
+        System.out.println(contact.getName());
+        return "redirect:list";
+    } 
 }
