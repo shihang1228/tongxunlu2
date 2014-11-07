@@ -9,8 +9,8 @@
         <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <fieldset>
-            <legend align="center">Contac List</legend>
+        <div class="container">
+            <h1 align="center">contact List</h1>
             <table border="1" align="center">
                 <tr>
                     <td>Name</td>
@@ -25,6 +25,6 @@
                     <td th:text="${contact.homeAddress}">TaiYuan</td>
                 </tr>
             </table>
-        </fieldset>
+        </div>
     </body>
 </html>
