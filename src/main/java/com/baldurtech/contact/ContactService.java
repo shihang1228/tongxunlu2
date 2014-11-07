@@ -20,6 +20,9 @@ public class ContactService {
     }
     
     public Contact show(Long id) {
+        if(contactRepository.getById(id) == null) {
+            return null;
+        }
         return contactRepository.getById(id);
     }
     

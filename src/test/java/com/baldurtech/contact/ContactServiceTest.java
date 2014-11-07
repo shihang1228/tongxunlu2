@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNull;
 public class ContactServiceTest {
     private final List<Contact> NON_CONTACT_EXISTS = null;
     private Contact contact = new Contact();
+    private Long CONTACT_ID = 5L;
     
     @Mock
     ContactRepository contactRepository;
@@ -52,7 +53,7 @@ public class ContactServiceTest {
     }
     
     @Test
-    public void 验证ContactService可以正确的使用ContactRepository的findAll方法() {
+    public void 在list方法中验证ContactService可以正确的使用ContactRepository的findAll方法() {
         List<Contact> contactList = 当Contact存在时返回contactList();
         
         assertEquals(contactList, contactService.list());
@@ -60,10 +61,18 @@ public class ContactServiceTest {
     }
     
     @Test
-    public void 验证contactRepository的返回值为null时返回null() {
+    public void 在list方法中验证contactRepository的返回值为null时返回null() {
         当Contact不存在时返回null();
     
         assertNull(contactService.list());
         verify(contactRepository, times(1)).findAll();
+    }
+    
+    @Test
+    public void 在show方法中当contactRepository的getById方法的返回值为null时应该返回null() {
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(null);
+        
+        assertNull(contactService.show(CONTACT_ID));
+        verify(contactRepository, times(1)).getById(CONTACT_ID);
     }
 }
