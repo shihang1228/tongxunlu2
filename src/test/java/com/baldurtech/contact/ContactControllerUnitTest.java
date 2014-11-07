@@ -100,4 +100,9 @@ public class ContactControllerUnitTest {
         assertEquals("redirect:list", contactController.show("      ", model));
         verify(contactService, never()).show(any(Long.class));
     }
+    
+    @Test
+    public void 当调用contactController中的create方法时应该返回contact_create() {
+        assertEquals("contact/create", contactController.create());
+    }
 }
