@@ -26,4 +26,8 @@ public class ContactService {
         return contactRepository.getById(id);
     }
     
+    public void save(Contact contact) {
+        System.out.println(contact.getName());
+    }
+    
 }

@@ -53,8 +53,8 @@ public class ContactController {
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(@ModelAttribute("contact") Contact contact, Model model) {
+        contactService.save(contact);
         model.addAttribute("contact", contact);
-        System.out.println(contact.getName());
         return "redirect:list";
     } 
 }
