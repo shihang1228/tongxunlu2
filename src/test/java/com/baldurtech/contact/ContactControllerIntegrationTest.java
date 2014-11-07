@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.baldurtech.config.WebAppConfigurationAware;
 
 public class ContactControllerIntegrationTest extends WebAppConfigurationAware {
-    private Long CONTACT_ID = 9L;
+    private Long CONTACT_ID = 3L;
     
     @Test 
     public void 当URL为contact_list时应该访问list页面() throws Exception {
