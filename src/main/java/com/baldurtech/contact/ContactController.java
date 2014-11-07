@@ -33,23 +33,15 @@ public class ContactController {
     
     @RequestMapping(value = "show", method = RequestMethod.GET) 
     public String show(@RequestParam(value = "id") String id, Model model) {
-        model.addAttribute("contact", getById(Long.valueOf(id)));
-        return "contact/show";
-    }
-    
-    public Contact getById(Long id) {
+        if(null == id && id.trim().length() == 0) {
+            return "redirect:list";
+        }
         
-        Contact contact = new Contact();
-        contact.setName("Shi Hang");
-        contact.setMobile("18233333333");
-        contact.setVpmn("6555");
-        contact.setEmail("a@a.com");
-        contact.setHomeAddress("TaiYuan");
-        contact.setOfficeAddress("BeiZhang");
-        contact.setJob("HR");
-        contact.setJobLevel(9L);
-        contact.setMemo("memo");
-        
-        return contact;
+        if(null != contactService.show(Long.valueOf(id))) {
+            model.addAttribute("contact", contactService.show(Long.valueOf(id)));
+            return "contact/show";
+        } else {
+            return "redirect:list";
+        }
     }
 }

@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 public class ContactControllerUnitTest {
     private List<Contact> NON_CONTACT_EXISTS = null;
     private Contact contact = new Contact();
+    private Long CONTACT_ID = 9L;
     
     @Mock
     Model model;
@@ -68,5 +69,13 @@ public class ContactControllerUnitTest {
         
         assertEquals("contact/create", contactController.list(model));
         verify(contactService, times(1)).list();
+    }
+    
+    @Test
+    public void 验证contactController的show方法能否正确使用contactService的show方法() {
+        when(contactService.show(CONTACT_ID)).thenReturn(contact);
+        
+        assertEquals("contact/show", contactController.show(String.valueOf(CONTACT_ID), model));
+        verify(contactService, times(2)).show(CONTACT_ID);
     }
 }
