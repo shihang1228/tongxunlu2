@@ -54,7 +54,7 @@ public class ContactController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(@ModelAttribute("contact") Contact contact, Model model) {
         contactService.save(contact);
-        model.addAttribute("contact", contact);
-        return "redirect:list";
+        model.addAttribute("id", contact.getId());
+        return "redirect:show";
     } 
 }

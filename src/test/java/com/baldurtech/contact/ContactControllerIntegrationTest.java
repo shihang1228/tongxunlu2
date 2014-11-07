@@ -33,9 +33,9 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware {
     }
     
     @Test
-    public void 当URLweicontact_save时应该重定向到list页面() throws Exception {
+    public void 当URLweicontact_save时应该重定向到show页面() throws Exception {
         mockMvc.perform(post("/contact/save"))
-               .andExpect(model().attributeExists("contact"))
-               .andExpect(redirectedUrl("list"));
+               .andExpect(model().attributeExists("id"))
+               .andExpect(redirectedUrl("show?id=8"));
     }
 }

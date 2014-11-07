@@ -1,11 +1,13 @@
 package com.baldurtech.contact;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+@Transactional
 @Repository
 public class ContactRepository {
     @PersistenceContext
@@ -28,6 +30,6 @@ public class ContactRepository {
     }
     
     public void save(Contact contact) {
-        System.out.println(contact.getName());
+        entityManager.persist(contact);
     }
 }
