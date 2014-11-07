@@ -19,10 +19,10 @@
                     <td>HomeAddress</td>
                 </tr>
                 <tr th:each="contact : ${contactList}">
-                    <td th:text="${contact.name}">Xiao Bai</td>
-                    <td th:text="${contact.mobile}">18234105437</td>
-                    <td th:text="${contact.vpmn}">62222</td>
-                    <td th:text="${contact.homeAddress}">TaiYuan</td>
+                    <td><a th:href="@{'show?id=' + ${contact.id}}" th:text="${contact.name}"></a></td>
+                    <td th:text="${contact.mobile}"></td>
+                    <td th:text="${contact.vpmn}"></td>
+                    <td th:text="${contact.homeAddress}"></td>
                 </tr>
             </table>
         </div>
