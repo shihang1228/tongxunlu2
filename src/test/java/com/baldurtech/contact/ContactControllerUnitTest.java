@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.never;
 
@@ -86,5 +87,11 @@ public class ContactControllerUnitTest {
         
         assertEquals("redirect:list", contactController.show(String.valueOf(CONTACT_ID), model));
         verify(contactService, times(1)).show(CONTACT_ID);
+    }
+    
+    @Test
+    public void 当id为null时应该重定向到list页面() {
+        assertEquals("redirect:list", contactController.show(null, model));
+        verify(contactService, never()).show(any(Long.class));
     }
 }

@@ -33,7 +33,7 @@ public class ContactController {
     
     @RequestMapping(value = "show", method = RequestMethod.GET) 
     public String show(@RequestParam(value = "id") String id, Model model) {
-        if(null == id && id.trim().length() == 0) {
+        if(null == id || id.trim().length() == 0) {
             return "redirect:list";
         }
 
