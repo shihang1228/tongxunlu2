@@ -5,5 +5,48 @@
     </head>
     <body>
         <h1 align="center">Contact Create</h1>
+        <form th:action="list" method="POST">
+            <table align="center">
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="ShiHang"/></td>
+                </tr>
+                <tr>
+                    <td>Mobile:</td>
+                    <td><input type="text" name="mobile" value="15235432994"/></td>
+                </tr>
+                <tr>
+                    <td>Vpmn:</td>
+                    <td><input type="text" name="vpmn" value="652994"/></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="a@qq.com"/></td>
+                </tr>
+                <tr>
+                    <td>HomeAddress:</td>
+                    <td><input type="text" name="homeAddress" value="TaiYuan"/></td>
+                </tr>
+                <tr>
+                    <td>OfficeAddress:</td>
+                    <td><input type="text" name="officeAddress" value="BeiZhang"/></td>
+                </tr>
+                <tr>
+                    <td>Job:</td>
+                    <td><input type="text" name="job" value="HR"/></td>
+                </tr>
+                <tr>
+                    <td>JobLevel:</td>
+                    <td><input type="text" name="jobLevel" value="4"/></td>
+                </tr>
+                <tr>
+                    <td>Memo:</td>
+                    <td><input type="text" name="memo" value="ShiHang"/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><input type="submit" name="action" value="submit"/></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
