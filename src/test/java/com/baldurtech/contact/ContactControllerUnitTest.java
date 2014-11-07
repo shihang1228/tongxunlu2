@@ -105,4 +105,9 @@ public class ContactControllerUnitTest {
     public void 当调用contactController中的create方法时应该返回contact_create() {
         assertEquals("contact/create", contactController.create());
     }
+    
+    @Test
+    public void 当save方法中的contact为null时应该返回list页面() {
+        assertEquals("redirect:list", contactController.save(null, model));
+    }
 }
