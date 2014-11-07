@@ -57,6 +57,9 @@ public class ContactController {
             return "redirect:list";
         }
         contactService.save(contact);
+        if(contact.getId() == null) {
+            return "redirect:list";
+        }
         model.addAttribute("id", contact.getId());
         return "redirect:show";
     } 

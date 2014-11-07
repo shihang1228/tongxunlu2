@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.Ignore;
 import static org.junit.Assert.assertEquals;
 
 import org.mockito.Mock;
@@ -109,5 +110,11 @@ public class ContactControllerUnitTest {
     @Test
     public void 当save方法中的contact为null时应该返回list页面() {
         assertEquals("redirect:list", contactController.save(null, model));
+    }
+    
+    @Test
+    public void 当save方法中的contact中的id为null时应该返回list页面() {
+        contact.setId(null);
+        assertEquals("redirect:list", contactController.save(contact, model));
     }
 }
