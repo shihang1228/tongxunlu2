@@ -75,4 +75,12 @@ public class ContactServiceTest {
         assertNull(contactService.show(CONTACT_ID));
         verify(contactRepository, times(1)).getById(CONTACT_ID);
     }
+    
+    @Test
+    public void 在show方法中当当contactRepository的getById方法的返回值不为null时应该放回contact() {
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        
+        assertEquals(contact, contactService.show(CONTACT_ID));
+        verify(contactRepository, times(2)).getById(CONTACT_ID);
+    }
 }
