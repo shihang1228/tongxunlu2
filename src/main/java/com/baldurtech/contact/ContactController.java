@@ -44,4 +44,9 @@ public class ContactController {
             return "redirect:list";
         }
     }
+    
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String create() {
+        return "contact/create";
+    }
 }
