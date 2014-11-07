@@ -11,43 +11,42 @@
     <body>
         <div class="container">
             <h1 align="center">Contact Show</h1>
-            <h1 th:text="${contact}"></h1>
             <table border="1" align="center">
                 <tr>
                     <td>Name:</td>
-                    <td>Shi Hang</td>
+                    <td th:text="${contact.name}"></td>
                 </tr>
                 <tr>
                     <td>Mobile:</td>
-                    <td>18222222222</td>
+                    <td th:text="${contact.mobile}"></td>
                 </tr>
                 <tr>
                     <td>Vpmn:</td>
-                    <td>6222</td>
+                    <td th:text="${contact.vpmn}"></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td>a@a.com</td>
+                    <td th:text="${contact.email}"></td>
                 </tr>
                 <tr>
                     <td>HomeAddress:</td>
-                    <td>TaiYuan</td>
+                    <td th:text="${contact.homeAddress}"></td>
                 </tr>
                 <tr>
                     <td>OfficeAddress:</td>
-                    <td>Bei Zhang</td>
+                    <td th:text="${contact.officeAddress}"></td>
                 </tr>
                 <tr>
                     <td>Job:</td>
-                    <td>HR</td>
+                    <td th:text="${contact.job}"></td>
                 </tr>
                 <tr>
                     <td>JobLevel:</td>
-                    <td>9</td>
+                    <td th:text="${contact.jobLevel}"></td>
                 </tr>
                 <tr>
                     <td>Memo:</td>
-                    <td>She is a bad girl</td>
+                    <td th:text="${contact.memo}"></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center"><a th:href="@{list}" th:text="Return"></a></td>

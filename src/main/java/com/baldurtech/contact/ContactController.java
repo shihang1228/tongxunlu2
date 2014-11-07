@@ -33,7 +33,18 @@ public class ContactController {
     
     @RequestMapping(value = "show", method = RequestMethod.GET) 
     public String show(@RequestParam(value = "id") String id, Model model) {
-        model.addAttribute("contact", new Contact());
+        Contact contact = new Contact();
+        contact.setName("Shi Hang");
+        contact.setMobile("18233333333");
+        contact.setVpmn("6555");
+        contact.setEmail("a@a.com");
+        contact.setHomeAddress("TaiYuan");
+        contact.setOfficeAddress("BeiZhang");
+        contact.setJob("HR");
+        contact.setJobLevel(9L);
+        contact.setMemo("memo");
+        
+        model.addAttribute("contact", contact);
         return "contact/show";
     }
 }
