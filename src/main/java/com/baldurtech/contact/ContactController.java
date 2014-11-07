@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,5 +29,10 @@ public class ContactController {
         } else {
             return "contact/create";
         }
+    }
+    
+    @RequestMapping(value = "show", method = RequestMethod.GET) 
+    public String show(@RequestParam(value = "id") String id) {
+        return "contact/show";
     }
 }
