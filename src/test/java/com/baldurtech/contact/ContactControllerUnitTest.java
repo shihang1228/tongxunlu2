@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.ui.Model;
+import com.baldurtech.exception.*;
 
 
 public class ContactControllerUnitTest { 
@@ -49,6 +50,14 @@ public class ContactControllerUnitTest {
         assertEquals("contact/list", contactController.list(model));        
         verify(contactService).findAll();
         verify(model).addAttribute("contactList", contactList); 
+    }
+    
+    @Test
+    public void 在list方法中如果service中的findAll方法抛异常应该访问error_general页面() throws DataAccessException{
+        when(contactService.findAll()).thenThrow(new DataAccessException("Can not query any record!"));
+        
+        assertEquals("error/general", contactController.list(model));
+        
     }
     
 }
