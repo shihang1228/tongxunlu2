@@ -40,7 +40,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在list方法中应该正确调用contactService中的findAll方法() {
+    public void 在list方法中应该正确调用contactService中的findAll方法() throws Exception {
         List<Contact> contactList = new ArrayList<Contact>();
         contactList.add(contact);
         

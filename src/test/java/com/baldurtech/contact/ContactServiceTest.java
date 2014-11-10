@@ -33,7 +33,7 @@ public class ContactServiceTest {
     }
     
     @Test
-    public void 在findAll方法中应该正确调用contactRepository中的findAll方法() {
+    public void 在findAll方法中应该正确调用contactRepository中的findAll方法() throws Exception {
         List<Contact> contactList = new ArrayList<Contact>();
         contactList.add(contact);
         when(contactRepository.findAll()).thenReturn(contactList);
@@ -41,4 +41,9 @@ public class ContactServiceTest {
         assertEquals(contactList, contactService.findAll());
         verify(contactRepository).findAll();
     } 
+    
+    @Test
+    public void 在findAll方法中查询失败后抛PersistenceException异常() {
+        
+    }
 }
