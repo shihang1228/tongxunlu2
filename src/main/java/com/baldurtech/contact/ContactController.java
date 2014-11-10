@@ -28,7 +28,7 @@ public class ContactController {
             model.addAttribute("contactList", contactService.findAll());
             return "contact/list";
         } catch(DataAccessException dae) {
-            return "error/dataAccessException";
+            return "error/general";
         } 
     }
 }
