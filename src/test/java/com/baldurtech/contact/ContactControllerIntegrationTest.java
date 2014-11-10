@@ -11,6 +11,7 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
     @Test
     public void 当URL为Contact_list时应该返回list页面() throws Exception{
         mockMvc.perform(get("/contact/list"))
+               .andExpect(model().attributeExists("contactList"))
                .andExpect(view().name("contact/list"));
     }
 }
