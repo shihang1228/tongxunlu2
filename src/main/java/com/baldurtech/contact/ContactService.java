@@ -19,6 +19,10 @@ public class ContactService {
     }
 
     public List<Contact> findAll() throws DataAccessException {
-        return contactRepository.findAll();
+        try {
+            return contactRepository.findAll();
+        } catch(PersistenceException pe) {
+            throw new DataAccessException("Can not query any record!");
+        }
     }
 }

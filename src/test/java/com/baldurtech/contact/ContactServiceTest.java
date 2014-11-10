@@ -11,9 +11,17 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+import javax.persistence.*;
+
+import com.baldurtech.exception.*;
 
 public class ContactServiceTest {
     Contact contact;
+    
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
     
     @Mock
     ContactRepository contactRepository;
@@ -43,7 +51,11 @@ public class ContactServiceTest {
     } 
     
     @Test
-    public void 在findAll方法中查询失败后抛PersistenceException异常() {
+    public void 在findAll方法中查询失败后抛DataAccessExceptionException异常() throws DataAccessException{
+        when(contactRepository.findAll()).thenThrow(new PersistenceException());
         
+        thrown.expect(DataAccessException.class);
+        thrown.expectMessage("Can not query any record!");
+        contactService.findAll();
     }
 }
