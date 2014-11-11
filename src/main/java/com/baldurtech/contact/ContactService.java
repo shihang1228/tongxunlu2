@@ -32,8 +32,6 @@ public class ContactService {
             return contact;
         } else {
             return null;
-        }
-        
-        
+        }  
     }
 }
