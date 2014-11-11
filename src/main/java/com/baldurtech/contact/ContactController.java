@@ -35,6 +35,11 @@ public class ContactController {
     
     @RequestMapping("show")
     public String show(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("contact", getById(id));
+        return "contact/show";
+    }
+    
+    public Contact getById(Long id) {
         Contact contact = new Contact();
         contact.setId(id);
         contact.setName("Xiao Bai");
@@ -47,7 +52,6 @@ public class ContactController {
         contact.setJobLevel(4L);
         contact.setMemo("Xiao Bai");
         
-        model.addAttribute("contact", contact);
-        return "contact/show";
+        return contact;
     }
 }
