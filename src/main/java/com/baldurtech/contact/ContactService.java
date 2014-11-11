@@ -34,4 +34,9 @@ public class ContactService {
             return null;
         }  
     }
+    
+    public Contact save(Contact contact) {
+        System.out.println(contact.getName());
+        return contact;
+    }
 }
