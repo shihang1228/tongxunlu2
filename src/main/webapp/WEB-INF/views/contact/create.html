@@ -4,5 +4,49 @@
     </head>
     <body>
         <h1 align="center">create</h1>
+        <form th:action="@{save}" method="POST">
+            <table align="center">
+                <tr>
+                    <td th:text="Name"></td>
+                    <td><input type="text" name="name" value="ShiHang"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Mobile"></td>
+                    <td><input type="text" name="mobile" value="15235432994"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Vpmn"></td>
+                    <td><input type="text" name="Vpmn" value="652994"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Email"></td>
+                    <td><input type="text" name="email" value="a@qq.com"/></td>
+                </tr>
+                <tr>
+                    <td th:text="HomeAddress"></td>
+                    <td><input type="text" name="homeAddress" value="taiyuan"/></td>
+                </tr>
+                <tr>
+                    <td th:text="OfficeAddress"></td>
+                    <td><input type="text" name="officeAddress" value="beizhang"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Job"></td>
+                    <td><input type="text" name="job" value="HR"/></td>
+                </tr>
+                <tr>
+                    <td th:text="JobLevel"></td>
+                    <td><input type="text" name="jobLevel" value="3"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Memo"></td>
+                    <td><input type="text" name="memo" value="memo"/></td>
+                </tr>
+                <tr>
+                    <td th:text="Name"></td>
+                    <td><input type="submit" name="action" value="submit"/></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
