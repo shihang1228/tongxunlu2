@@ -66,4 +66,10 @@ public class ContactServiceTest {
         when(contactRepository.getById(CONTACT_ID)).thenReturn(null);
         assertNull(contactService.getById(CONTACT_ID));
     }
+    
+    @Test
+    public void 在getById方法中如果contactRepository中的getById方法不返回null则应该返回contact() {
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        assertEquals(contact, contactService.getById(CONTACT_ID));
+    }
 }
