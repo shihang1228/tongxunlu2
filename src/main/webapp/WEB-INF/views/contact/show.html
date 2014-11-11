@@ -6,5 +6,46 @@
     <body>
         <h1 align="center" >Contact Show</h1>
         <h1 align="center" th:text="${contact.id}"></h1>
+        <table align="center" border="1">
+            <tr>
+                <td>Name</td>
+                <td th:text="${contact.name}"></td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td th:text="${contact.mobile}"></td>
+            </tr>
+            <tr>
+                <td>Vpmn</td>
+                <td th:text="${contact.vpmn}"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td th:text="${contact.email}"></td>
+            </tr>
+            <tr>
+                <td>HomeAddress</td>
+                <td th:text="${contact.homeAddress}"></td>
+            </tr>
+            <tr>
+                <td>OfficeAddress</td>
+                <td th:text="${contact.officeAddress}"></td>
+            </tr>
+            <tr>
+                <td>Job</td>
+                <td th:text="${contact.job}"></td>
+            </tr>
+            <tr>
+                <td>JobLevel</td>
+                <td th:text="${contact.jobLevel}"></td>
+            </tr>
+            <tr>
+                <td>Memo</td>
+                <td th:text="${contact.memo}"></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2"><a th:href="@{list}" th:text="return"></a></td>
+            </tr>
+        </table>
     </body>
 </html>
