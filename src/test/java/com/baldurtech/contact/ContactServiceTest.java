@@ -3,6 +3,7 @@ package com.baldurtech.contact;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import javax.persistence.*;
 import com.baldurtech.exception.*;
 
 public class ContactServiceTest {
+    private Long CONTACT_ID = 4L;
     Contact contact;
     
     @Rule
@@ -57,5 +59,11 @@ public class ContactServiceTest {
         thrown.expect(DataAccessException.class);
         thrown.expectMessage("Can not query any record!");
         contactService.findAll();
+    }
+    
+    @Test
+    public void 在getById方法中如果contactRepository中的getById方法返回null则应该返回null() {
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(null);
+        assertNull(contactService.getById(CONTACT_ID));
     }
 }

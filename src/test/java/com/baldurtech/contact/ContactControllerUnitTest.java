@@ -72,8 +72,7 @@ public class ContactControllerUnitTest {
     public void 在show方法中如果service中的getById方法返回值不为null时应该访问show页面() {
         when(contactService.getById(CONTACT_ID)).thenReturn(contact);
         assertEquals("contact/show", contactController.show(CONTACT_ID, model));
-        verify(model).addAttribute("contact", contact);
-        
+        verify(model).addAttribute("contact", contact);     
     }
     
 }

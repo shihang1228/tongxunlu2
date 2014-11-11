@@ -27,6 +27,13 @@ public class ContactService {
     }
     
     public Contact getById(Long id) {
-        return contactRepository.getById(id);
+        Contact contact = contactRepository.getById(id);
+        if(contact != null) {
+            return contact;
+        } else {
+            return null;
+        }
+        
+        
     }
 }
