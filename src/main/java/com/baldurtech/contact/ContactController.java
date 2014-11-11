@@ -35,23 +35,7 @@ public class ContactController {
     
     @RequestMapping("show")
     public String show(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("contact", getById(id));
+        model.addAttribute("contact", contactService.getById(id));
         return "contact/show";
-    }
-    
-    public Contact getById(Long id) {
-        Contact contact = new Contact();
-        contact.setId(id);
-        contact.setName("Xiao Bai");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setEmail("a@q.com");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("beizhang");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        contact.setMemo("Xiao Bai");
-        
-        return contact;
-    }
+    } 
 }
