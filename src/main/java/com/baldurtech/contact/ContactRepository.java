@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import javax.persistence.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class ContactRepository {
     @PersistenceContext
     EntityManager entityManager;
@@ -20,7 +22,7 @@ public class ContactRepository {
     }
     
     public Contact save(Contact contact) {
-        System.out.println(contact.getName());
+        entityManager.persist(contact);
         return contact;
     }
         
