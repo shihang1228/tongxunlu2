@@ -36,7 +36,11 @@ public class ContactController {
     @RequestMapping("show")
     public String show(@RequestParam("id") Long id, Model model) {
         Contact contact = contactService.getById(id);
-        model.addAttribute("contact", contact);
-        return "contact/show";
+        if(contact != null) {
+            model.addAttribute("contact", contact);
+            return "contact/show";
+        } else {
+            return "redirect:list";
+        }
     } 
 }

@@ -17,6 +17,7 @@ import com.baldurtech.exception.*;
 
 
 public class ContactControllerUnitTest { 
+    private Long CONTACT_ID = 4L;
     Contact contact;
     
     @Mock
@@ -58,6 +59,13 @@ public class ContactControllerUnitTest {
         
         assertEquals("error/general", contactController.list(model));
         
+    }
+    
+    @Test
+    public void 在show方法中如果service中的getById方法返回值为null时应该重定向到list页面() {
+        when(contactService.getById(CONTACT_ID)).thenReturn(null);
+        
+        assertEquals("redirect:list", contactController.show(CONTACT_ID, model));
     }
     
 }
