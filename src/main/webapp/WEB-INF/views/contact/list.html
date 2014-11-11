@@ -12,13 +12,13 @@
         <h1 align="center">ContactList</h1>
         <table align="center" border="1">
             <tr>
-                <td th:text="name"></td>
+                <td th:text="Name"></td>
                 <td th:text="Mobile"></td>
                 <td th:text="Vpmn"></td>
                 <td th:text="Address"></td>
             </tr>
             <tr th:each="contact : ${contactList}">
-                <td th:text="${contact.name}"></td>
+                <td><a th:href="@{'show?id=' + ${contact.id}}" th:text="${contact.name}"></a></td>
                 <td th:text="${contact.mobile}"></td>
                 <td th:text="${contact.vpmn}"></td>
                 <td th:text="${contact.homeAddress}"></td>
