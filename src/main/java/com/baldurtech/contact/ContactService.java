@@ -36,7 +36,6 @@ public class ContactService {
     }
     
     public Contact save(Contact contact) {
-        System.out.println(contact.getName());
-        return contact;
+        return contactRepository.save(contact);
     }
 }

@@ -18,5 +18,10 @@ public class ContactRepository {
     public Contact getById(Long id){
         return entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class).setParameter("id", id).getSingleResult();
     }
+    
+    public Contact save(Contact contact) {
+        System.out.println(contact.getName());
+        return contact;
+    }
         
 }
