@@ -15,20 +15,8 @@ public class ContactRepository {
             return entityManager.createNamedQuery(Contact.FIND_ALL, Contact.class).getResultList();       
     }
     
-    public Contact getById(Long id) {
-        Contact contact = new Contact();
-        contact.setId(id);
-        contact.setName("Xiao Bai");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setEmail("a@q.com");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("beizhang");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        contact.setMemo("Xiao Bai");
-        
-        return contact;
+    public Contact getById(Long id){
+        return entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class).setParameter("id", id).getSingleResult();
     }
         
 }
