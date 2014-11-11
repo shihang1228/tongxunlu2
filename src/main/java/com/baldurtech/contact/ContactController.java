@@ -52,10 +52,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact) {
+    public String save(@ModelAttribute("contact") Contact contact, Model model) {
         contact = contactService.save(contact);
         if(contact.getId() != null) {
-            return "redirect:list";
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";
         } 
         return "redirect:create";
     }

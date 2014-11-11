@@ -49,7 +49,7 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
     }
     
     @Test
-    public void 当URL为contact_save时应该访问重定向到list页面() throws Exception {
+    public void 当URL为contact_save时应该访问重定向到show页面() throws Exception {
         mockMvc.perform(post("/contact/save")
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
@@ -60,6 +60,6 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel()))
                        .param("memo", contact.getMemo()))
-               .andExpect(redirectedUrl("list"));
+               .andExpect(redirectedUrl("show?id=8"));
     }
 }
