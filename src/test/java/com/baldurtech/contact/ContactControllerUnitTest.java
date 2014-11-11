@@ -75,4 +75,9 @@ public class ContactControllerUnitTest {
         verify(model).addAttribute("contact", contact);     
     }
     
+    @Test
+    public void 当调用create方法应该访问create页面() {
+        assertEquals("contact/create", contactController.create());
+    }
+    
 }
