@@ -123,4 +123,10 @@ public class ContactValidationTest {
         assertConstraintViolations("not a valid email format");  
     }
     
+    @Test
+    public void email_cannot_be_blank() {
+        contact.setEmail("    ");
+        assertConstraintViolations("not a valid email format");  
+    }
+    
 }
