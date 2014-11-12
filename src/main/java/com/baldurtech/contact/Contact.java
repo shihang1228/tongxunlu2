@@ -25,6 +25,9 @@ public class Contact
     @NotNull
     @Pattern(regexp="\\b1\\d{10}", message="not a valid mobile format")
     private String mobile;
+    
+    @NotNull
+    @Pattern(regexp="\\d{4,6}", message="elements must be digits and must between 4 to 6")
     private String vpmn;
     private String email;
     private String homeAddress;
