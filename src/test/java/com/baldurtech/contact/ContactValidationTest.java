@@ -87,4 +87,10 @@ public class ContactValidationTest {
         assertConstraintViolations("not a valid mobile format");    
     }
     
+    @Test
+    public void mobile_can_be_start_with_one() {
+        contact.setMobile("28235100872");
+        assertConstraintViolations("not a valid mobile format");    
+    }
+    
 }
