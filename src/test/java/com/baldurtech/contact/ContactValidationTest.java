@@ -99,4 +99,10 @@ public class ContactValidationTest {
         assertConstraintViolations("不能为null");           
     }
     
+    @Test
+    public void vpmn_cannot_be_too_short() {
+        contact.setVpmn("5");
+        assertConstraintViolations("elements must be digits and must between 4 to 6");  
+    }
+    
 }
