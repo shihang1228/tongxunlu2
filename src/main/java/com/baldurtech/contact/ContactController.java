@@ -64,4 +64,9 @@ public class ContactController {
         } 
         return "redirect:create";
     }
+    
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public String edit(@RequestParam("id") Long id) {
+        return "contact/update";
+    }
 }

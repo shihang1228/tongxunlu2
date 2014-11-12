@@ -63,4 +63,11 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
                .andExpect(redirectedUrl("show?id=8"))
                .andExpect(model().attributeExists("id"));
     }
+    
+    @Test
+    public void 当URL为contact_update时应该访问edit页面() throws Exception {
+        mockMvc.perform(get("/contact/update")
+                       .param("id", String.valueOf(CONTACT_ID)))
+               .andExpect(view().name("contact/update"));
+    }
 }
