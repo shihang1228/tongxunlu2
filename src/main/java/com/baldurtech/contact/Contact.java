@@ -1,6 +1,8 @@
 package com.baldurtech.contact;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="contact")
@@ -15,6 +17,8 @@ public class Contact
     @Id
     @GeneratedValue
     private Long id;
+    
+    @NotBlank
     private String name;
     private String mobile;
     private String vpmn;
