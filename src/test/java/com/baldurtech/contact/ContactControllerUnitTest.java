@@ -81,6 +81,12 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 在show方法中如果service中的getById方法抛异常应该访问error_general页面() throws DataAccessException {
+        when(contactService.getById(CONTACT_ID)).thenThrow(new DataAccessException("Can not query any record!"));
+        assertEquals("error/general", contactController.show(CONTACT_ID, model));
+    }
+    
+    @Test
     public void 当调用create方法应该访问create页面() {
         assertEquals("contact/create", contactController.create());
     }
