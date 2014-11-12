@@ -71,4 +71,19 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/update"));
     }
+    
+    @Test
+    public void 当使用post方法URL为contact_update时应该重定向到list页面() throws Exception {
+        mockMvc.perform(post("/contact/update")
+                       .param("name", contact.getName())
+                       .param("mobile", contact.getMobile())
+                       .param("vpmn", contact.getVpmn())
+                       .param("email", contact.getEmail())
+                       .param("homeAddress", contact.getHomeAddress())
+                       .param("officeAddress", contact.getOfficeAddress())
+                       .param("job", contact.getJob())
+                       .param("jobLevel", String.valueOf(contact.getJobLevel()))
+                       .param("memo", contact.getMemo()))
+               .andExpect(redirectedUrl("list"));
+    }
 }

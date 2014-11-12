@@ -69,4 +69,10 @@ public class ContactController {
             return "error/general";
         } 
     }
+    
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("contact") Contact contact, Model model) {
+        System.out.println(contact.getName());
+        return "redirect:list";
+    }
 }
