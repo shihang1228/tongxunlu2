@@ -67,18 +67,14 @@ public class ContactController {
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
     public String edit(@RequestParam("id") Long id, Model model) {
-        Contact contact = new Contact();
-        contact.setName("shihang");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652993");
-        contact.setEmail("a@qq.com");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("beizhang");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        contact.setMemo("memo");
+        try {
+            Contact contact = contactService.getById(id);
+            model.addAttribute("contact", contact);
+            return "contact/update";
+        } catch(DataAccessException dae) {
+            return "redirect:list";
+        }
         
-        model.addAttribute("contact", contact);
-        return "contact/update";
+        
     }
 }
