@@ -42,4 +42,22 @@ public class ContactValidationTest {
         assertEquals( 1, constraintViolations.size());
         assertEquals("不能为空", constraintViolations.iterator().next().getMessage());        
     }
+    
+    @Test
+    public void name_cannot_be_blank() {  
+        contact = new Contact();   
+        contact.setName(null);
+        contact.setMobile("18235100872");
+        contact.setVpmn("62222");
+        contact.setEmail("a@a.com");
+        contact.setHomeAddress("TaiYuan");
+        contact.setOfficeAddress("BeiZhang");
+        contact.setMemo("memo");
+        contact.setJob("HR");
+        contact.setJobLevel(9L); 
+        
+        constraintViolations = validator.validate(contact);
+        assertEquals( 1, constraintViolations.size());
+        assertEquals("不能为空", constraintViolations.iterator().next().getMessage());        
+    }
 }
