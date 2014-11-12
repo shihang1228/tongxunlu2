@@ -12,19 +12,22 @@
         <h1 align="center">ContactList</h1>
         <table align="center" border="1">
             <tr align="center">
-                <td colspan="4"><a th:href="@{create}" th:text="create"></a></td>
+                <td colspan="6"><a th:href="@{create}" th:text="create"></a></td>
             </tr>
             <tr>
-                <td th:text="Name"></td>
-                <td th:text="Mobile"></td>
-                <td th:text="Vpmn"></td>
-                <td th:text="Address"></td>
+                <td align="center" th:text="Name"></td>
+                <td align="center" th:text="Mobile"></td>
+                <td align="center" th:text="Vpmn"></td>
+                <td align="center" th:text="Address"></td>
+                <td colspan="2" align="center" th:text="Edit"></td>
             </tr>
             <tr th:each="contact : ${contactList}">
                 <td><a th:href="@{'show?id=' + ${contact.id}}" th:text="${contact.name}"></a></td>
                 <td th:text="${contact.mobile}"></td>
                 <td th:text="${contact.vpmn}"></td>
                 <td th:text="${contact.homeAddress}"></td>
+                <td><a th:href="@{'update?id=' + ${contact.id}}" th:text="update"></a></td>
+                <td th:text="delete"></td>
             </tr>
         </table>
     </div>
