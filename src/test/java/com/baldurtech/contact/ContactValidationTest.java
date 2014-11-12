@@ -111,4 +111,10 @@ public class ContactValidationTest {
         assertConstraintViolations("elements must be digits and must between 4 to 6");  
     }
     
+    @Test
+    public void vpmn_can_be_digits() {
+        contact.setVpmn("abcd");
+        assertConstraintViolations("elements must be digits and must between 4 to 6");  
+    }
+    
 }
