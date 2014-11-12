@@ -19,6 +19,7 @@ import com.baldurtech.exception.*;
 public class ContactControllerUnitTest { 
     private Long CONTACT_ID = 4L;
     Contact contact;
+    Contact contact_has_saved;
     
     @Mock
     ContactService contactService;
@@ -39,6 +40,15 @@ public class ContactControllerUnitTest {
         contact.setEmail("shihang@qq.com");
         contact.setHomeAddress("TaiYuan");
         contact.setVpmn("652994");
+        
+        contact_has_saved = new Contact();
+        
+        contact_has_saved.setId(1L);
+        contact_has_saved.setName("ShiHang");
+        contact_has_saved.setMobile("15235432994");
+        contact_has_saved.setEmail("shihang@qq.com");
+        contact_has_saved.setHomeAddress("TaiYuan");
+        contact_has_saved.setVpmn("652994");
     }
     
     @Test
@@ -80,4 +90,13 @@ public class ContactControllerUnitTest {
         assertEquals("contact/create", contactController.create());
     }
     
+    @Test
+    public void 当保存成功后应该重定向到show页面() {
+        when(contactService.save(contact)).thenReturn(contact_has_saved);
+        
+        String save_has_Successd = contactController.save(contact, model);
+        
+        verify(contactService).save(contact);
+        assertEquals("redirect:show", save_has_Successd);
+    }
 }
