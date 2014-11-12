@@ -63,4 +63,10 @@ public class ContactValidationTest {
         assertConstraintViolations("不能为null");    
     }
     
+    @Test
+    public void Mobile_cannot_be_blank() {
+        contact.setMobile("     ");
+        assertConstraintViolations("not a valid mobile format");    
+    }
+    
 }
