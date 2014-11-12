@@ -129,4 +129,10 @@ public class ContactValidationTest {
         assertConstraintViolations("not a valid email format");  
     }
     
+    @Test
+    public void email_can_be_valid_format() {
+        contact.setEmail("22dd");
+        assertConstraintViolations("not a valid email format");  
+    }
+    
 }
