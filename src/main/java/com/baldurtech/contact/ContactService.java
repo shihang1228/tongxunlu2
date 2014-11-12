@@ -39,7 +39,6 @@ public class ContactService {
     }
     
     public Contact update(Contact contact) {
-        System.out.println(contact.getName());
-        return contact;
+        return contactRepository.update(contact);
     }
 }

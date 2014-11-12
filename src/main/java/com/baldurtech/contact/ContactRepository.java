@@ -25,5 +25,10 @@ public class ContactRepository {
         entityManager.persist(contact);
         return contact;
     }
+    
+    public Contact update(Contact contact) {
+        System.out.println(contact.getId());
+        return entityManager.merge(contact);
+    }
         
 }
