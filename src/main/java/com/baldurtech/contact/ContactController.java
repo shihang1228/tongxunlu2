@@ -38,13 +38,8 @@ public class ContactController {
     @RequestMapping("show")
     public String show(@RequestParam("id") Long id, Model model) {
         try {
-            Contact contact = contactService.getById(id);
-            if(contact != null) {
-                model.addAttribute("contact", contact);
-                return "contact/show";
-            } else {
-                return "redirect:list";
-            }
+            model.addAttribute("contact", contactService.getById(id));
+            return "contact/show";
         } catch(DataAccessException dae) {
             return "error/general";
         } 

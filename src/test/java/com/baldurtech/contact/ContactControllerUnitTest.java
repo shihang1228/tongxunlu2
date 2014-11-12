@@ -52,7 +52,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在list方法中应该正确调用contactService中的findAll方法() throws Exception {
+    public void 在list方法中应该正确调用contactService中的findAll方法() throws DataAccessException {
         List<Contact> contactList = new ArrayList<Contact>();
         contactList.add(contact);
         
@@ -72,17 +72,12 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在show方法中如果service中的getById方法返回值为null时应该重定向到list页面() throws DataAccessException {
-        when(contactService.getById(CONTACT_ID)).thenReturn(null);
-        
-        assertEquals("redirect:list", contactController.show(CONTACT_ID, model));
-    }
-    
-    @Test
-    public void 在show方法中如果service中的getById方法返回值不为null时应该访问show页面() throws DataAccessException {
+    public void 在show方法中如果能够正确调用service方法中的getById应该返回到show页面() throws DataAccessException {
         when(contactService.getById(CONTACT_ID)).thenReturn(contact);
+        
         assertEquals("contact/show", contactController.show(CONTACT_ID, model));
-        verify(model).addAttribute("contact", contact);     
+        verify(contactService).getById(CONTACT_ID);
+        verify(model).addAttribute("contact", contact);
     }
     
     @Test

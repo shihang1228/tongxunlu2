@@ -28,12 +28,7 @@ public class ContactService {
     
     public Contact getById(Long id) throws DataAccessException {
         try {
-            Contact contact = contactRepository.getById(id);
-            if(contact != null) {
-                return contact;
-            } else {
-                return null;
-            }  
+            return contactRepository.getById(id);            
         } catch (PersistenceException pe) {
             throw new DataAccessException("Can not query any record!");
         }
