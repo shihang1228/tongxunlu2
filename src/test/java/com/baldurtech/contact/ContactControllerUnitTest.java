@@ -119,4 +119,10 @@ public class ContactControllerUnitTest {
         verify(model).addAttribute("contact", contact);
         verify(contactService).getById(CONTACT_ID);
     }
+    
+    @Test
+    public void 在edit方法中如果调用service中的getById方法抛异常应该访问error_general页面() throws DataAccessException{
+        when(contactService.getById(CONTACT_ID)).thenThrow(new DataAccessException("Can not query any record!"));
+        assertEquals("error/general", contactController.edit(CONTACT_ID, model));
+    }
 }
