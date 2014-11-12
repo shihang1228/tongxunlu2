@@ -94,9 +94,19 @@ public class ContactControllerUnitTest {
     public void 当保存成功后应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         
-        String save_has_Successd = contactController.save(contact, model);
+        String save_has_successd = contactController.save(contact, model);
         
         verify(contactService).save(contact);
-        assertEquals("redirect:show", save_has_Successd);
+        assertEquals("redirect:show", save_has_successd);
+    }
+    
+     @Test
+     public void 当保存失败后应该重定向到create页面() {
+        when(contactService.save(contact)).thenReturn(contact);
+        
+        String save_has_failed = contactController.save(contact, model);
+        
+        verify(contactService).save(contact);
+        assertEquals("redirect:create", save_has_failed);
     }
 }
