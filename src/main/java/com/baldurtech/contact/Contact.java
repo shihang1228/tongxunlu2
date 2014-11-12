@@ -37,6 +37,8 @@ public class Contact
     
     @NotBlank
     private String homeAddress;
+    
+    @NotBlank
     private String officeAddress;
     private String memo;
     private String job;
