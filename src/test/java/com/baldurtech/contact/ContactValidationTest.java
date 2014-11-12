@@ -69,4 +69,11 @@ public class ContactValidationTest {
         assertConstraintViolations("not a valid mobile format");    
     }
     
+    @Test
+    public void Mobile_can_be_digits() {
+        contact.setMobile("abcdefghijk");
+        assertConstraintViolations("not a valid mobile format");    
+    }
+    
+    
 }
