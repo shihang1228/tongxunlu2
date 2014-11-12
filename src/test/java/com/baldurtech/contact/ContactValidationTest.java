@@ -56,4 +56,11 @@ public class ContactValidationTest {
         contact.setName("       ");
         assertConstraintViolations("不能为空");       
     }
+    
+    @Test
+    public void Mobile_cannot_be_null() {
+        contact.setMobile(null);
+        assertConstraintViolations("不能为null");    
+    }
+    
 }

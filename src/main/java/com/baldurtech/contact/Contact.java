@@ -3,6 +3,7 @@ package com.baldurtech.contact;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="contact")
@@ -20,6 +21,9 @@ public class Contact
     
     @NotBlank
     private String name;
+    
+    @NotNull
+    @Pattern(regexp="\\b1\\d{10}", message="not a valid mobile format")
     private String mobile;
     private String vpmn;
     private String email;
