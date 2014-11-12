@@ -53,12 +53,21 @@ public class ContactServiceTest {
     } 
     
     @Test
-    public void 在findAll方法中查询失败后抛DataAccessExceptionException异常() throws DataAccessException{
+    public void 在findAll方法中查询失败后抛DataAccessException异常() throws DataAccessException {
         when(contactRepository.findAll()).thenThrow(new PersistenceException());
         
         thrown.expect(DataAccessException.class);
         thrown.expectMessage("Can not query any record!");
         contactService.findAll();
+    }
+    
+    @Test
+    public void 在getById方法中如果查询失败后抛出DataAccessException异常() throws DataAccessException {
+        when(contactRepository.getById(CONTACT_ID)).thenThrow(new PersistenceException());
+        
+        thrown.expect(DataAccessException.class);
+        thrown.expectMessage("Can not query any record!");
+        contactService.getById(CONTACT_ID);
     }
     
     @Test
