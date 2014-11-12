@@ -73,7 +73,7 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
     }
     
     @Test
-    public void 当使用post方法URL为contact_update时应该重定向到list页面() throws Exception {
+    public void 当使用post方法URL为contact_update时应该重定向到show页面() throws Exception {
         mockMvc.perform(post("/contact/update")
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
@@ -86,5 +86,12 @@ public class ContactControllerIntegrationTest extends WebAppConfigurationAware{
                        .param("memo", contact.getMemo()))
                .andExpect(model().attributeExists("id"))
                .andExpect(redirectedUrl("show?id=9"));
+    }
+    
+    @Test
+    public void 当URL为contact_delete时应该重定向到show页面() throws Exception {
+        mockMvc.perform(post("/contact/delete")
+                        .param("id", String.valueOf(CONTACT_ID)))
+               .andExpect(redirectedUrl("list"));
     }
 }

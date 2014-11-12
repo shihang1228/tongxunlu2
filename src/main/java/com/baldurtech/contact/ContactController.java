@@ -75,4 +75,10 @@ public class ContactController {
         model.addAttribute("id", contactService.update(contact).getId());
         return "redirect:show";
     }
+    
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String delete(@RequestParam("id") Long id) {
+        contactService.delete(id);
+        return "redirect:list";
+    }
 }

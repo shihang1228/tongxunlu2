@@ -4,8 +4,8 @@
     </head>
     <body>
         <h1 align="center">Update</h1>
-        <form th:action="update" method="POST">
             <table align="center" border="1">
+                <form th:action="update" method="POST">
                 <tr>
                     <td>Name</td>
                     <td><input type="text" name="name" th:value="${contact.name}"/></td>
@@ -48,10 +48,20 @@
                         <input type="hidden" name="id" th:value="${contact.id}"/>
                     </td>
                 </tr>
+                </form>
+                <form th:action="delete" method="POST">
+                <tr align="center">
+                    <td colspan="2">
+                        <input type="submit" name="action" th:value="delete"/>
+                        <input type="hidden" name="id" th:value="${contact.id}"/>
+                    </td>
+                </tr>
+                </form>
                 <tr align="center">
                     <td colspan="2"><a th:href="@{list}" th:text="return"></a></td>
                 </tr>
+                
             </table>
-        </form>
+        
     </body>
 </html>

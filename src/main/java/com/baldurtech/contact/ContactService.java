@@ -41,4 +41,8 @@ public class ContactService {
     public Contact update(Contact contact) {
         return contactRepository.update(contact);
     }
+    
+    public void delete(Long id) {
+        
+    }
 }
