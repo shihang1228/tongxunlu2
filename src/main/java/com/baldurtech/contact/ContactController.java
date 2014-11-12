@@ -71,8 +71,8 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("contact") Contact contact, Model model) {
-        System.out.println(contact.getName());
+    public String update(@ModelAttribute("contact") Contact contact) {
+        contactService.update(contact);
         return "redirect:list";
     }
 }

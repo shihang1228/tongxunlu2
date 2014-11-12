@@ -37,4 +37,9 @@ public class ContactService {
     public Contact save(Contact contact) {
         return contactRepository.save(contact);
     }
+    
+    public Contact update(Contact contact) {
+        System.out.println(contact.getName());
+        return contact;
+    }
 }
