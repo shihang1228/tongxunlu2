@@ -27,8 +27,12 @@ public class ContactRepository {
     }
     
     public Contact update(Contact contact) {
-        System.out.println(contact.getId());
         return entityManager.merge(contact);
+    }
+    
+    public void delete(Long id) {
+        Contact contact = entityManager.find(Contact.class, id);
+        entityManager.remove(contact);
     }
         
 }

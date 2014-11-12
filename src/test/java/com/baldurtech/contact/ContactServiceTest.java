@@ -81,4 +81,10 @@ public class ContactServiceTest {
         when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
         assertEquals(contact, contactService.getById(CONTACT_ID));
     }
+    
+    @Test
+    public void 在delete方法中调用contactRepository的delete方法删除contact() {
+        contactService.delete(CONTACT_ID);
+        verify(contactRepository).delete(CONTACT_ID);
+    }
 }
