@@ -63,13 +63,10 @@ public class ContactController {
     @RequestMapping(value = "update", method = RequestMethod.GET)
     public String edit(@RequestParam("id") Long id, Model model) {
         try {
-            Contact contact = contactService.getById(id);
-            model.addAttribute("contact", contact);
+            model.addAttribute("contact", contactService.getById(id));
             return "contact/update";
         } catch(DataAccessException dae) {
-            return "redirect:list";
-        }
-        
-        
+            return "error/general";
+        } 
     }
 }

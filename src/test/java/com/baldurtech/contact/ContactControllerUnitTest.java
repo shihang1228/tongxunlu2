@@ -110,4 +110,13 @@ public class ContactControllerUnitTest {
         verify(contactService).save(contact);
         assertEquals("redirect:create", save_has_failed);
     }
+    
+    @Test
+    public void 在edit方法中如果能够正确调用service中的getById方法应该访问update页面() throws DataAccessException{
+        when(contactService.getById(CONTACT_ID)).thenReturn(contact);
+        
+        assertEquals("contact/update", contactController.edit(CONTACT_ID, model));
+        verify(model).addAttribute("contact", contact);
+        verify(contactService).getById(CONTACT_ID);
+    }
 }
