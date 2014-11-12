@@ -37,13 +37,17 @@ public class ContactController {
     
     @RequestMapping("show")
     public String show(@RequestParam("id") Long id, Model model) {
-        Contact contact = contactService.getById(id);
-        if(contact != null) {
-            model.addAttribute("contact", contact);
-            return "contact/show";
-        } else {
-            return "redirect:list";
-        }
+        try {
+            Contact contact = contactService.getById(id);
+            if(contact != null) {
+                model.addAttribute("contact", contact);
+                return "contact/show";
+            } else {
+                return "redirect:list";
+            }
+        } catch(DataAccessException dae) {
+            return "error/general";
+        } 
     }
 
     @RequestMapping("create")

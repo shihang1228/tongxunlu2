@@ -17,7 +17,7 @@ public class ContactRepository {
             return entityManager.createNamedQuery(Contact.FIND_ALL, Contact.class).getResultList();       
     }
     
-    public Contact getById(Long id){
+    public Contact getById(Long id) throws PersistenceException {
         return entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class).setParameter("id", id).getSingleResult();
     }
     

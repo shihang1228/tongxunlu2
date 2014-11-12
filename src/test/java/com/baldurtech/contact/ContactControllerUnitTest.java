@@ -64,7 +64,7 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在list方法中如果service中的findAll方法抛异常应该访问error_general页面() throws DataAccessException{
+    public void 在list方法中如果service中的findAll方法抛异常应该访问error_general页面() throws DataAccessException {
         when(contactService.findAll()).thenThrow(new DataAccessException("Can not query any record!"));
         
         assertEquals("error/general", contactController.list(model));
@@ -72,14 +72,14 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在show方法中如果service中的getById方法返回值为null时应该重定向到list页面() {
+    public void 在show方法中如果service中的getById方法返回值为null时应该重定向到list页面() throws DataAccessException {
         when(contactService.getById(CONTACT_ID)).thenReturn(null);
         
         assertEquals("redirect:list", contactController.show(CONTACT_ID, model));
     }
     
     @Test
-    public void 在show方法中如果service中的getById方法返回值不为null时应该访问show页面() {
+    public void 在show方法中如果service中的getById方法返回值不为null时应该访问show页面() throws DataAccessException {
         when(contactService.getById(CONTACT_ID)).thenReturn(contact);
         assertEquals("contact/show", contactController.show(CONTACT_ID, model));
         verify(model).addAttribute("contact", contact);     

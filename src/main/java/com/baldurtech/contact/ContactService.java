@@ -26,7 +26,7 @@ public class ContactService {
         }
     }
     
-    public Contact getById(Long id) {
+    public Contact getById(Long id) throws DataAccessException {
         Contact contact = contactRepository.getById(id);
         if(contact != null) {
             return contact;
