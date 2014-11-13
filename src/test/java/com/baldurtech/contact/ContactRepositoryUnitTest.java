@@ -89,4 +89,13 @@ public class ContactRepositoryUnitTest {
         when(entityManager.merge(contact)).thenReturn(contact);
         assertEquals(contact, contactRepository.update(contact));
     }
+    
+    @Test
+    public void 调用ContactRepository的delete方法删除联系人() {
+        Contact contact = new Contact();
+        when(entityManager.find(Contact.class, CONTACT_ID)).thenReturn(contact);
+        
+        contactRepository.delete(CONTACT_ID);
+        verify(entityManager).remove(contact);
+    }
 }
