@@ -78,6 +78,15 @@ public class ContactRepositoryUnitTest {
     @Test
     public void 调用contactRepository的save方法保存联系人() {
         Contact contact = new Contact();
+        
         assertEquals(contact, contactRepository.save(contact));
+    }
+    
+    @Test
+    public void 调用ContactRepository的update方法更新联系人() {
+        Contact contact = new Contact();
+        
+        when(entityManager.merge(contact)).thenReturn(contact);
+        assertEquals(contact, contactRepository.update(contact));
     }
 }
