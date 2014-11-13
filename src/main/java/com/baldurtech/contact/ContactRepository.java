@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ContactRepository {
     @PersistenceContext
     EntityManager entityManager;
+    
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public List<Contact> findAll() throws PersistenceException {
             return entityManager.createNamedQuery(Contact.FIND_ALL, Contact.class).getResultList();       
