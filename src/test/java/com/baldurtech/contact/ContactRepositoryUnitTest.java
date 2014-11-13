@@ -65,4 +65,12 @@ public class ContactRepositoryUnitTest {
         
         assertEquals(contact, contactRepository.getById(CONTACT_ID));
     }
+    
+    @Test
+    public void 如果contactRepository调用getById方法时数据库出现异常应该抛出异常() {
+        when(entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class)).thenThrow(new PersistenceException());
+        
+        thrown.expect(PersistenceException.class);
+        contactRepository.getById(CONTACT_ID);
+    }
 }
