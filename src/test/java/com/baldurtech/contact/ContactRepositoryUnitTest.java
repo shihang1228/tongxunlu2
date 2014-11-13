@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactRepositoryUnitTest {
+    private Long CONTACT_ID = 9L;
     @Mock
     EntityManager entityManager;
     
@@ -53,5 +54,15 @@ public class ContactRepositoryUnitTest {
         
         thrown.expect(PersistenceException.class);
         contactRepository.findAll();
+    }
+    
+    @Test
+    public void 如果数据库中存在联系人调用contactRepository中的getById方法应该查询到联系人() {
+        Contact contact = new Contact();
+        when(entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class)).thenReturn(typedQuery);
+        when(typedQuery.setParameter("id", CONTACT_ID)).thenReturn(typedQuery);
+        when(typedQuery.getSingleResult()).thenReturn(contact);
+        
+        assertEquals(contact, contactRepository.getById(CONTACT_ID));
     }
 }
