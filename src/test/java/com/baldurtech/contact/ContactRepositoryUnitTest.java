@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -72,5 +73,11 @@ public class ContactRepositoryUnitTest {
         
         thrown.expect(PersistenceException.class);
         contactRepository.getById(CONTACT_ID);
+    }
+    
+    @Test
+    public void 调用contactRepository的save方法保存联系人() {
+        Contact contact = new Contact();
+        assertEquals(contact, contactRepository.save(contact));
     }
 }
