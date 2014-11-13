@@ -13,6 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.when;
 
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactRepositoryUnitTest {
@@ -21,6 +24,9 @@ public class ContactRepositoryUnitTest {
     
     @Mock
     TypedQuery typedQuery; 
+    
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
     
     @InjectMocks
     ContactRepository contactRepository;
@@ -39,5 +45,13 @@ public class ContactRepositoryUnitTest {
         when(typedQuery.getResultList()).thenReturn(contactList);
         
         assertEquals(contactList, contactRepository.findAll());
+    }
+    
+    @Test
+    public void 如果contactRepository调用findAll方法时数据库出现异常应该抛出异常() {
+        when(entityManager.createNamedQuery(Contact.FIND_ALL, Contact.class)).thenThrow(new PersistenceException());
+        
+        thrown.expect(PersistenceException.class);
+        contactRepository.findAll();
     }
 }
