@@ -1,7 +1,16 @@
 package com.baldurtech.contact;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "contact")
+@NamedQuery(name = Contact.FIND_ALL, query = "from Contact")
 public class Contact
 {
+    public static final String FIND_ALL = "Contact.findAll";
+    
+    @GeneratedValue
+    @Id
     private Long id;
     private String name;
     private String mobile;
