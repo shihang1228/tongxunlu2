@@ -18,29 +18,11 @@
                     <td align="center">Vpmn</td>
                     <td align="center">Address</td>
                 </tr>
-                <tr>
-                    <td>ShiHang</td>
-                    <td>15235432994</td>
-                    <td>654229</td>
-                    <td>TaiYuan</td>
-                </tr>
-                <tr>
-                    <td>ShiHang</td>
-                    <td>15235432994</td>
-                    <td>654229</td>
-                    <td>TaiYuan</td>
-                </tr>
-                <tr>
-                    <td>ShiHang</td>
-                    <td>15235432994</td>
-                    <td>654229</td>
-                    <td>TaiYuan</td>
-                </tr>
-                <tr>
-                    <td>ShiHang</td>
-                    <td>15235432994</td>
-                    <td>654229</td>
-                    <td>TaiYuan</td>
+                <tr th:each="contact : ${contactList}">
+                    <td th:text="${contact.name}"></td>
+                    <td th:text="${contact.mobile}"></td>
+                    <td th:text="${contact.vpmn}"></td>
+                    <td th:text="${contact.homeAddress}"></td>
                 </tr>
             </table>
         </div>
