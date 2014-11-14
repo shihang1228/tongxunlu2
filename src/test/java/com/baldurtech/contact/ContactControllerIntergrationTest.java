@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.baldurtech.config.WebAppConfigurationAware;
 
-public class ContactControllerTest extends WebAppConfigurationAware {
+public class ContactControllerIntergrationTest extends WebAppConfigurationAware {
     @Test
     public void 当URL为contact_list时应该访问list页面() throws Exception{
         mockMvc.perform(get("/contact/list"))
