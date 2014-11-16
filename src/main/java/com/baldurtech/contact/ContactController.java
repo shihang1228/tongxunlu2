@@ -26,9 +26,13 @@ public class ContactController {
     }
     
     @RequestMapping("show")
-    public String show(@RequestParam("id") Long id, Model model) {
-        
+    public String show(@RequestParam("id") Long id, Model model) {   
         model.addAttribute("contact", contactService.getById(id));
         return "contact/show";
+    }
+    
+    @RequestMapping("create")
+    public String create() {
+        return "contact/create";
     }
 }
