@@ -51,4 +51,12 @@ public class ContactController {
         model.addAttribute("contact", contactService.getById(id));  
         return "contact/update";
     }
+    
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("contact") Contact contact, Model model) {
+        contactService.update(contact);
+        model.addAttribute("id", contact.getId());
+        return "redirect:show";
+    }
+    
 }
