@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 4L;
     Contact contact;
+    Contact contact_has_saved;
     
     @Mock
     ContactService contactService;
@@ -39,6 +40,17 @@ public class ContactControllerUnitTest {
         contact.setMemo("memo");
         contact.setJob("HR");
         contact.setJobLevel(4L);
+        
+        contact_has_saved = new Contact();
+        contact_has_saved.setId(9L);
+        contact_has_saved.setName("Shihang");
+        contact_has_saved.setMobile("15235432994");
+        contact_has_saved.setVpmn("652994");
+        contact_has_saved.setHomeAddress("taiyuan");
+        contact_has_saved.setOfficeAddress("taiyuan");
+        contact_has_saved.setMemo("memo");
+        contact_has_saved.setJob("HR");
+        contact_has_saved.setJobLevel(4L);
     }
     
     @Test
@@ -58,5 +70,12 @@ public class ContactControllerUnitTest {
         assertEquals("contact/show", contactController.show(CONTACT_ID, model));
         verify(contactService).getById(CONTACT_ID);
         verify(model).addAttribute("contact", contact);
+    }
+    
+    @Test
+    public void 在save方法中调用contactService中的save方法() {
+        when(contactService.save(contact)).thenReturn(contact);
+        assertEquals("redirect:list", contactController.save(contact));
+        verify(contactService).save(contact);
     }
 }
