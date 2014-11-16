@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
+    private Long CONTACT_ID = 4L;
     Contact contact;
     
     @Mock
@@ -50,5 +51,11 @@ public class ContactControllerUnitTest {
         verify(contactService).findAll();
         verify(model).addAttribute("contactList", contactList);
         
+    }
+    
+    @Test
+    public void 在show方法中当URL为contact_show时返回contact_show() {
+        assertEquals("contact/show", contactController.show(CONTACT_ID, model));
+        verify(model).addAttribute("id", CONTACT_ID);
     }
 }
