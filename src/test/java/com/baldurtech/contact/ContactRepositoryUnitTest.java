@@ -59,4 +59,15 @@ public class ContactRepositoryUnitTest {
         
         verify(entityManager).persist(contact);
     }
+    
+    @Test
+    public void 当联系人存在时更新数据库中的联系人() {
+        Contact contact = new Contact();
+        Contact contact_has_saved = new Contact();
+        
+        when(entityManager.merge(contact)).thenReturn(contact_has_saved);
+        
+        assertEquals(contact_has_saved, contactRepository.update(contact));
+        verify(entityManager).merge(contact);
+    }
 }
