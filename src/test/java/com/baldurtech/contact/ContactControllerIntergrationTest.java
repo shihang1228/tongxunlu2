@@ -72,7 +72,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     }
     
     @Test
-    public void 但URL为contact_update时应该post到update方法() throws Exception {
+    public void 当URL为contact_update时应该post到update方法() throws Exception {
         mockMvc.perform(get("/contact/update")
                         .param("id", String.valueOf(CONTACT_ID)))
             .andExpect(view().name("contact/update"))
