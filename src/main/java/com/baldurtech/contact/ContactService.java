@@ -23,6 +23,7 @@ public class ContactService {
     }
     
     public Contact save(Contact contact) {
-        return contactRepository.save(contact);
+        contactRepository.save(contact);
+        return contact;
     }
 }
