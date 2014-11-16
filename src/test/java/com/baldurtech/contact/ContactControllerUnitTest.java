@@ -20,6 +20,7 @@ public class ContactControllerUnitTest {
     private Long CONTACT_ID = 4L;
     Contact contact;
     Contact contact_has_saved;
+    Contact contact_has_updated;
     
     @Mock
     ContactService contactService;
@@ -53,6 +54,18 @@ public class ContactControllerUnitTest {
         contact_has_saved.setMemo("memo");
         contact_has_saved.setJob("HR");
         contact_has_saved.setJobLevel(4L);
+        
+        contact_has_updated = new Contact();
+        contact_has_updated.setId(9L);
+        contact_has_updated.setName("XiaoBai");
+        contact_has_updated.setMobile("15235432994");
+        contact_has_updated.setVpmn("652994");
+        contact_has_updated.setHomeAddress("taiyuan");
+        contact_has_updated.setOfficeAddress("taiyuan");
+        contact_has_updated.setMemo("memo");
+        contact_has_updated.setJob("HR");
+        contact_has_updated.setJobLevel(4L);
+        
     }
     
     @Test
@@ -95,5 +108,14 @@ public class ContactControllerUnitTest {
         assertEquals("contact/update", contactController.edit(contact_has_saved.getId(), model));
         verify(contactService).getById(contact_has_saved.getId());
         verify(model).addAttribute("contact", contact_has_saved);
+    }
+    
+    @Test
+    public void 在update方法中调用contactService中的update方法() {
+        when(contactService.update(contact_has_saved)).thenReturn(contact_has_updated);
+        
+        assertEquals("redirect:show", contactController.update(contact_has_saved, model));
+        verify(contactService).update(contact_has_saved);
+        verify(model).addAttribute("id", contact_has_updated.getId());
     }
 }
