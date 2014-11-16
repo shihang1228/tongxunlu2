@@ -1,9 +1,58 @@
-<html>
+<html lang="en-US">
     <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-        <title>Contact Create</title>
+        <title>contact list</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+        <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     </head>
     <body>
+        <div class="container">
         <h1 align="center">Contact Create</h1>
+            <form action="save" method="POST">
+            <table align="center" border="1">
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="Shi Hang"/></td>
+                </tr>
+                <tr>
+                    <td>Moible:</td>
+                    <td><input type="text" name="mobile" value="18233333333"/></td>
+                </tr>
+                <tr>
+                    <td>Vpmn:</td>
+                    <td><input type="text" name="vpmn" value="62222"/></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="a@a.com"/></td>
+                </tr>
+                <tr>
+                    <td>HomeAddress:</td>
+                    <td><input type="text" name="homeAddress" value="TaiYuan"/></td>
+                </tr>
+                <tr>
+                    <td>OfficeAddress:</td>
+                    <td><input type="text" name="officeAddress" value="BeiZhang"/></td>
+                </tr>
+                <tr>
+                    <td>Job:</td>
+                    <td><input type="text" name="Job" value="HR"/></td>
+                </tr>
+                <tr>
+                    <td>JobLevel:</td>
+                    <td><input type="text" name="jobLevel" value="16"/></td>
+                </tr>
+                <tr>
+                    <td>Memo:</td>
+                    <td><input type="text" name="memo" value="memo"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="action" value="Submit"/></td>
+                </tr>
+            </table>
+            </form>
+        </div>
     </body>
 </html>
