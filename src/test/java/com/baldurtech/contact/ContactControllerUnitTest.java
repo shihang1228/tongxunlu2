@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.Ignore;
 import static org.junit.Assert.assertEquals;
 
 import org.mockito.Mock;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
@@ -72,10 +74,17 @@ public class ContactControllerUnitTest {
         verify(model).addAttribute("contact", contact);
     }
     
+    @Test @Ignore
+    public void 在create方法中当URL为contact_create时应该调用model() {
+        contactController.create(model);
+        verify(model).addAttribute("contact", contact);
+    }
+    
     @Test
     public void 在save方法中调用contactService中的save方法() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
-        assertEquals("redirect:list", contactController.save(contact));
+
+        assertEquals("redirect:list", contactController.save(contact, model));
         verify(contactService).save(contact);
     }
 }
