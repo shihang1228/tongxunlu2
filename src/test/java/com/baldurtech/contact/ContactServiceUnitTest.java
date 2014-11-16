@@ -68,8 +68,6 @@ public class ContactServiceUnitTest {
     
     @Test
     public void 在save方法中应该调用ContactService的save方法() {
-        when(contactRepository.save(contact)).thenReturn(contact_has_saved);
-        
         assertEquals(contact, contactService.save(contact));
         verify(contactRepository).save(contact);
     }
