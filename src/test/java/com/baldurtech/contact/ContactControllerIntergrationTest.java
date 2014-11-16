@@ -2,15 +2,23 @@ package com.baldurtech.contact;
 
 import org.junit.Test;
 import org.junit.Before;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baldurtech.config.WebAppConfigurationAware;
 
 public class ContactControllerIntergrationTest extends WebAppConfigurationAware {
     private Long CONTACT_ID = 4L;
     private Contact contact;
+    
+    private ContactRepository contactRepository;
+    
+    @Autowired
+    ContactService contactService = new ContactService(contactRepository);
     
     @Before
     public void setup() {
@@ -43,11 +51,13 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     @Test
     public void 当URL为contact_create时应该访问create页面() throws Exception {
         mockMvc.perform(get("/contact/create"))
+            .andExpect(model().attributeExists("contact"))
             .andExpect(view().name("contact/create"));
     }
     
     @Test
     public void 当URL为contact_save时应该post到save方法() throws Exception {
+        contactService.save(contact);
         mockMvc.perform(post("/contact/save")
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
@@ -58,6 +68,13 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("memo", contact.getMemo())
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel())))
-            .andExpect(redirectedUrl("list"));
+            .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
+    }
+    
+    @Test
+    public void 但URL为contact_update时应该post到update方法() throws Exception {
+        mockMvc.perform(get("/contact/update")
+                        .param("id", String.valueOf(CONTACT_ID)))
+            .andExpect(view().name("contact/update"));
     }
 }
