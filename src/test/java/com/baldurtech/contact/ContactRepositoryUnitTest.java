@@ -14,7 +14,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ContactRepositoryUnitTest {
-    
+    private Long CONTACT_ID = 5L;
     @Mock
     EntityManager entityManager;
     
@@ -38,5 +38,15 @@ public class ContactRepositoryUnitTest {
         when(typedQuery.getResultList()).thenReturn(contactList);
         
         assertEquals(contactList, contactRepository.findAll());
+    }
+    
+    @Test
+    public void 在get_by_id方法中如果数据中存在指定联系人信息应该返回指定联系人的信息() {
+        Contact contact = new Contact();
+        when(entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class)).thenReturn(typedQuery);
+        when(typedQuery.setParameter("id", CONTACT_ID)).thenReturn(typedQuery);
+        when(typedQuery.getSingleResult()).thenReturn(contact);
+        
+        assertEquals(contact, contactRepository.getById(CONTACT_ID));
     }
 }
