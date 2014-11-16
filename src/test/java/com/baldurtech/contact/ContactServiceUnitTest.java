@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 public class ContactServiceUnitTest {
+    private Long CONTACT_ID = 4L;
     Contact contact;
     
     @Mock
@@ -43,5 +44,12 @@ public class ContactServiceUnitTest {
         assertEquals(contactList, contactService.findAll());
         verify(contactRepository).findAll();
         
+    }
+    
+    @Test
+    public void 在getById方法中应该返回指定id的contact() {
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        assertEquals(contact, contactService.getById(CONTACT_ID));
+        verify(contactRepository).getById(CONTACT_ID);
     }
 }
