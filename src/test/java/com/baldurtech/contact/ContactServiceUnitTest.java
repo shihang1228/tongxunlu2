@@ -67,8 +67,16 @@ public class ContactServiceUnitTest {
     }
     
     @Test
-    public void 在save方法中应该调用ContactService的save方法() {
+    public void 在save方法中应该调用ContactRepository的save方法() {
         assertEquals(contact, contactService.save(contact));
         verify(contactRepository).save(contact);
+    }
+    
+    @Test
+    public void 在update方法中应该调用ContactRepository的update方法并返回更新后的contact() {
+        when(contactRepository.update(contact)).thenReturn(contact_has_saved);
+        
+        assertEquals(contact_has_saved, contactService.update(contact));
+        verify(contactRepository).update(contact);
     }
 }
