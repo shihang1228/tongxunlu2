@@ -40,6 +40,7 @@ public class ContactController {
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(@ModelAttribute("contact") Contact contact) {
+        contactService.save(contact);
         return "redirect:list";
     }
 }
