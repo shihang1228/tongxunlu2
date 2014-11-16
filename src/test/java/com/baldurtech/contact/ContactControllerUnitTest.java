@@ -74,7 +74,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在save方法中调用contactService中的save方法() {
-        when(contactService.save(contact)).thenReturn(contact);
+        when(contactService.save(contact)).thenReturn(contact_has_saved);
         assertEquals("redirect:list", contactController.save(contact));
         verify(contactService).save(contact);
     }
