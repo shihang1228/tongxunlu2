@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import org.springframework.ui.Model;
 
 public class ContactControllerUnitTest {
@@ -55,7 +54,9 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在show方法中当URL为contact_show时返回contact_show() {
+        when(contactService.getById(CONTACT_ID)).thenReturn(contact);
         assertEquals("contact/show", contactController.show(CONTACT_ID, model));
-        verify(model).addAttribute("id", CONTACT_ID);
+        verify(contactService).getById(CONTACT_ID);
+        verify(model).addAttribute("contact", contact);
     }
 }

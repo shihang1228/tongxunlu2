@@ -10,6 +10,44 @@
     <body>
         <div class="container">
             <h1 align="center">ContactShow</h1>
+            <table align="center" border="1">
+                <tr>
+                    <td th:text="name"></td>
+                    <td th:text="${contact.name}"></td>
+                </tr>
+                <tr>
+                    <td th:text="mobile"></td>
+                    <td th:text="${contact.mobile}"></td>
+                </tr>
+                <tr>
+                    <td th:text="vpmn"></td>
+                    <td th:text="${contact.vpmn}"></td>
+                </tr>
+                <tr>
+                    <td th:text="email"></td>
+                    <td th:text="${contact.email}"></td>
+                </tr>
+                <tr>
+                    <td th:text="homeAddress"></td>
+                    <td th:text="${contact.homeAddress}"></td>
+                </tr>
+                <tr>
+                    <td th:text="officeAddress"></td>
+                    <td th:text="${contact.officeAddress}"></td>
+                </tr>
+                <tr>
+                    <td th:text="memo"></td>
+                    <td th:text="${contact.memo}"></td>
+                </tr>
+                <tr>
+                    <td th:text="job"></td>
+                    <td th:text="${contact.job}"></td>
+                </tr>
+                <tr>
+                    <td th:text="jobLevel"></td>
+                    <td th:text="${contact.jobLevel}"></td>
+                </tr>
+            </table>
             <h3 align="center"><a th:href="@{list}" th:text="return"></a></h3>
         </div>
     </body>
