@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,5 +49,14 @@ public class ContactRepositoryUnitTest {
         when(typedQuery.getSingleResult()).thenReturn(contact);
         
         assertEquals(contact, contactRepository.getById(CONTACT_ID));
+    }
+    
+    @Test
+    public void 调用save方法保存联系人信息() {
+        Contact contact = new Contact();
+        
+        contactRepository.save(contact);
+        
+        verify(entityManager).persist(contact);
     }
 }
