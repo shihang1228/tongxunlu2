@@ -7,10 +7,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.baldurtech.config.WebAppConfigurationAware;
 
 public class ContactControllerIntergrationTest extends WebAppConfigurationAware {
+    private Long CONTACT_ID = 4L;
+    
     @Test
-    public void 当URL为contact_list时应该访问list页面() throws Exception{
+    public void 当URL为contact_list时应该访问list页面() throws Exception {
         mockMvc.perform(get("/contact/list"))
                .andExpect(view().name("contact/list"))
                .andExpect(model().attributeExists("contactList"));
+    }
+    
+    @Test
+    public void 当URL为contact_show时应该访问show页面() throws Exception {
+        mockMvc.perform(get("/contact/show")
+                        .param("id", String.valueOf(CONTACT_ID)))
+               .andExpect(model().attributeExists("id"))
+               .andExpect(view().name("contact/show"));
     }
 }
