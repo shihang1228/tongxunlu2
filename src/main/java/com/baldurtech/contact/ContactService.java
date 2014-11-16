@@ -21,4 +21,8 @@ public class ContactService {
     public Contact getById(Long id) {
         return contactRepository.getById(id);
     }
+    
+    public Contact save(Contact contact) {
+        return contactRepository.save(contact);
+    }
 }
