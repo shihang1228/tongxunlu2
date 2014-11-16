@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
@@ -22,5 +23,11 @@ public class ContactController {
     public String list(Model model) {
         model.addAttribute("contactList", contactService.findAll());
         return "contact/list";
+    }
+    
+    @RequestMapping("show")
+    public String show(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("id", id);
+        return "contact/show";
     }
 }
