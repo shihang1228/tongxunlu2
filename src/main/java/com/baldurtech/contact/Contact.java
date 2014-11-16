@@ -4,10 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "contact")
-@NamedQuery(name = Contact.FIND_ALL, query = "from Contact")
+@NamedQueries ({
+    @NamedQuery(name = Contact.FIND_ALL, query = "from Contact"),
+    @NamedQuery(name = Contact.GET_BY_ID, query = "from Contact c where c.id = :id")
+})
 public class Contact
 {
     public static final String FIND_ALL = "Contact.findAll";
+    public static final String GET_BY_ID = "Contact.getById";
     
     @GeneratedValue
     @Id
