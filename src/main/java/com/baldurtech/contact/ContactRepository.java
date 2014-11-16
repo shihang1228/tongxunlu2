@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class ContactRepository {
     @PersistenceContext
     EntityManager entityManager;
@@ -22,5 +24,9 @@ public class ContactRepository {
     
     public Contact getById(Long id) {
         return entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class).setParameter("id", id).getSingleResult();
+    }
+    
+    public void save(Contact contact) {
+        entityManager.persist(contact);
     }
 }
