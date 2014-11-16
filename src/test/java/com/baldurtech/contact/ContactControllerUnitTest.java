@@ -87,4 +87,13 @@ public class ContactControllerUnitTest {
         assertEquals("redirect:show", contactController.save(contact, model));
         verify(contactService).save(contact);
     }
+    
+    @Test
+    public void 在edit方法中调用contactService中的getById方法() {
+        when(contactService.getById(contact_has_saved.getId())).thenReturn(contact_has_saved);
+        
+        assertEquals("contact/update", contactController.edit(contact_has_saved.getId(), model));
+        verify(contactService).getById(contact_has_saved.getId());
+        verify(model).addAttribute("contact", contact_has_saved);
+    }
 }
