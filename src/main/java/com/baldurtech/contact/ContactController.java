@@ -34,12 +34,13 @@ public class ContactController {
     }
     
     @RequestMapping(value = "create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("contact", new Contact());
         return "contact/create";
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact) {
+    public String save(@ModelAttribute("contact") Contact contact, Model model) { 
         contactService.save(contact);
         return "redirect:list";
     }
