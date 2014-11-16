@@ -23,4 +23,10 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/show"));
     }
+    
+    @Test
+    public void 当URL为contact_create时应该访问create页面() throws Exception {
+        mockMvc.perform(get("/contact/create"))
+            .andExpect(view().name("contact/create"));
+    }
 }
