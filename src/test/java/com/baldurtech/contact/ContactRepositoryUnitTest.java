@@ -62,13 +62,13 @@ public class ContactRepositoryUnitTest {
     
     @Test
     public void 当联系人存在时更新数据库中的联系人() {
-        Contact contact = new Contact();
+        Contact contact_has_updated = new Contact();
         Contact contact_has_saved = new Contact();
         
-        when(entityManager.merge(contact)).thenReturn(contact_has_saved);
+        when(entityManager.merge(contact_has_saved)).thenReturn(contact_has_updated);
         
-        assertEquals(contact_has_saved, contactRepository.update(contact));
-        verify(entityManager).merge(contact);
+        assertEquals(contact_has_updated, contactRepository.update(contact_has_saved));
+        verify(entityManager).merge(contact_has_saved);
     }
     
     @Test
