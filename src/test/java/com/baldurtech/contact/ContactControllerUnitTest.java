@@ -13,7 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.any;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -97,12 +99,20 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 当contact和法时在save方法中调用contactService中的save方法应该重定向到show页面() {
+    public void 当contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         when(result.hasErrors()).thenReturn(false);
         
         assertEquals("redirect:show", contactController.save(contact, result, model));
         verify(contactService).save(contact);
+    }
+    
+    @Test
+    public void 当contact不合法时在应该访问create页面() {
+        when(result.hasErrors()).thenReturn(true);
+        
+        assertEquals("redirect:create", contactController.save(contact, result, model));
+        verify(contactService, never()).save(contact);
     }
     
     @Test
