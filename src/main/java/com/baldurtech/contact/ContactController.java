@@ -48,9 +48,9 @@ public class ContactController {
             return "contact/create";
         }else {
             contactService.save(contact);
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";
         }
-        model.addAttribute("id", contact.getId());
-        return "redirect:show";
     }
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
@@ -65,9 +65,9 @@ public class ContactController {
             return "contact/update";
         }else {
             contactService.update(contact);
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";
         }
-        model.addAttribute("id", contact.getId());
-        return "redirect:show";
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)
