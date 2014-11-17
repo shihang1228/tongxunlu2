@@ -46,8 +46,7 @@ public class ContactController {
     public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) { 
         if(result.hasErrors()) {
             return "contact/create";
-        }
-        if(contact != null){
+        }else {
             contactService.save(contact);
         }
         model.addAttribute("id", contact.getId());
