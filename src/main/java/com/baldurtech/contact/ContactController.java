@@ -60,8 +60,12 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("contact") Contact contact, Model model) {
-        contactService.update(contact);
+    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "contact/update";
+        }else {
+            contactService.update(contact);
+        }
         model.addAttribute("id", contact.getId());
         return "redirect:show";
     }
