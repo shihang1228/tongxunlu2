@@ -72,7 +72,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
-    @Test
+    @Test @Ignore
     public void 当URL为contact_update时应该访问update页面() throws Exception {
         mockMvc.perform(get("/contact/update")
                         .param("id", String.valueOf(CONTACT_ID)))
