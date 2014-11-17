@@ -65,7 +65,13 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
-    public String edit(@RequestParam("id") Long id, Model model) {  
+    public String edit(@RequestParam("id") Long id, Model model, Principal principal) {  
+        Account account = accountRepository.findByEmail(principal.getName());
+     
+        if("ROLE_USER".equals(account.getRole())) {
+            return "contact/forbidden";
+        }
+        
         model.addAttribute("contact", contactService.getById(id));  
         return "contact/update";
     }
