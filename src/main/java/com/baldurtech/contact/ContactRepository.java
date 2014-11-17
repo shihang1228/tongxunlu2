@@ -35,6 +35,7 @@ public class ContactRepository {
     }
     
     public void delete(Long id) {
-        System.out.println(id);
+        Contact contact = entityManager.find(Contact.class, id);
+        entityManager.remove(contact);
     }
 }
