@@ -152,4 +152,10 @@ public class ContactValidationUnitTest {
         contact.setHomeAddress("      ");
         assertConstraintValidation("不能为空");
     }
+    
+    @Test
+    public void officeAddress_cannot_be_null() {
+        contact.setOfficeAddress(null);
+        assertConstraintValidation("不能为空");
+    }
 }
