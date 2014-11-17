@@ -15,6 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 4L;
@@ -27,6 +28,9 @@ public class ContactControllerUnitTest {
     
     @Mock
     Model model;
+    
+    @Mock
+    BindingResult result;
     
     @InjectMocks
     ContactController contactController;
@@ -93,10 +97,11 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在save方法中调用contactService中的save方法() {
+    public void 当contact和法时在save方法中调用contactService中的save方法应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
-
-        assertEquals("redirect:show", contactController.save(contact, model));
+        when(result.hasErrors()).thenReturn(false);
+        
+        assertEquals("redirect:show", contactController.save(contact, result, model));
         verify(contactService).save(contact);
     }
     
