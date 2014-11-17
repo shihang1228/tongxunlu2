@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "contact")
@@ -32,7 +33,8 @@ public class Contact
     @Pattern(regexp = "\\d{4,6}", message = "elements must be digits and betweent 4 to 6!")
     private String vpmn;
     
-    @NotBlank
+    @NotBlank(message = "Not a valid email format!")
+    @Email(message = "Not a valid email format!")
     private String email;
     
     private String homeAddress;
