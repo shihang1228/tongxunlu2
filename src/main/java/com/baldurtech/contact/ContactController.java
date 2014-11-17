@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("contact")
 public class ContactController {
@@ -39,10 +42,14 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("contact") Contact contact, Model model) { 
-        contactService.save(contact);
-        model.addAttribute("id", contact.getId());
-        return "redirect:show";
+    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) { 
+        if(result.hasErrors()) {
+            return "redirect:create";
+        }else {
+            contactService.save(contact);
+            model.addAttribute("id", contact.getId());
+            return "redirect:show";
+        }
     }
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
