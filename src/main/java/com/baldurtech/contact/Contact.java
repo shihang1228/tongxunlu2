@@ -2,6 +2,8 @@ package com.baldurtech.contact;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "contact")
 @NamedQueries ({
@@ -16,6 +18,8 @@ public class Contact
     @GeneratedValue
     @Id
     private Long id;
+    
+    @NotBlank
     private String name;
     private String mobile;
     private String vpmn;
