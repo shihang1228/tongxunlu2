@@ -32,7 +32,9 @@ public class Contact
     @Pattern(regexp = "\\d{4,6}", message = "elements must be digits and betweent 4 to 6!")
     private String vpmn;
     
+    @NotBlank
     private String email;
+    
     private String homeAddress;
     private String officeAddress;
     private String memo;
