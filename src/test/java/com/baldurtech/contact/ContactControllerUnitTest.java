@@ -125,14 +125,22 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在update方法中调用contactService中的update方法() {
+    public void 当contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
         when(contactService.update(contact_has_saved)).thenReturn(contact_has_updated);
+        when(result.hasErrors()).thenReturn(false);
         
-        assertEquals("redirect:show", contactController.update(contact_has_saved, model));
+        assertEquals("redirect:show", contactController.update(contact_has_saved, result, model));
         verify(contactService).update(contact_has_saved);
         verify(model).addAttribute("id", contact_has_updated.getId());
     }
     
+    @Test 
+    public void 当contact不合法时应该返回update页面() {
+        when(result.hasErrors()).thenReturn(true);
+        
+        assertEquals("contact/update", contactController.update(contact_has_saved, result, model));
+        verify(contactService, never()).update(contact_has_saved);
+    }
     @Test
     public void 在delete方法中调用contactService中的delete方法() {
         assertEquals("redirect:list", contactController.delete(CONTACT_ID));
