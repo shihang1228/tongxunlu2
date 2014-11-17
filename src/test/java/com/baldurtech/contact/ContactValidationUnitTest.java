@@ -2,6 +2,7 @@ package com.baldurtech.contact;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
@@ -22,11 +23,11 @@ public class ContactValidationUnitTest {
         validator = validatorFactory.getValidator();
     }
     
-    @Test
-    public void name_cannot_be_null() {
+    @Before
+    public void createValidateContact() {
         contact = new Contact();
         
-        contact.setName(null);
+        contact.setName("Xiao Bai");
         contact.setMobile("18222222222");
         contact.setVpmn("62222");
         contact.setEmail("xiaobai@qq.com");
@@ -35,9 +36,8 @@ public class ContactValidationUnitTest {
         contact.setJob("HR");
         contact.setJobLevel(16L);
         contact.setMemo("memo");
-        
-        assertConstraintValidation("不能为空");
     }
+    
     public void assertConstraintValidation(String errorMessage) {
         constraintViolations = validator.validate(contact); 
         
@@ -46,21 +46,14 @@ public class ContactValidationUnitTest {
     }
     
     @Test
+    public void name_cannot_be_null() {
+        contact.setName(null);
+        assertConstraintValidation("不能为空");
+    }
+   
+    @Test
     public void name_cannot_be_blank(){
-        Contact contact = new Contact();
-        contact.setName("         ");
-        contact.setMobile("18222222222");
-        contact.setVpmn("62222");
-        contact.setEmail("xiaobai@qq.com");
-        contact.setHomeAddress("TaiYuan");
-        contact.setOfficeAddress("BeiZhang");
-        contact.setJob("HR");
-        contact.setJobLevel(16L);
-        contact.setMemo("memo");
-        
-        Set<ConstraintViolation<Contact>> constraintViolations = validator.validate(contact);
-        
-        assertEquals(1, constraintViolations.size());
-        assertEquals("不能为空", constraintViolations.iterator().next().getMessage());
+        contact.setName("    ");
+        assertConstraintValidation("不能为空");
     }
 }
