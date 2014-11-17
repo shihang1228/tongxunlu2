@@ -10,9 +10,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.baldurtech.config.WebAppConfigurationAware;
+import com.baldurtech.config.WebSecurityConfigurationAware;
 
-public class ContactControllerIntergrationTest extends WebAppConfigurationAware {
+public class ContactControllerIntergrationTest extends WebSecurityConfigurationAware {
     private Long CONTACT_ID = 4L;
     private Contact contact;
     
@@ -36,30 +36,29 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     }
     @Test
     public void 当URL为contact_list时应该访问list页面() throws Exception {
-        mockMvc.perform(get("/contact/list"))
+        userPerform(get("/contact/list"))
                .andExpect(view().name("contact/list"))
                .andExpect(model().attributeExists("contactList"));
     }
     
     @Test
     public void 当URL为contact_show时应该访问show页面() throws Exception {
-        mockMvc.perform(get("/contact/show")
+        userPerform(get("/contact/show")
                         .param("id", String.valueOf(CONTACT_ID)))
                .andExpect(model().attributeExists("contact"))
                .andExpect(view().name("contact/show"));
     }
     
-    @Test @Ignore
+    @Test 
     public void 当URL为contact_create时应该访问create页面() throws Exception {
-        mockMvc.perform(get("/contact/create"))
-            .andExpect(view().name("contact/create"))
-            .andExpect(model().attributeExists("contact"));
+        userPerform(get("/contact/create"))
+            .andExpect(view().name("contact/forbidden"));
     }
     
     @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {
         contactService.save(contact);
-        mockMvc.perform(post("/contact/save")
+        userPerform(post("/contact/save")
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
                        .param("vpmn", contact.getVpmn())
@@ -72,18 +71,17 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
-    @Test @Ignore
+    @Test 
     public void 当URL为contact_update时应该访问update页面() throws Exception {
-        mockMvc.perform(get("/contact/update")
+        userPerform(get("/contact/update")
                         .param("id", String.valueOf(CONTACT_ID)))
-            .andExpect(view().name("contact/update"))
-            .andExpect(model().attributeExists("contact"));
+            .andExpect(view().name("contact/forbidden"));
     }
     
     @Test
     public void 当URL为contact_update时应该post到update方法() throws Exception {
         contactService.save(contact);
-        mockMvc.perform(post("/contact/update")
+        userPerform(post("/contact/update")
                        .param("id", String.valueOf(contact.getId()))
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
@@ -100,7 +98,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     @Test
     public void 当URL为contact_delete时应该执行delete方法() throws Exception{
         contactService.save(contact);
-        mockMvc.perform(post("/contact/delete")
+        userPerform(post("/contact/delete")
                        .param("id", String.valueOf(contact.getId())))
                .andExpect(redirectedUrl("list"));
     }
