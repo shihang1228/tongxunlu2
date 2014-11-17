@@ -146,4 +146,10 @@ public class ContactValidationUnitTest {
         contact.setHomeAddress(null);
         assertConstraintValidation("不能为空");
     }
+    
+    @Test
+    public void homeAddress_cannot_be_blank() {
+        contact.setHomeAddress("      ");
+        assertConstraintValidation("不能为空");
+    }
 }
