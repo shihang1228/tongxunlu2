@@ -2,6 +2,7 @@ package com.baldurtech.contact;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.Ignore;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,14 +49,14 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                .andExpect(view().name("contact/show"));
     }
     
-    @Test
+    @Test @Ignore
     public void 当URL为contact_create时应该访问create页面() throws Exception {
         mockMvc.perform(get("/contact/create"))
             .andExpect(view().name("contact/create"))
             .andExpect(model().attributeExists("contact"));
     }
     
-    @Test
+    @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {
         contactService.save(contact);
         mockMvc.perform(post("/contact/save")
