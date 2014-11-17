@@ -92,4 +92,10 @@ public class ContactValidationUnitTest {
         contact.setMobile("abcdefjhijk");
         assertConstraintValidation("Not a valid mobile format!");
     }
+    
+    @Test
+    public void vpmn_can_not_be_null() {
+        contact.setVpmn(null);
+        assertConstraintValidation("不能为null");
+    }
 }
