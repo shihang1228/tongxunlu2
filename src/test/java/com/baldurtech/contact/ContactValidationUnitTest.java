@@ -62,4 +62,10 @@ public class ContactValidationUnitTest {
         contact.setMobile(null);
         assertConstraintValidation("Not a valid mobile format!");
     }
+    
+    @Test
+    public void mobile_cannnot_be_blank() {
+        contact.setMobile("    ");
+        assertConstraintValidation("Not a valid mobile format!");
+    }
 }
