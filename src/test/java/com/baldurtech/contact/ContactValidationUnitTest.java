@@ -126,12 +126,18 @@ public class ContactValidationUnitTest {
     @Test
     public void email_cannot_be_null() {
         contact.setEmail(null);
-        assertConstraintValidation("不能为空");
+        assertConstraintValidation("Not a valid email format!");
     }
     
     @Test
     public void email_cannot_be_blank() {
         contact.setEmail("    ");
-        assertConstraintValidation("不能为空");
+        assertConstraintValidation("Not a valid email format!");
+    }
+    
+    @Test
+    public void email_cannot_be_invalid() {
+        contact.setEmail("sdfsdfsd");
+        assertConstraintValidation("Not a valid email format!");
     }
 }
