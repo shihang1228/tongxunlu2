@@ -78,5 +78,6 @@ public class ContactValidationUnitTest {
     @Test
     public void mobile_cannot_too_short() {
         contact.setMobile("182");
+        assertConstraintValidation("Not a valid mobile format!");
     }
 }
