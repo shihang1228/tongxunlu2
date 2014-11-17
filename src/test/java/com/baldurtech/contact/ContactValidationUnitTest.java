@@ -129,5 +129,9 @@ public class ContactValidationUnitTest {
         assertConstraintValidation("不能为空");
     }
     
-    
+    @Test
+    public void email_cannot_be_blank() {
+        contact.setEmail("    ");
+        assertConstraintValidation("不能为空");
+    }
 }
