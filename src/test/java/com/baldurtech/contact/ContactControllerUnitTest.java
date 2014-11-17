@@ -124,7 +124,6 @@ public class ContactControllerUnitTest {
     
     @Test
     public void contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
-        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         when(result.hasErrors()).thenReturn(false);
         
@@ -141,12 +140,20 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在edit方法中调用contactService中的getById方法() {
+    public void 当角色为ADMIN时在edit方法中调用contactService中的getById方法() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         when(contactService.getById(contact_has_saved.getId())).thenReturn(contact_has_saved);
         
-        assertEquals("contact/update", contactController.edit(contact_has_saved.getId(), model));
+        assertEquals("contact/update", contactController.edit(contact_has_saved.getId(), model, principal));
         verify(contactService).getById(contact_has_saved.getId());
         verify(model).addAttribute("contact", contact_has_saved);
+    }
+    
+    @Test
+    public void 当角色为USER应该访问forbidden页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.edit(contact_has_saved.getId(), model, principal));
     }
     
     @Test
