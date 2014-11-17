@@ -117,4 +117,10 @@ public class ContactControllerUnitTest {
         verify(contactService).update(contact_has_saved);
         verify(model).addAttribute("id", contact_has_updated.getId());
     }
+    
+    @Test
+    public void 在delete方法中调用contactService中的delete方法() {
+        assertEquals("redirect:list", contactController.delete(CONTACT_ID));
+        verify(contactService).delete(CONTACT_ID);
+    }
 }
