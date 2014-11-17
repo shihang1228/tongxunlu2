@@ -95,4 +95,12 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
     
+    @Test
+    public void 当URL为contact_delete时应该执行delete方法() throws Exception{
+        contactService.save(contact);
+        mockMvc.perform(post("/contact/delete")
+                       .param("id", String.valueOf(contact.getId())))
+               .andExpect(redirectedUrl("list"));
+    }
+    
 }
