@@ -2,6 +2,7 @@ package com.baldurtech.contact;
 
 import javax.persistence.*;
 
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -21,6 +22,8 @@ public class Contact
     
     @NotBlank
     private String name;
+    
+    @NotNull(message = "Not a valid mobile format!")
     private String mobile;
     private String vpmn;
     private String email;
