@@ -87,10 +87,9 @@ public class ContactControllerUnitTest {
         verify(model).addAttribute("contact", contact);
     }
     
-    @Test @Ignore
+    @Test
     public void 在create方法中当URL为contact_create时应该调用model() {
-        contactController.create(model);
-        verify(model).addAttribute("contact", contact);
+        assertEquals("contact/create", contactController.create());
     }
     
     @Test

@@ -34,8 +34,7 @@ public class ContactController {
     }
     
     @RequestMapping(value = "create")
-    public String create(Model model) {
-        model.addAttribute("contact", new Contact());
+    public String create() {
         return "contact/create";
     }
     
