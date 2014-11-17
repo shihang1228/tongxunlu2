@@ -2,6 +2,7 @@ package com.baldurtech.contact;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.security.Principal;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -19,14 +20,24 @@ import static org.mockito.Mockito.any;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import com.baldurtech.account.*;
+
 public class ContactControllerUnitTest {
     private Long CONTACT_ID = 4L;
     Contact contact;
     Contact contact_has_saved;
     Contact contact_has_updated;
+    Account user_account;
+    Account admin_account;
+    
+    @Mock
+    AccountRepository accountRepository;
     
     @Mock
     ContactService contactService;
+    
+    @Mock
+    Principal principal;
     
     @Mock
     Model model;
@@ -40,6 +51,10 @@ public class ContactControllerUnitTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        
+        user_account = new Account("a@a.com", "123", "ROLE_USER");
+        admin_account = new Account("b@b.com", "admin", "ROLE_ADMIN");
+        
         contact = new Contact();
         contact.setName("Shihang");
         contact.setMobile("15235432994");
@@ -94,12 +109,22 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在create方法中当URL为contact_create时应该调用model() {
-        assertEquals("contact/create", contactController.create(model));
+    public void 当角色为user时调用create方法应该重定向到forbidden() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.create(model, principal));
     }
     
     @Test
-    public void 当contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
+    public void 当角色为admin时调用create方法应该访问create页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
+        
+        assertEquals("contact/create", contactController.create(model, principal));
+    }
+    
+    @Test
+    public void contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         when(result.hasErrors()).thenReturn(false);
         
