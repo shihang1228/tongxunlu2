@@ -164,4 +164,10 @@ public class ContactValidationUnitTest {
         contact.setOfficeAddress("       ");
         assertConstraintValidation("不能为空");
     }
+    
+    @Test
+    public void job_cannot_be_null() {
+        contact.setJob(null);
+        assertConstraintValidation("不能为空");
+    }
 }
