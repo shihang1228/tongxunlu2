@@ -95,7 +95,7 @@ public class ContactControllerUnitTest {
     
     @Test
     public void 在create方法中当URL为contact_create时应该调用model() {
-        assertEquals("contact/create", contactController.create());
+        assertEquals("contact/create", contactController.create(model));
     }
     
     @Test
@@ -111,7 +111,7 @@ public class ContactControllerUnitTest {
     public void 当contact不合法时在应该访问create页面() {
         when(result.hasErrors()).thenReturn(true);
         
-        assertEquals("redirect:create", contactController.save(contact, result, model));
+        assertEquals("contact/create", contactController.save(contact, result, model));
         verify(contactService, never()).save(contact);
     }
     
