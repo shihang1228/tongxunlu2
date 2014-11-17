@@ -11,17 +11,23 @@
         <div class="container">
             <h1 align="center">ContactList</h1>
             <table align="center" border="1">
+                <tr align="center">
+                    <td colspan="6"><a th:href="@{create}" th:text="create"></a></td>
+                </tr>
                 <tr>
                     <td align="center">Name</td>
                     <td align="center">Mobile</td>
                     <td align="center">Vpmn</td>
                     <td align="center">Address</td>
+                    <td align="center" colspan="2">Edit</td>
                 </tr>
                 <tr th:each="contact : ${contactList}">
                     <td><a th:href="@{'show?id=' + ${contact.id}}" th:text="${contact.name}"></a></td>
                     <td th:text="${contact.mobile}"></td>
                     <td th:text="${contact.vpmn}"></td>
                     <td th:text="${contact.homeAddress}"></td>
+                    <td><a th:href="@{'update?id=' + ${contact.id}}" th:text="update"></a></td>
+                    <td><a th:href="@{'delete?id=' + ${contact.id}}" th:text="delete"></a></td>
                 </tr>
             </table>
         </div>
