@@ -60,6 +60,7 @@ public class ContactController {
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String delete(@RequestParam("id") Long id) {
+        contactService.delete(id);
         return "redirect:list";
     }
     
