@@ -176,4 +176,10 @@ public class ContactValidationUnitTest {
         contact.setJob("    ");
         assertConstraintValidation("不能为空");
     }
+    
+    @Test
+    public void jobLevel_cannot_be_null() {
+        contact.setJobLevel(null);
+        assertConstraintValidation("不能为null");
+    }
 }
