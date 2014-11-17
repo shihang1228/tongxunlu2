@@ -32,6 +32,6 @@ public class ContactService {
     }
     
     public void delete(Long id) {
-        System.out.println(id);
+        contactRepository.delete(id);
     }
 }

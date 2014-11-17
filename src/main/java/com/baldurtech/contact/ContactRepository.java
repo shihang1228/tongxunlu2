@@ -33,4 +33,8 @@ public class ContactRepository {
     public Contact update(Contact contact) {
         return entityManager.merge(contact);
     }
+    
+    public void delete(Long id) {
+        System.out.println(id);
+    }
 }
