@@ -116,4 +116,18 @@ public class ContactValidationUnitTest {
         contact.setVpmn("123");
         assertConstraintValidation("elements must be digits and betweent 4 to 6!");
     }
+    
+    @Test
+    public void vpmn_can_be_digits() {
+        contact.setVpmn("abcdd");
+        assertConstraintValidation("elements must be digits and betweent 4 to 6!");
+    }
+    
+    @Test
+    public void email_cannot_be_null() {
+        contact.setEmail(null);
+        assertConstraintValidation("不能为空");
+    }
+    
+    
 }
