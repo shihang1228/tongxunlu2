@@ -13,7 +13,9 @@ import javax.validation.ConstraintViolation;
 
 public class ContactValidationUnitTest {
     private static Validator validator;
-    
+    private Set<ConstraintViolation<Contact>> constraintViolations;
+    private Contact contact;
+  
     @BeforeClass
     public static void setup() {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -22,7 +24,7 @@ public class ContactValidationUnitTest {
     
     @Test
     public void name_cannot_be_null() {
-        Contact contact = new Contact();
+        contact = new Contact();
         
         contact.setName(null);
         contact.setMobile("18222222222");
@@ -34,10 +36,13 @@ public class ContactValidationUnitTest {
         contact.setJobLevel(16L);
         contact.setMemo("memo");
         
-        Set<ConstraintViolation<Contact>> constraintViolations = validator.validate(contact); 
+        assertConstraintValidation("不能为空");
+    }
+    public void assertConstraintValidation(String errorMessage) {
+        constraintViolations = validator.validate(contact); 
         
         assertEquals(1, constraintViolations.size());
-        assertEquals("不能为空", constraintViolations.iterator().next().getMessage());
+        assertEquals(errorMessage, constraintViolations.iterator().next().getMessage());
     }
     
     @Test
