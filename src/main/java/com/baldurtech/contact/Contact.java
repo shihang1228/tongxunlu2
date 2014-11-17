@@ -44,7 +44,10 @@ public class Contact
     private String officeAddress;
     
     private String memo;
+    
+    @NotBlank
     private String job;
+    
     private Long jobLevel;
 
     public void setId(Long id)
