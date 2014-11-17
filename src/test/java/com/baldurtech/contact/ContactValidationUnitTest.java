@@ -98,4 +98,10 @@ public class ContactValidationUnitTest {
         contact.setVpmn(null);
         assertConstraintValidation("不能为null");
     }
+    
+    @Test
+    public void vpmn_can_not_be_blank() {
+        contact.setVpmn("    ");
+        assertConstraintValidation("elements must be digits and betweent 4 to 6!");
+    }
 }
