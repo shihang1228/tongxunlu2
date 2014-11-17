@@ -58,4 +58,9 @@ public class ContactController {
         return "redirect:show";
     }
     
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String delete(@RequestParam("id") Long id) {
+        return "redirect:list";
+    }
+    
 }
