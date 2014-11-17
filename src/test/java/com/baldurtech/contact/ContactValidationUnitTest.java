@@ -110,4 +110,10 @@ public class ContactValidationUnitTest {
         contact.setVpmn("123456789");
         assertConstraintValidation("elements must be digits and betweent 4 to 6!");
     }
+    
+    @Test
+    public void vpmn_cannot_be_too_short() {
+        contact.setVpmn("123");
+        assertConstraintValidation("elements must be digits and betweent 4 to 6!");
+    }
 }
