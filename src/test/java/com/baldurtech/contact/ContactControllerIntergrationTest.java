@@ -81,8 +81,8 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
     @Test
     public void 当URL为contact_update时应该post到update方法() throws Exception {
         contactService.save(contact);
-        mockMvc.perform(post("/contact/save")
-                       .param("id", String.valueOf(CONTACT_ID ))
+        mockMvc.perform(post("/contact/update")
+                       .param("id", String.valueOf(contact.getId()))
                        .param("name", contact.getName())
                        .param("mobile", contact.getMobile())
                        .param("vpmn", contact.getVpmn())
@@ -92,6 +92,7 @@ public class ContactControllerIntergrationTest extends WebAppConfigurationAware 
                        .param("memo", contact.getMemo())
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel())))
-            .andExpect(redirectedUrl(null));
+            .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
+    
 }
