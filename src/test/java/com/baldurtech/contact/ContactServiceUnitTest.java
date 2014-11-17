@@ -79,4 +79,10 @@ public class ContactServiceUnitTest {
         assertEquals(contact_has_saved, contactService.update(contact));
         verify(contactRepository).update(contact);
     }
+    
+    @Test
+    public void 在delete方法中应该调用contactRepository的delete方法() {
+        contactService.delete(CONTACT_ID);
+        verify(contactRepository).delete(CONTACT_ID);
+    }
 }
