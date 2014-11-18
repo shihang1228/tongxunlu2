@@ -43,18 +43,15 @@ public class ContactController {
     
     @RequestMapping(value = "create")
     public String create(Model model, Principal principal) {
-        Account account = accountRepository.findByEmail(principal.getName());
-     
-        if("ROLE_USER".equals(account.getRole())) {
+        if(assertRole("ROLE_USER", principal.getName())) {
             return "contact/forbidden";
         }
-        
         model.addAttribute("contact", new Contact());
         return "contact/create";
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) { 
+    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) {
         if(bingdingResult.hasErrors()) {
             return "contact/create";
         }else {
@@ -66,8 +63,8 @@ public class ContactController {
     
     @RequestMapping(value = "update", method = RequestMethod.GET)
     public String edit(@RequestParam("id") Long id, Model model, Principal principal) {  
-        Account account = accountRepository.findByEmail(principal.getName());
      
+        Account account = accountRepository.findByEmail(principal.getName());
         if("ROLE_USER".equals(account.getRole())) {
             return "contact/forbidden";
         }
@@ -91,6 +88,11 @@ public class ContactController {
     public String delete(@RequestParam("id") Long id) {
         contactService.delete(id);
         return "redirect:list";
+    }
+    
+     public Boolean assertRole( String role, String accountName) {
+        Account account = accountRepository.findByEmail(accountName);
+        return role.equals(account.getRole());
     }
     
 }
