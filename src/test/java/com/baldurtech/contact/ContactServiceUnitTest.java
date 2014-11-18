@@ -60,9 +60,9 @@ public class ContactServiceUnitTest {
     
     @Test
     public void 在getById方法中应该返回指定id的contact() {
-        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact);
+        when(contactRepository.getById(CONTACT_ID)).thenReturn(contact_has_saved);
         
-        assertEquals(contact, contactService.getById(CONTACT_ID));
+        assertEquals(contact_has_saved, contactService.getById(CONTACT_ID));
         verify(contactRepository).getById(CONTACT_ID);
     }
     
