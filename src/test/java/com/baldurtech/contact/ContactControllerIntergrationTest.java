@@ -7,6 +7,9 @@ import org.junit.Ignore;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,6 +37,20 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         contact.setJob("HR");
         contact.setJobLevel(3L);
     }
+    
+    protected ResultActions userPostPerform(MockHttpServletRequestBuilder request) throws Exception {
+        return mockMvc.perform(request.session(userSession())    
+                       .param("name", contact.getName())
+                       .param("mobile", contact.getMobile())
+                       .param("vpmn", contact.getVpmn())
+                       .param("email", contact.getEmail())
+                       .param("homeAddress", contact.getHomeAddress())
+                       .param("officeAddress", contact.getOfficeAddress())
+                       .param("memo", contact.getMemo())
+                       .param("job", contact.getJob())
+                       .param("jobLevel", String.valueOf(contact.getJobLevel())));
+    }
+    
     @Test
     public void 当URL为contact_list时应该访问list页面() throws Exception {
         userPerform(get("/contact/list"))
@@ -58,16 +75,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {
         contactService.save(contact);
-        userPerform(post("/contact/save")
-                       .param("name", contact.getName())
-                       .param("mobile", contact.getMobile())
-                       .param("vpmn", contact.getVpmn())
-                       .param("email", contact.getEmail())
-                       .param("homeAddress", contact.getHomeAddress())
-                       .param("officeAddress", contact.getOfficeAddress())
-                       .param("memo", contact.getMemo())
-                       .param("job", contact.getJob())
-                       .param("jobLevel", String.valueOf(contact.getJobLevel())))
+        userPostPerform(post("/contact/save"))
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
@@ -81,17 +89,8 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     @Test
     public void 当URL为contact_update时应该post到update方法() throws Exception {
         contactService.save(contact);
-        userPerform(post("/contact/update")
-                       .param("id", String.valueOf(contact.getId()))
-                       .param("name", contact.getName())
-                       .param("mobile", contact.getMobile())
-                       .param("vpmn", contact.getVpmn())
-                       .param("email", contact.getEmail())
-                       .param("homeAddress", contact.getHomeAddress())
-                       .param("officeAddress", contact.getOfficeAddress())
-                       .param("memo", contact.getMemo())
-                       .param("job", contact.getJob())
-                       .param("jobLevel", String.valueOf(contact.getJobLevel())))
+        userPostPerform(post("/contact/update")
+                       .param("id", String.valueOf(contact.getId())))
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
     
