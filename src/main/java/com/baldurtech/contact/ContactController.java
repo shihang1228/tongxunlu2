@@ -54,8 +54,8 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) { 
-        if(result.hasErrors()) {
+    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) { 
+        if(bingdingResult.hasErrors()) {
             return "contact/create";
         }else {
             contactService.save(contact);
@@ -77,8 +77,8 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, Model model) {
-        if(result.hasErrors()) {
+    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) {
+        if(bingdingResult.hasErrors()) {
             return "contact/update";
         }else {
             contactService.update(contact);
