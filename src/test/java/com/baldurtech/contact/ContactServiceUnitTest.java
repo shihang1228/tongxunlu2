@@ -25,8 +25,17 @@ public class ContactServiceUnitTest {
     
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.initMocks(this); 
+        
+        contact = createContact(contact);
+        contact.setId(null);
+            
+        contact_has_saved = createContact(contact_has_saved);
+    } 
+    
+    public Contact createContact(Contact contact) {
         contact = new Contact();
+        contact.setId(9L);
         contact.setName("Shihang");
         contact.setMobile("15235432994");
         contact.setVpmn("652994");
@@ -36,16 +45,7 @@ public class ContactServiceUnitTest {
         contact.setJob("HR");
         contact.setJobLevel(4L);
         
-        contact_has_saved = new Contact();
-        contact_has_saved.setId(16L);
-        contact_has_saved.setName("Shihang");
-        contact_has_saved.setMobile("15235432994");
-        contact_has_saved.setVpmn("652994");
-        contact_has_saved.setHomeAddress("taiyuan");
-        contact_has_saved.setOfficeAddress("taiyuan");
-        contact_has_saved.setMemo("memo");
-        contact_has_saved.setJob("HR");
-        contact_has_saved.setJobLevel(4L);
+        return contact;
     }
     
     @Test
