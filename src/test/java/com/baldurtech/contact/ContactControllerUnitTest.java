@@ -55,7 +55,18 @@ public class ContactControllerUnitTest {
         user_account = new Account("a@a.com", "123", "ROLE_USER");
         admin_account = new Account("b@b.com", "admin", "ROLE_ADMIN");
         
+        contact = createContact(contact);
+        contact.setId(null);
+            
+        contact_has_saved = createContact(contact_has_saved);
+        
+        contact_has_updated = createContact(contact_has_updated);
+        contact_has_updated.setName("Xiao Bai");
+    } 
+    
+    public Contact createContact(Contact contact) {
         contact = new Contact();
+        contact.setId(9L);
         contact.setName("Shihang");
         contact.setMobile("15235432994");
         contact.setVpmn("652994");
@@ -65,28 +76,7 @@ public class ContactControllerUnitTest {
         contact.setJob("HR");
         contact.setJobLevel(4L);
         
-        contact_has_saved = new Contact();
-        contact_has_saved.setId(9L);
-        contact_has_saved.setName("Shihang");
-        contact_has_saved.setMobile("15235432994");
-        contact_has_saved.setVpmn("652994");
-        contact_has_saved.setHomeAddress("taiyuan");
-        contact_has_saved.setOfficeAddress("taiyuan");
-        contact_has_saved.setMemo("memo");
-        contact_has_saved.setJob("HR");
-        contact_has_saved.setJobLevel(4L);
-        
-        contact_has_updated = new Contact();
-        contact_has_updated.setId(9L);
-        contact_has_updated.setName("XiaoBai");
-        contact_has_updated.setMobile("15235432994");
-        contact_has_updated.setVpmn("652994");
-        contact_has_updated.setHomeAddress("taiyuan");
-        contact_has_updated.setOfficeAddress("taiyuan");
-        contact_has_updated.setMemo("memo");
-        contact_has_updated.setJob("HR");
-        contact_has_updated.setJobLevel(4L);
-        
+        return contact;
     }
     
     @Test
