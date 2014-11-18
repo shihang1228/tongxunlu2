@@ -3,6 +3,7 @@ package com.baldurtech.contact;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.After;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,6 +28,15 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     @Before
     public void setup() {
         contact = new Contact();
+        contactService.save(createContact(contact));
+    }
+    
+    @After
+    public void teardown() {
+        contactService.delete(contact.getId());
+    }
+    
+    public Contact createContact(Contact contact) {
         contact.setName("ShiHang");
         contact.setMobile("15235432994");
         contact.setEmail("shihang@qq.com");
@@ -36,6 +46,8 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         contact.setMemo("Memo");
         contact.setJob("HR");
         contact.setJobLevel(3L);
+        
+        return contact;
     }
     
     protected ResultActions userPostPerform(MockHttpServletRequestBuilder request) throws Exception {
@@ -49,6 +61,16 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
                        .param("memo", contact.getMemo())
                        .param("job", contact.getJob())
                        .param("jobLevel", String.valueOf(contact.getJobLevel())));
+    }
+    
+    @Test
+    public void 当URL为contact_delete时应该执行delete方法() throws Exception{
+        Contact contact = new Contact();;
+        contactService.save(createContact(contact));
+        
+        userPerform(post("/contact/delete")
+                       .param("id", String.valueOf(contact.getId())))
+               .andExpect(redirectedUrl("list"));
     }
     
     @Test
@@ -74,7 +96,6 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {
-        contactService.save(contact);
         userPostPerform(post("/contact/save"))
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
@@ -88,18 +109,8 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test
     public void 当URL为contact_update时应该post到update方法() throws Exception {
-        contactService.save(contact);
         userPostPerform(post("/contact/update")
                        .param("id", String.valueOf(contact.getId())))
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
-    
-    @Test
-    public void 当URL为contact_delete时应该执行delete方法() throws Exception{
-        contactService.save(contact);
-        userPerform(post("/contact/delete")
-                       .param("id", String.valueOf(contact.getId())))
-               .andExpect(redirectedUrl("list"));
-    }
-    
 }
