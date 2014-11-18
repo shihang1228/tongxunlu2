@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baldurtech.config.WebSecurityConfigurationAware;
@@ -50,17 +50,16 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
         return contact;
     }
     
-    protected ResultActions userPostPerform(MockHttpServletRequestBuilder request) throws Exception {
-        return mockMvc.perform(request.session(userSession())    
-                       .param("name", contact.getName())
-                       .param("mobile", contact.getMobile())
-                       .param("vpmn", contact.getVpmn())
-                       .param("email", contact.getEmail())
-                       .param("homeAddress", contact.getHomeAddress())
-                       .param("officeAddress", contact.getOfficeAddress())
-                       .param("memo", contact.getMemo())
-                       .param("job", contact.getJob())
-                       .param("jobLevel", String.valueOf(contact.getJobLevel())));
+    protected MockHttpServletRequestBuilder postContactTo(String url) {
+        return post(url).param("name", contact.getName())
+                   .param("mobile", contact.getMobile())
+                   .param("vpmn", contact.getVpmn())
+                   .param("email", contact.getEmail())
+                   .param("homeAddress", contact.getHomeAddress())
+                   .param("officeAddress", contact.getOfficeAddress())
+                   .param("memo", contact.getMemo())
+                   .param("job", contact.getJob())
+                   .param("jobLevel", String.valueOf(contact.getJobLevel()));
     }
     
     @Test
@@ -96,7 +95,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {
-        userPostPerform(post("/contact/save"))
+        userPerform(postContactTo("/contact/save"))
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
@@ -109,7 +108,7 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     @Test
     public void 当URL为contact_update时应该post到update方法() throws Exception {
-        userPostPerform(post("/contact/update")
+        userPerform(postContactTo("/contact/update")
                        .param("id", String.valueOf(contact.getId())))
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
     }
