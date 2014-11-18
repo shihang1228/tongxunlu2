@@ -43,7 +43,7 @@ public class ContactControllerUnitTest {
     Model model;
     
     @Mock
-    BindingResult result;
+    BindingResult bindingResult;
     
     @InjectMocks
     ContactController contactController;
@@ -115,17 +115,17 @@ public class ContactControllerUnitTest {
     @Test
     public void contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
-        when(result.hasErrors()).thenReturn(false);
+        when(bindingResult.hasErrors()).thenReturn(false);
         
-        assertEquals("redirect:show", contactController.save(contact, result, model));
+        assertEquals("redirect:show", contactController.save(contact, bindingResult, model));
         verify(contactService).save(contact);
     }
     
     @Test
     public void 当contact不合法时在应该访问create页面() {
-        when(result.hasErrors()).thenReturn(true);
+        when(bindingResult.hasErrors()).thenReturn(true);
         
-        assertEquals("contact/create", contactController.save(contact, result, model));
+        assertEquals("contact/create", contactController.save(contact, bindingResult, model));
         verify(contactService, never()).save(contact);
     }
     
@@ -149,18 +149,18 @@ public class ContactControllerUnitTest {
     @Test
     public void 当contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
         when(contactService.update(contact_has_saved)).thenReturn(contact_has_updated);
-        when(result.hasErrors()).thenReturn(false);
+        when(bindingResult.hasErrors()).thenReturn(false);
         
-        assertEquals("redirect:show", contactController.update(contact_has_saved, result, model));
+        assertEquals("redirect:show", contactController.update(contact_has_saved, bindingResult, model));
         verify(contactService).update(contact_has_saved);
         verify(model).addAttribute("id", contact_has_updated.getId());
     }
     
     @Test 
     public void 当contact不合法时应该返回update页面() {
-        when(result.hasErrors()).thenReturn(true);
+        when(bindingResult.hasErrors()).thenReturn(true);
         
-        assertEquals("contact/update", contactController.update(contact_has_saved, result, model));
+        assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model));
         verify(contactService, never()).update(contact_has_saved);
     }
     @Test
