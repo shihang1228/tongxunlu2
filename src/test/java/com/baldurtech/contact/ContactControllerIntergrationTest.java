@@ -108,10 +108,18 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test 
-    public void 当URL为contact_update时应该访问update页面() throws Exception {
+    public void 当角色为USER时访问URL为contact_update时应该重定向到forbidden页面() throws Exception {
         userPerform(get("/contact/update")
                         .param("id", String.valueOf(CONTACT_ID)))
             .andExpect(view().name("contact/forbidden"));
+    }
+    
+    @Test 
+    public void 当角色为ADMIN时访问URL为contact_update时应该访问update页面() throws Exception {
+        adminPerform(get("/contact/update")
+                        .param("id", String.valueOf(CONTACT_ID)))
+            .andExpect(model().attributeExists("contact"))
+            .andExpect(view().name("contact/update"));
     }
     
     @Test
