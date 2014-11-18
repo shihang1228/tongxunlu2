@@ -88,10 +88,18 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test 
-    public void 当URL为contact_create时应该访问create页面() throws Exception {
+    public void 当角色为USER时访问contact_create时将重定向到contact_forbidden页面() throws Exception {
         userPerform(get("/contact/create"))
             .andExpect(view().name("contact/forbidden"));
     }
+    
+    @Test 
+    public void 当角色为ADMIN时访问contact_create时应该访问contact_create页面() throws Exception {
+        adminPerform(get("/contact/create"))
+            .andExpect(model().attributeExists("contact"))
+            .andExpect(view().name("contact/create"));
+    }
+    
     
     @Test 
     public void 当URL为contact_save时应该post到save方法() throws Exception {

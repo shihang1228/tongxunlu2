@@ -48,8 +48,29 @@ public abstract class WebSecurityConfigurationAware extends WebAppConfigurationA
         return userSession;
     }
     
+    protected MockHttpSession adminSession() {
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+        Authentication userAuthentication = 
+            new UsernamePasswordAuthenticationToken("admin","admin", authorities);
+            
+        SecurityContext securityContext = org.mockito.Mockito.mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(userAuthentication);
+        
+        MockHttpSession userSession = new MockHttpSession();
+        userSession.setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, 
+                securityContext);
+                
+        return userSession;
+    }
+    
     protected ResultActions userPerform(MockHttpServletRequestBuilder request)
         throws Exception {
         return mockMvc.perform(request.session(userSession()));
+    }
+    
+    protected ResultActions adminPerform(MockHttpServletRequestBuilder request)
+        throws Exception {
+        return mockMvc.perform(request.session(adminSession()));
     }
 }

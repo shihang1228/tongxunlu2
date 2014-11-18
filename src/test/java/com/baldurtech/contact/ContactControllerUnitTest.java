@@ -163,6 +163,7 @@ public class ContactControllerUnitTest {
         assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model));
         verify(contactService, never()).update(contact_has_saved);
     }
+    
     @Test
     public void 在delete方法中调用contactService中的delete方法() {
         assertEquals("redirect:list", contactController.delete(CONTACT_ID));
