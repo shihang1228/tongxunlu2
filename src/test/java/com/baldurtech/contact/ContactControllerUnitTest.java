@@ -113,19 +113,21 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
+    public void 当角色为ADMIN且contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         when(bindingResult.hasErrors()).thenReturn(false);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("redirect:show", contactController.save(contact, bindingResult, model));
+        assertEquals("redirect:show", contactController.save(contact, bindingResult, model, principal));
         verify(contactService).save(contact);
     }
     
     @Test
-    public void 当contact不合法时在应该访问create页面() {
+    public void 当角色为ADMIN且contact不合法时在应该访问create页面() {
         when(bindingResult.hasErrors()).thenReturn(true);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("contact/create", contactController.save(contact, bindingResult, model));
+        assertEquals("contact/create", contactController.save(contact, bindingResult, model, principal));
         verify(contactService, never()).save(contact);
     }
     
