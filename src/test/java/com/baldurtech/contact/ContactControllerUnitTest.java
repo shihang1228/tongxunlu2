@@ -177,6 +177,14 @@ public class ContactControllerUnitTest {
     }
     
     @Test
+    public void 当角色为USER时调用update方法应该访问forbidden页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.update(contact_has_saved, bindingResult, model, principal));
+        verify(contactService, never()).update(contact_has_saved);
+    }
+    
+    @Test
     public void 在delete方法中调用contactService中的delete方法() {
         assertEquals("redirect:list", contactController.delete(CONTACT_ID));
         verify(contactService).delete(CONTACT_ID);
