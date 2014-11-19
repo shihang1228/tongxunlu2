@@ -55,29 +55,14 @@ public class ContactControllerUnitTest {
         user_account = new Account("a@a.com", "123", "ROLE_USER");
         admin_account = new Account("b@b.com", "admin", "ROLE_ADMIN");
         
-        contact = createContact(contact);
+        contact = CreateContactData.createContact();
         contact.setId(null);
             
-        contact_has_saved = createContact(contact_has_saved);
+        contact_has_saved = contact;
         
-        contact_has_updated = createContact(contact_has_updated);
+        contact_has_updated = contact;
         contact_has_updated.setName("Xiao Bai");
     } 
-    
-    public Contact createContact(Contact contact) {
-        contact = new Contact();
-        contact.setId(9L);
-        contact.setName("Shihang");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("taiyuan");
-        contact.setMemo("memo");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        
-        return contact;
-    }
     
     @Test
     public void 在list方法中当URL为contact_list时返回contact_list() {
