@@ -91,7 +91,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String delete(@RequestParam("id") Long id) {
+    public String delete(@RequestParam("id") Long id, Principal principal) {
+        if(assertRole("ROLE_USER", principal.getName())) {
+            return "contact/forbidden";
+        }
+        
         contactService.delete(id);
         return "redirect:list";
     }
