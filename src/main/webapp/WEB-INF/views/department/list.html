@@ -17,23 +17,11 @@
                     <td align="center">Address</td>
                     <td align="center">Memo</td>
                 </tr>
-                <tr>
-                    <td align="center">technology department</td>
-                    <td align="center">baldurtech</td>
-                    <td align="center">beizhang</td>
-                    <td align="center">Memo</td>
-                </tr>
-                <tr>
-                    <td align="center">technology department</td>
-                    <td align="center">baldurtech</td>
-                    <td align="center">beizhang</td>
-                    <td align="center">Memo</td>
-                </tr>
-                <tr>
-                    <td align="center">technology department</td>
-                    <td align="center">baldurtech</td>
-                    <td align="center">beizhang</td>
-                    <td align="center">Memo</td>
+                <tr th:each="department : ${departmentList}">
+                    <td align="center" th:text="${department.name}"></td>
+                    <td align="center" th:text="${department.parent}"></td>
+                    <td align="center" th:text="${department.address}"></td>
+                    <td align="center" th:text="${department.memo}"></td>
                 </tr>
             </table>
         </div>

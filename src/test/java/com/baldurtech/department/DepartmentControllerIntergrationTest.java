@@ -10,6 +10,7 @@ public class DepartmentControllerIntergrationTest extends WebAppConfigurationAwa
     @Test
     public void 当URL为department_list时应该访问list页面() throws Exception {
         mockMvc.perform(get("/department/list"))
+               .andExpect(model().attributeExists("departmentList"))
                .andExpect(view().name("department/list"));
     }
 }
