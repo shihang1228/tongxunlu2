@@ -22,7 +22,7 @@ import org.springframework.validation.BindingResult;
 
 import com.baldurtech.account.*;
 
-public class ContactControllerUnitTest {
+public class ContactControllerUnitTest extends CreateContactData{
     private Long CONTACT_ID = 4L;
     Contact contact;
     Contact contact_has_saved;
@@ -55,7 +55,7 @@ public class ContactControllerUnitTest {
         user_account = new Account("a@a.com", "123", "ROLE_USER");
         admin_account = new Account("b@b.com", "admin", "ROLE_ADMIN");
         
-        contact = CreateContactData.createContact();
+        contact = createContact();
         contact.setId(null);
             
         contact_has_saved = contact;

@@ -1,7 +1,7 @@
 package com.baldurtech.contact;
 
 public class CreateContactData {
-    public static Contact createContact() {
+    public Contact createContact() {
         Contact contact = new Contact();
         contact.setId(9L);
         contact.setName("Shihang");
