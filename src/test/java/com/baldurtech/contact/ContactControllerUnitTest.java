@@ -191,4 +191,12 @@ public class ContactControllerUnitTest {
         assertEquals("redirect:list", contactController.delete(CONTACT_ID, principal));
         verify(contactService).delete(CONTACT_ID);
     }
+    
+    @Test
+    public void 当角色为USER时调用delete方法应该访问forbidden() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.delete(CONTACT_ID, principal));
+        verify(contactService, never()).delete(CONTACT_ID);
+    }
 }
