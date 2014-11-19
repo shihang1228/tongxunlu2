@@ -185,8 +185,10 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 在delete方法中调用contactService中的delete方法() {
-        assertEquals("redirect:list", contactController.delete(CONTACT_ID));
+    public void 当角色为ADMIN时在delete方法中调用contactService中的delete方法() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
+        
+        assertEquals("redirect:list", contactController.delete(CONTACT_ID, principal));
         verify(contactService).delete(CONTACT_ID);
     }
 }
