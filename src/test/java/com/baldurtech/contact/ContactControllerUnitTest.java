@@ -22,7 +22,7 @@ import org.springframework.validation.BindingResult;
 
 import com.baldurtech.account.*;
 
-public class ContactControllerUnitTest {
+public class ContactControllerUnitTest extends CreateContactData{
     private Long CONTACT_ID = 4L;
     Contact contact;
     Contact contact_has_saved;
@@ -55,29 +55,14 @@ public class ContactControllerUnitTest {
         user_account = new Account("a@a.com", "123", "ROLE_USER");
         admin_account = new Account("b@b.com", "admin", "ROLE_ADMIN");
         
-        contact = createContact(contact);
+        contact = createContact();
         contact.setId(null);
             
-        contact_has_saved = createContact(contact_has_saved);
+        contact_has_saved = contact;
         
-        contact_has_updated = createContact(contact_has_updated);
+        contact_has_updated = contact;
         contact_has_updated.setName("Xiao Bai");
     } 
-    
-    public Contact createContact(Contact contact) {
-        contact = new Contact();
-        contact.setId(9L);
-        contact.setName("Shihang");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("taiyuan");
-        contact.setMemo("memo");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        
-        return contact;
-    }
     
     @Test
     public void 在list方法中当URL为contact_list时返回contact_list() {
@@ -113,22 +98,32 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
+    public void 当角色为ADMIN且contact合法时在save方法中调用contactService中的save方法应该重定向到show页面() {
         when(contactService.save(contact)).thenReturn(contact_has_saved);
         when(bindingResult.hasErrors()).thenReturn(false);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("redirect:show", contactController.save(contact, bindingResult, model));
+        assertEquals("redirect:show", contactController.save(contact, bindingResult, model, principal));
         verify(contactService).save(contact);
     }
     
     @Test
-    public void 当contact不合法时在应该访问create页面() {
+    public void 当角色为ADMIN且contact不合法时在应该访问create页面() {
         when(bindingResult.hasErrors()).thenReturn(true);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("contact/create", contactController.save(contact, bindingResult, model));
+        assertEquals("contact/create", contactController.save(contact, bindingResult, model, principal));
         verify(contactService, never()).save(contact);
     }
     
+    @Test
+    public void 当角色为USER调用save方法应该访问forbidden页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.save(contact, bindingResult, model, principal));
+        verify(contactService, never()).save(contact);
+    }
+   
     @Test
     public void 当角色为ADMIN时在edit方法中调用contactService中的getById方法() {
         when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
@@ -140,33 +135,53 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 当角色为USER应该访问forbidden页面() {
+    public void 当角色为USER调用edit方法时应该访问forbidden页面() {
         when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
         
         assertEquals("contact/forbidden", contactController.edit(contact_has_saved.getId(), model, principal));
     }
     
     @Test
-    public void 当contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
+    public void 当角色为ADMIN且contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
         when(contactService.update(contact_has_saved)).thenReturn(contact_has_updated);
         when(bindingResult.hasErrors()).thenReturn(false);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("redirect:show", contactController.update(contact_has_saved, bindingResult, model));
+        assertEquals("redirect:show", contactController.update(contact_has_saved, bindingResult, model, principal));
         verify(contactService).update(contact_has_saved);
         verify(model).addAttribute("id", contact_has_updated.getId());
     }
     
     @Test 
-    public void 当contact不合法时应该返回update页面() {
+    public void 当角色为ADMIN且contact不合法时应该返回update页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         when(bindingResult.hasErrors()).thenReturn(true);
         
-        assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model));
+        assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model, principal));
         verify(contactService, never()).update(contact_has_saved);
     }
     
     @Test
-    public void 在delete方法中调用contactService中的delete方法() {
-        assertEquals("redirect:list", contactController.delete(CONTACT_ID));
+    public void 当角色为USER时调用update方法应该访问forbidden页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.update(contact_has_saved, bindingResult, model, principal));
+        verify(contactService, never()).update(contact_has_saved);
+    }
+    
+    @Test
+    public void 当角色为ADMIN时在delete方法中调用contactService中的delete方法() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
+        
+        assertEquals("redirect:list", contactController.delete(CONTACT_ID, principal));
         verify(contactService).delete(CONTACT_ID);
+    }
+    
+    @Test
+    public void 当角色为USER时调用delete方法应该访问forbidden() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(user_account);
+        
+        assertEquals("contact/forbidden", contactController.delete(CONTACT_ID, principal));
+        verify(contactService, never()).delete(CONTACT_ID);
     }
 }

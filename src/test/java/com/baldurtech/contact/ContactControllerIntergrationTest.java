@@ -63,13 +63,20 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test
-    public void 当URL为contact_delete时应该执行delete方法() throws Exception{
+    public void 当角色为ADMIN时URL为contact_delete时应该执行delete方法() throws Exception {
         Contact contact = new Contact();;
         contactService.save(createContact(contact));
         
-        userPerform(post("/contact/delete")
+        adminPerform(post("/contact/delete")
                        .param("id", String.valueOf(contact.getId())))
                .andExpect(redirectedUrl("list"));
+    }
+    
+    @Test
+    public void 当角色为USER时访问URLcontact_delete是应该转到forbidden页面() throws Exception {
+        userPerform(post("/contact/delete")
+                        .param("id", String.valueOf(contact.getId())))
+            .andExpect(view().name("contact/forbidden"));
     }
     
     @Test
@@ -100,10 +107,15 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
             .andExpect(view().name("contact/create"));
     }
     
+    @Test
+    public void 当角色为USER时访问contact_save时应该访问forbidden页面() throws Exception {
+        userPerform(postContactTo("/contact/save"))
+            .andExpect(view().name("contact/forbidden"));
+    }
     
     @Test 
-    public void 当URL为contact_save时应该post到save方法() throws Exception {
-        userPerform(postContactTo("/contact/save"))
+    public void 当角色为ADMIN时访问URL为contact_save时应该post到save方法() throws Exception {
+        adminPerform(postContactTo("/contact/save"))
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
@@ -123,9 +135,16 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test
-    public void 当URL为contact_update时应该post到update方法() throws Exception {
-        userPerform(postContactTo("/contact/update")
+    public void 当角色为ADMIN时URL为contact_update时应该post到update方法() throws Exception {
+        adminPerform(postContactTo("/contact/update")
                        .param("id", String.valueOf(contact.getId())))
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
+    }
+    
+    @Test
+    public void 当角色为USER时调用update方法post到update方法时应该访问forbidden() throws Exception {
+        userPerform(postContactTo("/contact/update")
+                        .param("id", String.valueOf(contact.getId())))
+            .andExpect(view().name("contact/forbidden"));
     }
 }

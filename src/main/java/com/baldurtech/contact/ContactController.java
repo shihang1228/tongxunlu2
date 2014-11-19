@@ -51,7 +51,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) {
+    public String save(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model, Principal principal) {
+        if(assertRole("ROLE_USER", principal.getName())) {
+            return "contact/forbidden";
+        }
+        
         if(bingdingResult.hasErrors()) {
             return "contact/create";
         }else {
@@ -72,7 +76,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) {
+    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model, Principal principal) {
+        if(assertRole("ROLE_USER", principal.getName())) {
+            return "contact/forbidden";
+        }
+        
         if(bingdingResult.hasErrors()) {
             return "contact/update";
         }else {
@@ -83,7 +91,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String delete(@RequestParam("id") Long id) {
+    public String delete(@RequestParam("id") Long id, Principal principal) {
+        if(assertRole("ROLE_USER", principal.getName())) {
+            return "contact/forbidden";
+        }
+        
         contactService.delete(id);
         return "redirect:list";
     }
