@@ -157,20 +157,22 @@ public class ContactControllerUnitTest {
     }
     
     @Test
-    public void 当contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
+    public void 当角色为ADMIN且contact合法时在update方法中调用contactService中的update方法并重定向到show页面() {
         when(contactService.update(contact_has_saved)).thenReturn(contact_has_updated);
         when(bindingResult.hasErrors()).thenReturn(false);
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         
-        assertEquals("redirect:show", contactController.update(contact_has_saved, bindingResult, model));
+        assertEquals("redirect:show", contactController.update(contact_has_saved, bindingResult, model, principal));
         verify(contactService).update(contact_has_saved);
         verify(model).addAttribute("id", contact_has_updated.getId());
     }
     
     @Test 
-    public void 当contact不合法时应该返回update页面() {
+    public void 当角色为ADMIN且contact不合法时应该返回update页面() {
+        when(accountRepository.findByEmail(principal.getName())).thenReturn(admin_account);
         when(bindingResult.hasErrors()).thenReturn(true);
         
-        assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model));
+        assertEquals("contact/update", contactController.update(contact_has_saved, bindingResult, model, principal));
         verify(contactService, never()).update(contact_has_saved);
     }
     
