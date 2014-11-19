@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-public class ContactServiceUnitTest {
+public class ContactServiceUnitTest extends CreateContactData {
     private Long CONTACT_ID = 4L;
     Contact contact;
     Contact contact_has_saved;
@@ -27,26 +27,11 @@ public class ContactServiceUnitTest {
     public void setup() {
         MockitoAnnotations.initMocks(this); 
         
-        contact = createContact(contact);
+        contact = createContact();
         contact.setId(null);
             
-        contact_has_saved = createContact(contact_has_saved);
+        contact_has_saved = createContact();
     } 
-    
-    public Contact createContact(Contact contact) {
-        contact = new Contact();
-        contact.setId(9L);
-        contact.setName("Shihang");
-        contact.setMobile("15235432994");
-        contact.setVpmn("652994");
-        contact.setHomeAddress("taiyuan");
-        contact.setOfficeAddress("taiyuan");
-        contact.setMemo("memo");
-        contact.setJob("HR");
-        contact.setJobLevel(4L);
-        
-        return contact;
-    }
     
     @Test
     public void 在findAll方法中应该返回集合contactList() {
