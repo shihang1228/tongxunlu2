@@ -63,11 +63,11 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test
-    public void 当URL为contact_delete时应该执行delete方法() throws Exception{
+    public void 当角色为ADMIN时URL为contact_delete时应该执行delete方法() throws Exception{
         Contact contact = new Contact();;
         contactService.save(createContact(contact));
         
-        userPerform(post("/contact/delete")
+        adminPerform(post("/contact/delete")
                        .param("id", String.valueOf(contact.getId())))
                .andExpect(redirectedUrl("list"));
     }
