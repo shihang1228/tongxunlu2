@@ -14,8 +14,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class ContactRepositoryUnitTest {
+public class ContactRepositoryUnitTest extends CreateContactData{
     private Long CONTACT_ID = 5L;
+    private Contact contact;
+    private Contact contact_has_saved;
+    private Contact contact_has_updated;
+    
     @Mock
     EntityManager entityManager;
     
@@ -30,6 +34,14 @@ public class ContactRepositoryUnitTest {
         MockitoAnnotations.initMocks(this);
         contactRepository = new ContactRepository();
         contactRepository.setEntityManager(entityManager);
+        
+        contact = createContact();
+        contact.setId(null);
+        
+        contact_has_saved = contact;
+       
+        contact_has_updated = contact;
+        contact.setName("Xiao Bai");
     }
     
     @Test
@@ -43,7 +55,6 @@ public class ContactRepositoryUnitTest {
     
     @Test
     public void 在get_by_id方法中如果数据中存在指定联系人信息应该返回指定联系人的信息() {
-        Contact contact = new Contact();
         when(entityManager.createNamedQuery(Contact.GET_BY_ID, Contact.class)).thenReturn(typedQuery);
         when(typedQuery.setParameter("id", CONTACT_ID)).thenReturn(typedQuery);
         when(typedQuery.getSingleResult()).thenReturn(contact);
@@ -53,7 +64,6 @@ public class ContactRepositoryUnitTest {
     
     @Test
     public void 调用save方法保存联系人信息() {
-        Contact contact = new Contact();
         
         contactRepository.save(contact);
         
@@ -62,8 +72,6 @@ public class ContactRepositoryUnitTest {
     
     @Test
     public void 当联系人存在时更新数据库中的联系人() {
-        Contact contact_has_updated = new Contact();
-        Contact contact_has_saved = new Contact();
         
         when(entityManager.merge(contact_has_saved)).thenReturn(contact_has_updated);
         
@@ -73,7 +81,6 @@ public class ContactRepositoryUnitTest {
     
     @Test
     public void 当id存在时删除指定联系人信息() {
-        Contact contact = new Contact();
         when(entityManager.find(Contact.class, CONTACT_ID)).thenReturn(contact);
         contactRepository.delete(CONTACT_ID);
         verify(entityManager).remove(contact);
