@@ -128,9 +128,16 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     }
     
     @Test
-    public void 当URL为contact_update时应该post到update方法() throws Exception {
-        userPerform(postContactTo("/contact/update")
+    public void 当角色为ADMIN时URL为contact_update时应该post到update方法() throws Exception {
+        adminPerform(postContactTo("/contact/update")
                        .param("id", String.valueOf(contact.getId())))
             .andExpect(redirectedUrl("show?id=" + contact.getId()));
+    }
+    
+    @Test
+    public void 当角色为USER时调用update方法post到update方法时应该访问forbidden() throws Exception {
+        userPerform(postContactTo("/contact/update")
+                        .param("id", String.valueOf(contact.getId())))
+            .andExpect(view().name("contact/forbidden"));
     }
 }
