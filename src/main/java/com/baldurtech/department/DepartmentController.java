@@ -20,7 +20,7 @@ public class DepartmentController {
     
     @RequestMapping("list")
     public String list(Model model) {
-        model.addAttribute("departmentList", departmentService.list());
+        model.addAttribute("departmentList", departmentService.findAll());
         return "department/list";
     }
 } 

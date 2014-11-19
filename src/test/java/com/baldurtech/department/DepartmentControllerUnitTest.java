@@ -33,9 +33,9 @@ public class DepartmentControllerUnitTest {
     public void 在list方法中当URL为department_list时应该访问list页面() {
         List<Department> departmentList = new ArrayList<Department>();
         
-        when(departmentService.list()).thenReturn(departmentList);
+        when(departmentService.findAll()).thenReturn(departmentList);
         assertEquals("department/list", departmentController.list(model));
-        verify(departmentService).list();
+        verify(departmentService).findAll();
         verify(model).addAttribute("departmentList", departmentList);
     }
 }
