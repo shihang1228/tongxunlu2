@@ -102,8 +102,8 @@ public class ContactControllerIntergrationTest extends WebSecurityConfigurationA
     
     
     @Test 
-    public void 当URL为contact_save时应该post到save方法() throws Exception {
-        userPerform(postContactTo("/contact/save"))
+    public void 当角色为ADMIN时访问URL为contact_save时应该post到save方法() throws Exception {
+        adminPerform(postContactTo("/contact/save"))
             .andExpect(redirectedUrl("show?id=" + (contactService.findAll().get(contactService.findAll().size() - 1)).getId()));
     }
     
