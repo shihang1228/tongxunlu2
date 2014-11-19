@@ -1,7 +1,16 @@
 package com.baldurtech.department;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="department")
+@NamedQuery(name = Department.FIND_ALL, query = "from Department")
 public class Department
 {
+    public static final String FIND_ALL = "Department.findAll";
+
+    @GeneratedValue
+    @Id
     private Long id;
     private String name;
     private String memo;
