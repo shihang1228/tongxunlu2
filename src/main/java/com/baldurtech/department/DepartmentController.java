@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DepartmentController {
     @RequestMapping("list")
     public String list(Model model) {
+        model.addAttribute("departmentList", list());
+        return "department/list";
+    }
+    
+    public List<Department> list() {
         List<Department> departmentList = new ArrayList<Department>();
         Department department1 = new Department();
         department1.setName("technologyDepartment");
@@ -35,8 +40,6 @@ public class DepartmentController {
         departmentList.add(department2);
         departmentList.add(department3);
         
-        model.addAttribute("departmentList", departmentList);
-        
-        return "department/list";
+        return departmentList;
     }
 } 
