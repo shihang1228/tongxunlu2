@@ -76,7 +76,11 @@ public class ContactController {
     }
     
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model) {
+    public String update(@Valid @ModelAttribute("contact") Contact contact, BindingResult bingdingResult, Model model, Principal principal) {
+        if(assertRole("ROLE_USER", principal.getName())) {
+            return "contact/forbidden";
+        }
+        
         if(bingdingResult.hasErrors()) {
             return "contact/update";
         }else {
